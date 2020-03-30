@@ -10,3 +10,5 @@ Work In Progress....
   <img src="/wip.gif">
 </p>
 
+simulink e github 
+https://it.mathworks.com/matlabcentral/answers/417866-how-can-i-create-a-simulink-project-under-source-control-git-and-upload-it-on-a-remote-repository
