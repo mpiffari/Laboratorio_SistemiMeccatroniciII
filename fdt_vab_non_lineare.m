@@ -120,7 +120,7 @@ T_r = 1/2 * transpose(V_r) * M_r * V_r;
 U_r = 0;
 L_r = T_r - U_r;
 %Lagrangiana dell'intero sistema
-L = collect(simplify(2*L_r + L_a + L_b + L_c));
+L = vpa(collect(simplify(2*L_r + L_a + L_b + L_c)),4);
 L_q = subs(L,{phi,vel,theta,vel_ang},{q_1 q_1_p q_2 q_2_p}); % Esprimo la Lagrangiana rispetto ai simboli di coordinate libere generiche (q_1 etc)
 
 % Equazioni del moto
@@ -152,11 +152,11 @@ acc = diff(phi, t, 2);
 
 eqns = [subs(E_L_theta, {acc,acc_ang},{q1_s,q2_s}), subs(E_L_phi, {acc,acc_ang},{q1_s,q2_s})];
 [theta2, phi2] = solve(eqns, [q1_s q2_s]);
-theta2_ris = vpa(collect(simplify(subs(theta2,{phi,vel,theta,vel_ang},{q_1 q_1_p q_2 q_2_p}))),4)
-phi2_ris = collect(simplify(subs(phi2,{phi,vel,theta,vel_ang},{q_1 q_1_p q_2 q_2_p})))
+theta2_ris = collect(simplify(subs(theta2,{phi,vel,theta,vel_ang},{q_1 q_1_p q_2 q_2_p})))
+phi2_ris = collect(simplify(subs(phi2,{phi,vel,theta,vel_ang},{q_1 q_1_p q_2 q_2_p})));
 disp('funzione creata');
 ris = 0;
-matlabFunction(theta2_ris,'File','theta_secondo');
-matlabFunction(phi2_ris,'File','p_secondo');
+matlabFunction(theta2_ris,'File','theta_secondo_sub');
+matlabFunction(phi2_ris,'File','phi_secondo');
 end
 
