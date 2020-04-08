@@ -56,22 +56,19 @@ l_b = 0.1;
 l_a = sqrt((temp_1)^2 + (temp_2)^2);
 
 beta = atan(temp_2/temp_1);
-alpha = alfa;
-
 % Calcolo componenti dinamiche e potenziali per ogni corpo rigido del sistema
 % Nello specifico abbiamo considerato il sistema composto da:
-%%%% Asta
-%%%% Utente a bordo dello chassis
-%%%% Chassis (o base) ()
-%%%% Ruota () che poi sarà considerata con un contributo doppio, essendo 2 le ruote del sistema
+% Asta ()
+% Utente a bordo dello chassis ()
+% Chassis (o base) ()
+% Ruota () che poi sarà considerata con un contributo doppio, essendo 2 le ruote del sistema
 % Per ognuno di questi corpi rigidi siamo andati a calcolare:
-%%%% Coordinate spaziali nel sistema di riferimento XZ, con l'aggiunta delle coordinate angolari  vettore 3 x 1
-%%%% Vettore delle velocità  vettore 3 x 1
-%%%% Matrice delle masse  matrice 3 x 3
-%%%% Energia cinetica dello specifico corpo rigido  
-%%%% Energia potenziale dello specifico corpo rigido 
-%%%% Lagrangiana dello specifico corpo rigido  
-
+% Coordinate spaziali nel sistema di riferimento XZ, con l'aggiunta delle coordinate angolari  vettore 3 x 1
+% Vettore delle velocità  vettore 3 x 1
+% Matrice delle masse  matrice 3 x 3
+% Energia cinetica dello specifico corpo rigido  
+% Energia potenziale dello specifico corpo rigido 
+% Lagrangiana dello specifico corpo rigido  
 % Asta 
 P_a = [phi*r+l_a*sin(theta+beta); l_a*cos(theta+beta); theta];
 V_a = diff(P_a, t);
@@ -79,7 +76,6 @@ M_a = [m_a,0,0; 0,m_a,0; 0,0,J_a]; % Matrice delle masse/inerzie
 T_a = 1/2 * transpose(V_a) * M_a * V_a;
 U_a = m_a * g * l_a * cos(theta+beta);
 L_a = T_a - U_a;
-
 %Utente  
 P_c = [phi*r+l_c*sin(theta+alpha); l_c*cos(theta+alpha); theta + alpha];
 V_c = diff(P_c,t);
@@ -87,7 +83,6 @@ M_c = [m_c,0,0; 0,m_c,0; 0,0,J_c];
 T_c = 1/2 * transpose(V_c) * M_c * V_c;
 U_c = m_c * g * l_c * cos(alpha+theta);
 L_c = T_c - U_c;
-
 %Chassis (o base)  
 P_b = [phi*r+l_b*sin(pi+theta); l_b*cos(pi+theta); pi+theta];
 V_b = diff(P_b,t);
@@ -95,7 +90,6 @@ M_b = [m_b,0,0; 0,m_b,0; 0,0,J_b];
 T_b = 1/2 * transpose(V_b) * M_b * V_b;
 U_b = m_b * g * l_b * cos(pi+theta);
 L_b = T_b - U_b;
-
 %Ruota 
 P_r = [phi*r; 0; phi];
 V_r = diff(P_r,t);
@@ -103,12 +97,13 @@ M_r = [m_r,0,0; 0,m_r,0; 0,0,J_r];
 T_r = 1/2 * transpose(V_r) * M_r * V_r;
 U_r = 0;
 L_r = T_r - U_r;
-
 %Lagrangiana dell'intero sistema
 L = collect(simplify(2*L_r + L_a + L_b + L_c));
-L_q = subs(L,{phi,vel,theta,vel_ang},{q_1 q_1_p q_2 q_2_p}); % Esprimo la Lagrangiana rispetto ai simboli di coordinate libere generiche (q_1...)
+L_q = subs(L,{phi,vel,theta,vel_ang},{q_1 q_1_p q_2 q_2_p}); % Esprimo la Lagrangiana rispetto ai simboli di coordinate libere generiche (q_1 etc)
 
-% Equazioni del moto 
+% Equazioni del moto
+% Andiamo ora a calcolare le equazioni del moto, considerando, come coordinate libere
+% 
 % Calcolo equazioni del moto rispetto a  phi
 dL_dq1 = diff(L_q,q_1);
 dL_dphi = subs(dL_dq1,{q_1 q_1_p q_2 q_2_p},{phi,vel,theta,vel_ang});
@@ -118,7 +113,6 @@ dL_dvel = subs(dL_dq1p,{q_1 q_1_p q_2 q_2_p},{phi,vel,theta,vel_ang});
 dL_dvel_dt = diff(dL_dvel,t);
 
 E_L_phi = collect(simplify(dL_dvel_dt - dL_dphi == C_m));
-
 % Calcolo equazioni del moto rispetto a  theta
 dL_dq2 = diff(L_q,q_2);
 dL_dtheta = subs(dL_dq2,{q_1 q_1_p q_2 q_2_p},{phi,vel,theta,vel_ang});
@@ -148,7 +142,10 @@ eqns = [subs(E_L_theta, {acc,acc_ang},{q1_s,q2_s}), subs(E_L_phi, {acc,acc_ang},
 % 
 % Da qui è quindi possibile poi ricavare le matrici A-B-C-D come segue:
 
+
+
 % Dove le matrici A e B hanno nello specifico questa forma:
+
 syms u;
 theta2_differenziabile = subs(theta2,{phi,vel,theta,vel_ang,C_m},{q_1 q_1_p q_2 q_2_p u});
 phi2_differenziabile = subs(phi2,{phi,vel,theta,vel_ang,C_m},{q_1 q_1_p q_2 q_2_p u});
@@ -181,9 +178,8 @@ B41 = subs(diff(theta2_differenziabile,u),{q_1 q_1_p q_2 q_2_p u},equilibrio);
 B = [B11;B21;B31;B41];
 
 C = [0,0,1,0]; % Riportiamo in uscita solamente l'angolo
-% C = eye(4); % Riportiamo in uscita tutte le variabili di stato
+%C = eye(4); % Riportiamo in uscita tutte le variabili di stato
 D = 0;
-
 syms s G(s);
 G = collect(simplify(C*(s*eye(4)-A)^(-1)*B+D))
 [num, den] = numden(G)

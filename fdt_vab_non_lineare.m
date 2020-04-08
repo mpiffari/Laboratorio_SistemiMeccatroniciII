@@ -1,6 +1,5 @@
 function ris = VAB_non_lineare(alfa,pi,pi_p,teta,teta_p,Cm)
-%Dinamica Veicolo Autobilanciato - gruppo Calegari
-clc
+
 %Dinamica Veicolo Autobilanciato - gruppo Calegari
 clc
 digits(4)
