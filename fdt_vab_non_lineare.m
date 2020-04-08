@@ -1,5 +1,4 @@
-function ris = VAB_non_lineare(alfa,pi,pi_p,teta,teta_p,Cm)
-
+function ris = fdt_vab_non_lineare()
 %Dinamica Veicolo Autobilanciato - gruppo Calegari
 clc
 digits(4)
@@ -153,8 +152,11 @@ acc = diff(phi, t, 2);
 
 eqns = [subs(E_L_theta, {acc,acc_ang},{q1_s,q2_s}), subs(E_L_phi, {acc,acc_ang},{q1_s,q2_s})];
 [theta2, phi2] = solve(eqns, [q1_s q2_s]);
-theta2_ris = double(subs(theta2,{phi,vel,theta,vel_ang,C_m,alpa},{pi,pi_p,teta,teta_p,Cm,alfa}));
-phi2_ris = double(subs(phi2,{phi,vel,theta,vel_ang,C_m,alpa},{pi,pi_p,teta,teta_p,Cm,alfa}));
-ris =[theta2_ris,phi2_ris];
+theta2_ris = vpa(collect(simplify(subs(theta2,{phi,vel,theta,vel_ang},{q_1 q_1_p q_2 q_2_p}))),4)
+phi2_ris = collect(simplify(subs(phi2,{phi,vel,theta,vel_ang},{q_1 q_1_p q_2 q_2_p})))
+disp('funzione creata');
+ris = 0;
+matlabFunction(theta2_ris,'File','theta_secondo');
+matlabFunction(phi2_ris,'File','p_secondo');
 end
 

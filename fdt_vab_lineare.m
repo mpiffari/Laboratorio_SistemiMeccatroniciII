@@ -19,34 +19,82 @@ syms theta(t); % Angolo inclinazione
 vel_ang = diff(theta, t); % Vel angolare
 %syms C_m; % Forza esterna
 
-%%%%%%%%%%%%%%%%%%%%%%%%% Definizione masse e gravità %%%%%%%%%%%%%%%%%%%%%
-m_r = 3; % Massa singola ruota
-m_a = 3.5; % Massa asta
-m_c = 70; % Massa uomo
-m_b = 20; % Massa carello(base) + batterie: 
-% (Si suppongono le batterie all'interno di questa massa)
+% %%%%%%%%%%%%%%%%%%%%%%%%% Definizione masse e gravità %%%%%%%%%%%%%%%%%%%%%
+% m_r = vba(3,4); % Massa singola ruota
+% m_a = 3.5; % Massa asta
+% m_c = 70; % Massa uomo
+% m_b = 20; % Massa carello(base) + batterie: 
+% % (Si suppongono le batterie all'interno di questa massa)
+% 
+% M = m_a + m_b + m_c + 2*m_r; % Massa totale del sistema
+% g = 9.80665; % Costante di accelerazione di gravità
+% 
+% %%%%%%%%%%%%%%%%%%%%%%%%% Definizione delle altezze %%%%%%%%%%%%%%%%%%%%%%%
+% %Dimensioni espresse tutte in [m]
+% h_a = 1.4; % Altezza asta
+% h_b = 0.2; % Altezza base
+% w_b = 0.5; % Profondità base
+% 
+% z_b = 0.1; % Posizione baricentro base (valore assoluto)
+% h_c = 1.70; % Altezza uomo
+% 
+% r = 0.22; % Raggio ruota
+% %%%%%%%%%%%%%%%%%%%%%%%%% Definizione inerzie %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% J_a = 0.1669;% Inerzia asta
+% J_b = 0.6667; % Inerzia della base
+% 
+% % Inerzia del corpo
+% J_c = (1732353*h_c + 619298*2.20462*m_c - 277625773)*10e-7;
+% J_r = 0.1452;% Inerzia della singola ruota
+% Definizione masse e gravità
+% Massa singola ruota
+m_r = sym('3');
+% Massa asta
+m_a = sym('3.5');
+% Massa uomo (da far variare poi)
+m_c = sym('70');
 
-M = m_a + m_b + m_c + 2*m_r; % Massa totale del sistema
-g = 9.80665; % Costante di accelerazione di gravità
+% Massa carello(base) + batterie: si suppongo le batterie all'interno di
+% questa massa
+m_b = sym('20');
 
-%%%%%%%%%%%%%%%%%%%%%%%%% Definizione delle altezze %%%%%%%%%%%%%%%%%%%%%%%
+% Massa totale del sistema
+M = m_a+m_b+m_c+2*m_r;
+
+% Costante di accelerazione di gravità
+g = sym('9.80665');
+%Definizione delle altezze
 %Dimensioni espresse tutte in [m]
-h_a = 1.4; % Altezza asta
-h_b = 0.2; % Altezza base
-w_b = 0.5; % Profondità base
+% Altezza asta
+h_a = sym('1.4');
 
-z_b = 0.1; % Posizione baricentro base (valore assoluto)
-h_c = 1.70; % Altezza uomo
+% Altezza base
+h_b = sym('0.2');
 
-r = 0.22; % Raggio ruota
-%%%%%%%%%%%%%%%%%%%%%%%%% Definizione inerzie %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-J_a = 0.1669;% Inerzia asta
-J_b = 0.6667; % Inerzia della base
+% Profondità base
+w_b = sym('0.5');
+
+% Posizione baricentro base (valore assoluto)
+z_b = sym('0.1');
+
+% Altezza uomo
+h_c = sym('1.70');
+
+% Raggio ruota
+r = sym('0.22');
+%Definizione inerzie
+% Inerzia asta
+J_a = sym('0.1669');
+
+% Inerzia della base
+J_b = sym('0.6667');
 
 % Inerzia del corpo
 J_c = (1732353*h_c + 619298*2.20462*m_c - 277625773)*10e-7;
-J_r = 0.1452;% Inerzia della singola ruota
 
+% Inerzia della singola ruota
+J_r = sym('0.1452');
+% Definizione delle costanti geometriche 
 %%%%%%%%%%%%%%%%%%%%% Definizione delle costanti geometriche %%%%%%%%%%%%%%
 temp_1 = (h_a / 2) + (h_b / 2);
 temp_2 = w_b / 2;
