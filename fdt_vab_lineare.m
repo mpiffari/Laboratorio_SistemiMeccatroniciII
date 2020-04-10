@@ -137,7 +137,7 @@ U_c = m_c * g * l_c * cos(alpha+theta);
 L_c = T_c - U_c;
 
 %Chassis (o base)  
-P_b = [phi*r+l_b*sin(pi+theta); l_b*cos(pi+theta); pi+theta];
+P_b = [phi*r+l_b*sin(pi+theta); l_b*cos(pi+theta); theta];
 V_b = diff(P_b,t);
 M_b = [m_b,0,0; 0,m_b,0; 0,0,J_b];
 T_b = 1/2 * transpose(V_b) * M_b * V_b;
@@ -183,7 +183,7 @@ acc_ang = diff(theta, t, 2);
 acc = diff(phi, t, 2);
 
 eqns = [subs(E_L_theta, {acc,acc_ang},{q1_s,q2_s}), subs(E_L_phi, {acc,acc_ang},{q1_s,q2_s})];
-[theta2, phi2] = solve(eqns, [q1_s q2_s]);
+[phi2,theta2] = solve(eqns, q1_s ,q2_s)
 
 % Avrò 2 equilibri per l'angolo theta
 % 0 --> equilibrio instabile

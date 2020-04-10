@@ -106,7 +106,7 @@ T_c = 1/2 * transpose(V_c) * M_c * V_c;
 U_c = m_c * g * l_c * cos(alpa+theta);
 L_c = T_c - U_c;
 %Chassis (o base)  
-P_b = [phi*r+l_b*sin(3.1415+theta); l_b*cos(3.1415+theta); 3.1415+theta];
+P_b = [phi*r+l_b*sin(3.1415+theta); l_b*cos(3.1415+theta); theta];
 V_b = diff(P_b,t);
 M_b = [m_b,0,0; 0,m_b,0; 0,0,J_b];
 T_b = 1/2 * transpose(V_b) * M_b * V_b;
@@ -151,11 +151,11 @@ acc_ang = diff(theta, t, 2);
 acc = diff(phi, t, 2);
 
 eqns = [subs(E_L_theta, {acc,acc_ang},{q1_s,q2_s}), subs(E_L_phi, {acc,acc_ang},{q1_s,q2_s})];
-[theta2, phi2] = solve(eqns, [q1_s q2_s]);
+[phi2,theta2] = solve(eqns, q1_s ,q2_s)
 theta2_ris = collect(simplify(subs(theta2,{phi,vel,theta,vel_ang},{q_1 q_1_p q_2 q_2_p})))
 phi2_ris = collect(simplify(subs(phi2,{phi,vel,theta,vel_ang},{q_1 q_1_p q_2 q_2_p})));
 disp('funzione creata');
-ris = 0;
+ris = 0;%to return something
 matlabFunction(theta2_ris,'File','theta_secondo_sub');
 matlabFunction(phi2_ris,'File','phi_secondo');
 end
