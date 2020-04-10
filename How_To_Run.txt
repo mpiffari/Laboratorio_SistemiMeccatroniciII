@@ -1,0 +1,7 @@
+Per utilizzare:
+- Runnare VAB_dinamica_numerica
+
+Se si vuole testare modello lineare:
+ - Rimanere su VAD_dinamica_numerica
+altrimenti
+ - Runnare Simulazione_non_lineare
