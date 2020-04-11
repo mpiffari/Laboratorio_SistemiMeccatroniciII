@@ -70,6 +70,3 @@ end
 function R = RotZ(qz)
     R = [cos(qz)  -sin(qz) 0;sin(qz) cos(qz) 0; 0 0 1];
 end
-
-
-
