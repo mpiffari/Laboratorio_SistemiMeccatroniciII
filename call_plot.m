@@ -28,7 +28,7 @@ AngleWheel = -q1/r;
 RotWheel = RotZ(AngleWheel);
 
 %% Arm
-line([p0(1);p2(1)],[p0(2);p2(2)],  'LineWidth',10,   'Color',[1 0.4 0.1]);
+line([0.2+p0(1);0.2+p2(1)],[p0(2);p2(2)],  'LineWidth',10,   'Color',[1 0.4 0.1]);
 hold on 
 
 %% Cart
@@ -51,7 +51,7 @@ line([p_WheelCenter(1);p3_Wheel(1)],[p_WheelCenter(2);p3_Wheel(2)],...
 %% Head
 p_head_left = p2-Rotz_q2*[0.2;0;0];
 p_head_right = p2+Rotz_q2*[0.2;0;0];
-plot(p_head_right(1),p_head_right(2),'*','LineWidth',5,   'Color',[1 0.2 0.1])
+plot(p_head_right(1),p_head_right(2),'*','LineWidth',1,   'Color',[1 0.2 0.1])
 line([p_head_left(1);p_head_right(1)],[p_head_left(2);p_head_right(2)],...
     'LineWidth',10,   'Color',[0.4 0.4 0.5]);
 hold on
