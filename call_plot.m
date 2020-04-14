@@ -11,20 +11,21 @@ end
 clf
 
 PlotS2A(q);
-pause(0.02)
+%pause(0.02)
 end
 
 function PlotS2A(q)
-
+r = 0.22; % Wheel radius
 q1 = q(1);
-q2 = q(3);
-
-r = 0.4; % Wheel radius
+q2 = -q(3);
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+q1 = q1*r;
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 l1 = 2;
 p0 = [q1;0;0]; % Base
 Rotz_q2 = RotZ(q2);
 p2 = Rotz_q2*[0;1;0] * l1 + p0; % Tip of the Arm / Head
-AngleWheel = -q1/r;
+AngleWheel = q1/r;
 RotWheel = RotZ(AngleWheel);
 
 %% Arm
@@ -57,10 +58,10 @@ line([p_head_left(1);p_head_right(1)],[p_head_left(2);p_head_right(2)],...
 hold on
 
 %% Ground
-rectangle('Position',[-3.5,-0.2-0.1,7,0.1],'FaceColor',[0.6 0.6 0.7])
+rectangle('Position',[q1-4.5,-0.2-0.1,9,0.1],'FaceColor',[0.6 0.6 0.7])
 %% Axis
 % grid on
-axis([-4 4 -3 3])
+axis([q1-4 q1+4 -3 3])
 xlabel('X')
 ylabel('Y')
 
