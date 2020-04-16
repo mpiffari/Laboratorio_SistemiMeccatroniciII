@@ -12,7 +12,7 @@ set(gcf,'Visible','on');
 for i = 1:length(completeState)
      clf
      PlotS2A(completeState(i,:));
-     pause(1/200)
+     pause(1/2000)
 end
 
 end

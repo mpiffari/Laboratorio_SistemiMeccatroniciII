@@ -1,0 +1,4 @@
+- Commenti rlocus
+- Gestione plot (chiusura a fine movimento)
+- Eventuale gestione clamp
+- Allineare rad/deg dei due modelli simulink
