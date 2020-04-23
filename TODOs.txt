@@ -3,5 +3,12 @@
 - Eventuale gestione clamp
 - Allineare rad/deg dei due modelli simulink
 
-- Verificare peso delle batterie
-- Peso della persona (quale avete usato)
+- Verificare peso delle batterie (solved)
+- Peso della persona (quale avete usato) (solved)
+
+
+
+DOMANDE NATALI:
+- Come dobbiamo considerare gli angoli? (sen cos) Check sull'impostazione delle posizioni dei CorpiRigidi
+- Cm in eq di Lagrange qual'è: ridotta alle ruote o quella uscente dal motore?
+- All'altezza del baricentro della persona, va aggiunta anche la grandezza hb/2, giusto?
