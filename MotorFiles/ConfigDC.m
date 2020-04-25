@@ -46,7 +46,6 @@ tf_V_I = tf([m.tm/m.Ra, 0],[m.tm*m.te,m.tm,1]);
 tf_V_w = tf([1/m.K],[m.te*m.tm, m.tm, 1]);
 set(tf_V_w,'Name',['motore', m.name], 'InputName', 'Va', 'OutputName', 'omega');
 
-
 m.tf_V_I_simple = tf_V_I_e;
 m.tf_V_w = tf_V_w;
 m.tf_V_I = tf_V_I;
