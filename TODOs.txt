@@ -14,5 +14,5 @@ DOMANDE NATALI:
 
 - Cm in eq di Lagrange qual'è: è corretto aggiungere 2 * Cm nell'equazione del moto di theta, e mantenere
 singola la coppia per phi?
-- Corrente di sense: giusto non considerare nel modello il guadagno dell'AO? (non so quanto possa 
-essere utile parlarne con Natali/Prof).
+- Corrente di sense: giusto non considerare nel modello il guadagno dell'AO (200)?
+- Ponte H: guadagno.
