@@ -6,9 +6,13 @@
 - Verificare peso delle batterie (solved)
 - Peso della persona (quale avete usato) (solved)
 
-
-
 DOMANDE NATALI:
-- Come dobbiamo considerare gli angoli? (sen cos) Check sull'impostazione delle posizioni dei CorpiRigidi
-- Cm in eq di Lagrange qual'è: ridotta alle ruote o quella uscente dal motore?
-- All'altezza del baricentro della persona, va aggiunta anche la grandezza hb/2, giusto?
+- Come dobbiamo considerare gli angoli? (sen cos) Check sull'impostazione delle posizioni dei CorpiRigidi (solved)
+- All'altezza del baricentro della persona, va aggiunta anche la grandezza hb/2, giusto? (solved)
+
+
+
+- Cm in eq di Lagrange qual'è: è corretto aggiungere 2 * Cm nell'equazione del moto di theta, e mantenere
+singola la coppia per phi?
+- Corrente di sense: giusto non considerare nel modello il guadagno dell'AO? (non so quanto possa 
+essere utile parlarne con Natali/Prof).
