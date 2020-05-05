@@ -1,0 +1,6 @@
+\babel@toc {english}{}
+\contentsline {chapter}{\numberline {1}Introduzione}{1}{chapter.1}
+\contentsline {part}{I\hspace {1em}Dinamica}{3}{part.1}
+\contentsline {chapter}{\numberline {2}Scomposizione del VAB}{5}{chapter.2}
+\contentsline {part}{II\hspace {1em}Controllo}{7}{part.2}
+\contentsline {chapter}{\numberline {3}OPC - UA}{9}{chapter.3}
