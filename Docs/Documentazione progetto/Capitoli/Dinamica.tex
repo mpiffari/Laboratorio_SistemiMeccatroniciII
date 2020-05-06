@@ -1,4 +1,5 @@
 \chapter{Scomposizione del VAB}
+\section{Considerazioni iniziali}
 Per il calcolo delle equazioni dinamiche del sistema siamo andati a considerare ogni singolo corpo rigido componente il sistema, calcolandone le grandezze fisiche di posizione e velocità, seguendo un approccio cartesiano. 
 Nello specifico abbiamo considerato il sistema composto da:
 \begin{itemize}
@@ -24,4 +25,50 @@ Ognuno di questi corpi rigidi separati è individuato da un punto, che ne rappre
 	\label{fig:VAB_baricentri}
 \end{figure} 
 
+\section{Grandezze di supporto}
 Prima di andare a definire le componenti di energia potenziale e cinetica di ogni singolo corpo, siamo andati ad introdurre alcune grandezze geometriche di supporto che definiremo qui di seguito.
+
+Nello specifico abbiamo introdotto i seguenti parametri, specificati anche in figura ~\ref{fig:VAB_lunghezze}:
+\begin{itemize}
+	\item \textbf{$l_a$}: rappresenta la congiungente tra il centro del sistema di riferimento e il centro dell'asta, utilizzata appunto come manubrio, che abbiamo individuato come
+	\begin{center}
+		{\Large $\sqrt{(\frac{h_a}{2} + \frac{h_b}{2})^2 + (\frac{w_b}{2})^2}$}
+	\end{center}
+	\item \textbf{$l_c$}: (TODO: check) questa grandezza invece rappresenta per noi l'altezza del baricentro del corpo dell'utente, la quale ovviamente andrà a dipendere dal valore di inclinazione del corpo stesso.
+	Considerando il corpo inzialmente in posizione verticale, avremo che questa grandezza corrisponde alla congiungente dal centro del sistema di riferimento al punto $P_c$, che equivale a dire che
+	\begin{center}
+		$l_c = 0.55\bullet h_c + \frac{h_b}{2}$
+	\end{center}
+	\item \textbf{$l_b$}: spostamento verso il basso, lungo l'asse z, del baricentro dello chassis. Da specifiche del progetto sappiamo che questa grandezza ha valore (con segno negativo) di:
+	\begin{center}
+		$l_b = 0.1 m$
+	\end{center}
+	\item \textbf{$\beta$}: angolo formato con la verticale dalla congiungente tra il centro del sistema di riferimento e il punto $P_a$. Si ricava, con un semplice approccio trigonometrico, che l'angolo in questione ha questa forma
+	\begin{center}
+		$\arctan{(\frac{\frac{w_b}{2}}{\frac{h_a}{2} + \frac{h_b}{2}})}$
+	\end{center}
+\end{itemize}
+
+\begin{figure}[h]
+	\centering   	
+	\includegraphics[width=0.4\textwidth]{Immagini/VAB_additionalMeasures.png}
+	\caption{Lunghezze di supporto}
+	\label{fig:VAB_lunghezze}
+\end{figure}
+
+\section{Calcolo componenti dinamiche e potenziali per ogni corpo rigido del sistema}
+Per ognuno dei corpi rigidi definiti in precedenza siamo andati appunto a calcolare:
+
+\begin{itemize}
+	\item \textbf{Coordinate spaziali P} espresse nel sistema di riferimento XZ. A queste due coordinate cartesiane ne va aggiunta una terza, relativa alle coordinate angolari (per poter tener così conto dei contirbuti inerziali);
+	\item \textbf{Vettore delle velocità V} $\rightarrow$ vettore $3\times 1$
+	\item \textbf{Matrice delle masse M} $\rightarrow$ matrice $3\times 3$
+	\item \textbf{Energia cinetica T} $\rightarrow \frac{1}{2}\bullet V^T \bullet M \bullet V$
+	\item \textbf{Energia potenziale U}
+	\item \textbf{Lagrangiana \textit{parziale} L}
+\end{itemize}
+
+\subsection{Asta}
+\subsection{Chassis}
+\subsection{Utente}
+\subsection{Ruota}
