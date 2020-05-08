@@ -69,6 +69,28 @@ Per ognuno dei corpi rigidi definiti in precedenza siamo andati appunto a calcol
 \end{itemize}
 
 \subsection{Asta}
+\begin{itemize}
+	\item \textbf{$P_a = \left(\begin{array}{c}
+		r\,\phi \left(t\right)+l_a \,\mathrm{sin}\left(\beta +\theta \left(t\right)\right)\\
+		l_a \,\mathrm{cos}\left(\beta +\theta \left(t\right)\right)\\
+		\theta \left(t\right)
+		\end{array}\right)$}
+
+	\item \textbf{$V_a = 	\frac{\partial }{\partial t}\;P_a \left(t\right)
+		= \left(\begin{array}{c}
+		r\,\dot{\phi}+l_a \,\mathrm{cos}\left(\beta +\theta \left(t\right)\right)\,\dot{\theta}\\\\
+		-l_a \,\mathrm{sin}\left(\beta +\theta \left(t\right)\right)\,\dot{\theta}\\\\
+		\dot{\theta}
+		\end{array}\right)$}
+	
+	\item Nella stesura della matrice di massa,  \textbf{$M_a = \left(\begin{array}{ccc}
+		m_a  & 0 & 0\\
+		0 & m_a  & 0\\
+		0 & 0 & m_a \,{l_a }^2 +J_a 
+		\end{array}\right)$}
+	
+	\item \textbf{$T_a = m_a \,{l_a }^2 \,{{\left(\frac{\partial }{\partial t}\;\theta \left(t\right)\right)}}^2 +\frac{m_a \,r^2 \,{{\left(\frac{\partial }{\partial t}\;\phi \left(t\right)\right)}}^2 }{2}+\frac{J_a \,{{\left(\frac{\partial }{\partial t}\;\theta \left(t\right)\right)}}^2 }{2}+m_a \,\mathrm{cos}\left(\beta +\theta \left(t\right)\right)\,l_a \,r\,\frac{\partial }{\partial t}\;\theta \left(t\right)\,\frac{\partial }{\partial t}\;\phi \left(t\right)$}
+\end{itemize}
 \subsection{Chassis}
 \subsection{Utente}
 \subsection{Ruota}
