@@ -76,21 +76,129 @@ Per ognuno dei corpi rigidi definiti in precedenza siamo andati appunto a calcol
 		\theta \left(t\right)
 		\end{array}\right)$}
 
-	\item \textbf{$V_a = 	\frac{\partial }{\partial t}\;P_a \left(t\right)
-		= \left(\begin{array}{c}
-		r\,\dot{\phi}+l_a \,\mathrm{cos}\left(\beta +\theta \left(t\right)\right)\,\dot{\theta}\\\\
-		-l_a \,\mathrm{sin}\left(\beta +\theta \left(t\right)\right)\,\dot{\theta}\\\\
-		\dot{\theta}
+	\item \textbf{$V_a = \left(\begin{array}{c}
+		r\,\dot{\phi \left(t\right)}+l_a \,\mathrm{cos}\left(\beta +\theta \left(t\right)\right)\,\dot{\theta \left(t\right)}\\
+		-l_a \,\mathrm{sin}\left(\beta +\theta \left(t\right)\right)\,\dot{\theta \left(t\right)}\\
+		\dot{\theta \left(t\right)}
 		\end{array}\right)$}
 	
-	\item Nella stesura della matrice di massa,  \textbf{$M_a = \left(\begin{array}{ccc}
+	\item \textbf{$M_a = \left(\begin{array}{ccc}
 		m_a  & 0 & 0\\
 		0 & m_a  & 0\\
 		0 & 0 & m_a \,{l_a }^2 +J_a 
 		\end{array}\right)$}
 	
-	\item \textbf{$T_a = m_a \,{l_a }^2 \,{{\left(\frac{\partial }{\partial t}\;\theta \left(t\right)\right)}}^2 +\frac{m_a \,r^2 \,{{\left(\frac{\partial }{\partial t}\;\phi \left(t\right)\right)}}^2 }{2}+\frac{J_a \,{{\left(\frac{\partial }{\partial t}\;\theta \left(t\right)\right)}}^2 }{2}+m_a \,\mathrm{cos}\left(\beta +\theta \left(t\right)\right)\,l_a \,r\,\frac{\partial }{\partial t}\;\theta \left(t\right)\,\frac{\partial }{\partial t}\;\phi \left(t\right)$}
+	\item \textbf{$T_a = m_a \,{l_a }^2 \,{{\left(\dot{\theta \left(t\right)}\right)}}^2 +\frac{m_a \,r^2 \,{{\left(\dot{\phi \left(t\right)}\right)}}^2 }{2}+\frac{J_a \,{{\left(\dot{\theta \left(t\right)}\right)}}^2 }{2}+m_a \,\mathrm{cos}\left(\beta +\theta \left(t\right)\right)\,l_a \,r\,\dot{\theta \left(t\right)}\,\dot{\phi \left(t\right)}$}
+	
+	\item \textbf{$U_a = g\,l_a \,m_a \,\mathrm{cos}\left(\beta +\theta \left(t\right)\right)$}
+	
+	\item \textbf{$L_a = m_a \,{l_a }^2 \,{{\left(\dot{\theta \left(t\right)}\right)}}^2 +\frac{m_a \,r^2 \,{{\left(\dot{\phi \left(t\right)}\right)}}^2 }{2}+\frac{J_a \,{{\left(\dot{\theta \left(t\right)}\right)}}^2 }{2}+m_a \,\mathrm{cos}\left(\beta +\theta \left(t\right)\right)\,l_a \,r\,\dot{\theta \left(t\right)}\,\dot{\phi \left(t\right)}-g\,m_a \,\mathrm{cos}\left(\beta +\theta \left(t\right)\right)\,l_a$}
 \end{itemize}
-\subsection{Chassis}
+\subsection{Chassis (base)}
+\begin{itemize}
+	\item \textbf{$P_b = \left(\begin{array}{c}
+		r\,\phi \left(t\right)-l_b \,\mathrm{sin}\left(\theta \left(t\right)\right)\\
+		-l_b \,\mathrm{cos}\left(\theta \left(t\right)\right)\\
+		\theta \left(t\right)
+		\end{array}\right)$}
+	
+	\item \textbf{$V_b = \left(\begin{array}{c}
+		r\,\dot{\phi \left(t\right)}-l_b \,\mathrm{cos}\left(\theta \left(t\right)\right)\,\dot{\theta \left(t\right)}\\
+		l_b \,\mathrm{sin}\left(\theta \left(t\right)\right)\,\dot{\theta \left(t\right)}\\
+		\dot{\theta \left(t\right)}
+		\end{array}\right)$}
+	
+	\item \textbf{$M_b = \left(\begin{array}{ccc}
+		m_b  & 0 & 0\\
+		0 & m_b  & 0\\
+		0 & 0 & m_b \,{l_b }^2 +J_b 
+		\end{array}\right)$}
+	
+	\item \textbf{$T_b = m_b \,{l_b }^2 \,{{\left(\dot{\theta \left(t\right)}\right)}}^2 +\frac{m_b \,r^2 \,{{\left(\dot{\phi \left(t\right)}\right)}}^2 }{2}+\frac{J_b \,{{\left(\dot{\theta \left(t\right)}\right)}}^2 }{2}-m_b \,\mathrm{cos}\left(\theta \left(t\right)\right)\,l_b \,r\,\dot{\theta \left(t\right)}\,\dot{\phi \left(t\right)}$}
+	
+	\item \textbf{$U_b = -g\,l_b \,m_b \,\mathrm{cos}\left(\theta \left(t\right)\right)$}
+	
+	\item \textbf{$L_b = m_b \,{l_b }^2 \,{{\left(\dot{\theta \left(t\right)}\right)}}^2 +\frac{m_b \,r^2 \,{{\left(\dot{\phi \left(t\right)}\right)}}^2 }{2}+\frac{J_b \,{{\left(\dot{\theta \left(t\right)}\right)}}^2 }{2}-m_b \,\mathrm{cos}\left(\theta \left(t\right)\right)\,l_b \,r\,\dot{\theta \left(t\right)}\,\dot{\phi \left(t\right)}+g\,m_b \,\mathrm{cos}\left(\theta \left(t\right)\right)\,l_b$}
+\end{itemize}
 \subsection{Utente}
+\begin{itemize}
+	\item \textbf{$P_c = \left(\begin{array}{c}
+		r\,\phi \left(t\right)+l_c \,\mathrm{sin}\left(\alpha +\theta \left(t\right)\right)\\
+		l_c \,\mathrm{cos}\left(\alpha +\theta \left(t\right)\right)\\
+		\alpha +\theta \left(t\right)
+		\end{array}\right)$}
+	
+	\item \textbf{$V_c = \left(\begin{array}{c}
+		r\,\dot{\phi \left(t\right)}+l_c \,\mathrm{cos}\left(\alpha +\theta \left(t\right)\right)\,\dot{\theta \left(t\right)}\\
+		-l_c \,\mathrm{sin}\left(\alpha +\theta \left(t\right)\right)\,\dot{\theta \left(t\right)}\\
+		\dot{\theta \left(t\right)}
+		\end{array}\right)$}
+	
+	\item \textbf{$M_c = \left(\begin{array}{ccc}
+		m_c  & 0 & 0\\
+		0 & m_c  & 0\\
+		0 & 0 & m_c \,{l_c }^2 +J_c 
+		\end{array}\right)$}
+	
+	\item \textbf{$T_c = m_c \,{l_c }^2 \,{{\left(\dot{\theta \left(t\right)}\right)}}^2 +\frac{m_c \,r^2 \,{{\left(\dot{\phi \left(t\right)}\right)}}^2 }{2}+\frac{J_c \,{{\left(\dot{\theta \left(t\right)}\right)}}^2 }{2}+m_c \,\mathrm{cos}\left(\alpha +\theta \left(t\right)\right)\,l_c \,r\,\dot{\theta \left(t\right)}\,\dot{\phi \left(t\right)}$}
+	
+	\item \textbf{$U_c = g\,l_c \,m_c \,\mathrm{cos}\left(\alpha +\theta \left(t\right)\right)$}
+	
+	\item \textbf{$L_c = m_c \,{l_c }^2 \,{{\left(\dot{\theta \left(t\right)}\right)}}^2 +\frac{m_c \,r^2 \,{{\left(\dot{\phi \left(t\right)}\right)}}^2 }{2}+\frac{J_c \,{{\left(\dot{\theta \left(t\right)}\right)}}^2 }{2}+m_c \,\mathrm{cos}\left(\alpha +\theta \left(t\right)\right)\,l_c \,r\,\dot{\theta \left(t\right)}\,\dot{\phi \left(t\right)}-g\,m_c \,\mathrm{cos}\left(\alpha +\theta \left(t\right)\right)\,l_c$}
+\end{itemize}
 \subsection{Ruota}
+\begin{itemize}
+	\item \textbf{$P_r = \left(\begin{array}{c}
+		r\,\phi \left(t\right)\\
+		0\\
+		\phi \left(t\right)
+		\end{array}\right)$}
+	
+	\item \textbf{$V_r = \left(\begin{array}{c}
+		r\,\dot{\phi \left(t\right)}\\
+		0\\
+		\dot{\phi \left(t\right)}
+		\end{array}\right)$}
+	
+	\item \textbf{$M_r = \left(\begin{array}{ccc}
+		m_r  & 0 & 0\\
+		0 & m_r  & 0\\
+		0 & 0 & J_r 
+		\end{array}\right)$} \label{matrix:mr}
+	
+	\item \textbf{$T_r = \frac{{\left(m_r \,r^2 +J_r \right)}\,{{\left(\dot{\phi \left(t\right)}\right)}}^2 }{2}$}
+	
+	\item \textbf{$U_r = 0$}
+	
+	\item \textbf{$L_r = \frac{{\left(m_r \,r^2 +J_r \right)}\,{{\left(\dot{\phi \left(t\right)}\right)}}^2 }{2}$}
+\end{itemize}
+\subsection{Note sul calcolo delle componenti dinamiche}
+\begin{itemize}
+	\item Nel calcolo della matrice di massa abbiamo considerato tre componenti:
+	\begin{itemize}
+		\item Componente di massa lungo x;
+		\item Componente di massa lungo z;
+		\item Componente di massa rotazionale: dalla meccanica è noto che, un corpo con una certa massa che si trova in uno stato di rotazione, avrà un contirbuto inerziale che dipende dal braccio rispetto al quale avviene la rotazione.
+		Nello specifico, per ogni singolo corpo rigido che è stato preso in esame, abbiamo considerato, secondo il teorema di \textit{Huygens-Steiner}, il quale permette di definire l'inerzia di un corpo come la somma di due diverse componenti:
+		\begin{itemize}
+			\item Momento d'inerzia definito rispetto all'asse passante per il centro di massa: questo parametro rappresenta il valore che è fornito dalle specifiche del progetto;
+			\item prodotto tra la massa \textit{m} del corpo preso in considerazione e la distanza tra l'asse in esame e quello passante per il centro di massa;
+		\end{itemize}
+		Questa terza componente è visibile nelle matrici di massa in posizione $(3, 1)$: si sottolinea come invece, per la matrice ~\ref{matrix:mr}, non sia presente la componente esplicitata dal teorema di \textit{Huygens-Steiner} per il fatto che il centro di massa della ruota coincide con quello del sistema di riferimento XZ;
+ 	\end{itemize}
+ 	\item Nel calcolo simbolico in ambiente \textit{Matlab} siamo andati ad utilizzare le funzionalità di \textit{collect} e \textit{simplify}, per permettere di ridurre e semplificare le equazioni. Nello specifico, con il comando simplify, tramite l'opzione \textit{Steps}, siamo andati a settare il numeor di step che l'algoritmo di calcolo simbolico andrà a seguire per poter ridurre e semplificare il maggior numero di termini ($\uparrow Steps, \uparrow $\textit{Compattezza eq symb});
+ 	
+ 	\item Le ruote, nel calcolo della dinamica completa del VAB, sono state considerate con un contirbuto doppio;
+ 	
+ 	\item Nello studio dello chassis (base), abbiamo seguito questo approccio. Il baricentro della base stessa sappiamo essere posizionato ad una quota differente rispetto al centro del sistem di coordinate XZ preso come riferimento.
+ 	
+ 	Per questo motivo il suo contributo in termini cinetici e potenziali dipende dal valore dell'inclinazione dello chassis stesso, ovvero dal valore dell'angolo \textit{caratterizzante} il sistema $\theta$: questo concetto è evidenziato in figura ~\ref{fig:chassis}.L'aggiunta di \textit{$\pi$} al valore di $\theta$ è necessaria per poter rendere sensibile i valori di energia cinetica e potenziale al \textit{quadrante} in cui si trova ad essere posizionato il centro di amssa della abse stessa ($P_b$).
+ 	
+ 	\begin{figure}[h]
+ 		\centering   	
+ 		\includegraphics[width=0.6\textwidth]{Immagini/ChassisAngle.jpg}
+ 		\caption{Ragionamento per il calcolo dei contributi dinamici dello chassis}
+ 		\label{fig:chassis}
+ 	\end{figure}
+ 	
+\end{itemize}
