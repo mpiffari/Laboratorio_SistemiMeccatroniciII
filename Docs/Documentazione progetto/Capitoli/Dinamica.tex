@@ -172,6 +172,14 @@ Per ognuno dei corpi rigidi definiti in precedenza siamo andati appunto a calcol
 	
 	\item \textbf{$L_r = \frac{{\left(m_r \,r^2 +J_r \right)}\,{{\left(\dot{\phi \left(t\right)}\right)}}^2 }{2}$}
 \end{itemize}
+
+\subsection{Veicolo completo}
+Una volta trovati le componenti dinamiche dei singoli corpi rigidi, possiamo andare a definire l'energia cinetica e potenziale totale del sistema, per poter poi andare a calcolare l'equazione di Lagrange per l'intero sistema.
+In sostanza quindi avremo:
+\begin{center}
+	$L = L_a + L_b + L_c + 2 \bullet L_r$
+\end{center}
+
 \subsection{Note sul calcolo delle componenti dinamiche}
 \begin{itemize}
 	\item Nel calcolo della matrice di massa abbiamo considerato tre componenti:
@@ -192,7 +200,9 @@ Per ognuno dei corpi rigidi definiti in precedenza siamo andati appunto a calcol
  	
  	\item Nello studio dello chassis (base), abbiamo seguito questo approccio. Il baricentro della base stessa sappiamo essere posizionato ad una quota differente rispetto al centro del sistem di coordinate XZ preso come riferimento.
  	
- 	Per questo motivo il suo contributo in termini cinetici e potenziali dipende dal valore dell'inclinazione dello chassis stesso, ovvero dal valore dell'angolo \textit{caratterizzante} il sistema $\theta$: questo concetto è evidenziato in figura ~\ref{fig:chassis}.L'aggiunta di \textit{$\pi$} al valore di $\theta$ è necessaria per poter rendere sensibile i valori di energia cinetica e potenziale al \textit{quadrante} in cui si trova ad essere posizionato il centro di amssa della abse stessa ($P_b$).
+ 	Per questo motivo il suo contributo in termini cinetici e potenziali dipende dal valore dell'inclinazione dello chassis stesso, ovvero dal valore dell'angolo \textit{caratterizzante} il sistema $\theta$: questo concetto è evidenziato in figura ~\ref{fig:chassis}.
+ 	
+ 	L'aggiunta di \textit{$\pi$} al valore di $\theta$ è necessaria per poter rendere sensibile i valori di energia cinetica e potenziale al \textit{quadrante} in cui si trova ad essere posizionato il centro di amssa della base stessa ($P_b$).
  	
  	\begin{figure}[h]
  		\centering   	
@@ -201,4 +211,23 @@ Per ognuno dei corpi rigidi definiti in precedenza siamo andati appunto a calcol
  		\label{fig:chassis}
  	\end{figure}
  	
+\end{itemize}
+
+\chapter{Equazioni del moto}
+Una volta definita la dinamica del sistema ed ottenuta quindi l'equazione di Lagrange che ne caratterizza il comportamento, andiamo a ricavare le equazioni del moto, le quali consentono di definire l'andamento delle \textit{coordinate libere} (scelte in fase inziale di progetto) che sappiamo essere
+\begin{itemize}
+	\item $\phi = q_1 =$ \textit{angolo di rotazione delle ruote}
+	\item $\theta = q_2 =$ \textit{angolo di inclinazione dello chassis}
+\end{itemize}
+
+In particolare possiamo definire le cosidette \textit{equazioni di Eulero-Lagrange}, ovvero un insieme di n equazioni differenziali (con n pari al numero di coordinate libere del sistema), la cui risoluzione fornisce le equazioni del moto del sistema.
+\begin{center}
+	\label{eq:lagrangiana}
+	$\frac{d}{\mathrm{dt}}\left(\frac{\partial }{\partial \dot{q} }L\right)-\frac{\partial }{\partial q}L=\mathrm{torque}\ $
+\end{center}
+
+Sono da effettuare alcune annotazioni sugli addenti presenti nell'equazione ~\ref{eq:lagrangiana}:
+\begin{itemize}
+	\item \textit{q} rappresenta la coordinata libera (nel nostro caso sarà $\theta$ e $\phi$);
+	\item al secondo membro della lagrangiana TODO
 \end{itemize}
