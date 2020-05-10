@@ -18,7 +18,7 @@ addspace = server.register_namespace(name)
 
 node = server.get_objects_node()
 
-Param = node.add_object(addspace, "parameters")
+Param = node.add_object(addspace, "Gain parameters")
 
 K_phi = Param.add_variable(addspace, "K_phi", 0)
 K_phi_p = Param.add_variable(addspace, "K_phi_p", 0)
@@ -33,7 +33,7 @@ K_theta_p.set_writable()
 flag.set_writable()
 
 server.start()
-print("server started at{}".format(url))
+print("server started at {}".format(url))
 K1 = K_phi.get_value()
 K2 = K_phi_p.get_value()
 K3 = K_theta.get_value()
