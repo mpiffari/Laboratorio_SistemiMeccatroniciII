@@ -20,7 +20,7 @@ if ise
 else
     integrator_controller = evalin('base', 'integrator_controller');
 end
-cm_phi_p_setpoint = integrator_controller + K_integrazione*Ts*difference_phi_p;
+cm_phi_p_setpoint = integrator_controller + K_integrazione*(1)*Ts*difference_phi_p;
 
 assignin('base','integrator_controller',cm_phi_p_setpoint);
 desidered_cm = cm_phi_p_setpoint - cm_state_feedback;
