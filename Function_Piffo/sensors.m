@@ -77,7 +77,7 @@ window_phi = temp_window_phi;
 
 temp_window_theta = zeros(size(window_theta));
 temp_window_theta(n+1:end)= window_theta(1:end-n);
-temp_window_theta(1,1) = actual_theta_deriveded;
+temp_window_theta(1,1) = actual_theta_derived;
 actual_theta_deriveded = sum(window_theta) / windowLen;
 window_theta = temp_window_theta;
 
