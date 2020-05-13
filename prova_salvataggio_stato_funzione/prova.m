@@ -9,7 +9,10 @@ if ise
 else
     k = evalin('base', 'k');
 end
-output = input * k
+disp('ciao');
+
+output = input * k;
+
 %salvo il nuovo valore nella workspace
 assignin('base','k',k+1) 
 end
