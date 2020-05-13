@@ -72,13 +72,13 @@ end
 temp_window_phi = zeros(size(window_phi));
 temp_window_phi(n+1:end)= window_phi(1:end-n);
 temp_window_phi(1,1) = actual_phi_derived;
-actual_phi_derived = sum(window_phi) / windowlen;
+actual_phi_derived = sum(window_phi) / windowLen;
 window_phi = temp_window_phi;
 
 temp_window_theta = zeros(size(window_theta));
 temp_window_theta(n+1:end)= window_theta(1:end-n);
 temp_window_theta(1,1) = actual_theta_deriveded;
-actual_theta_deriveded = sum(window_theta) / windowlen;
+actual_theta_deriveded = sum(window_theta) / windowLen;
 window_theta = temp_window_theta;
 
 assignin('base','window_phi', window_phi);
