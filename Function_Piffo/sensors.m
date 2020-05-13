@@ -67,6 +67,9 @@ ise_window_theta = evalin( 'base', 'exist(''window_theta'',''var'') == 0' );
 if ise_window_phi && ise_window_theta
     window_phi = zeros(windowLen,1);
     window_theta = zeros(windowLen,1);
+else 
+    window_phi = evalin('base', 'window_phi');
+    window_theta = evalin('base', 'window_theta');
 end
 
 temp_window_phi = zeros(size(window_phi));
