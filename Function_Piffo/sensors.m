@@ -2,6 +2,7 @@ function sensedStates = sensors(input)
 %% GET INPUT
 actual_phi_quantized = input(1);
 actual_theta_quantized = input(2);
+
 %% GET DATA FROM WS
 Ts = evalin('base', 'Ts');
 
