@@ -1,37 +1,9 @@
-function sensedStates = sensors(actual_phi,actual_phi_p,actual_theta,actual_theta_p)
-%actual_phi = actualStates(1);
-%actual_theta = actualStates(3);
-
+function sensedStates = sensors(input)
+%% GET INPUT
+actual_phi_quantized = input(1);
+actual_theta_quantized = input(2);
 %% GET DATA FROM WS
 Ts = evalin('base', 'Ts');
-sensitivity_giroscopio = evalin('base', 'sensitivity_giroscopio');
-sensitivity_encoder = evalin('base', 'sensitivity_encoder');
-
-%% NOISE
-power = 10^-7;
-seed = 23341;
-imp = 1;
-noise = wgn(1,1,power, imp, seed);
-
-actual_phi_noised = actual_phi + noise;
-actual_theta_noised = actual_theta + noise;
-
-%% QUANTIZATION
-quantumEncoder = 1 / sensitivity_encoder;
-quantumGiroscope = 1 / sensitivity_giroscopio;
-
-actual_phi_quantized = round(actual_phi_noised/quantumEncoder)*quantumEncoder; 
-actual_theta_quantized = round(actual_theta_noised/quantumGiroscope)*quantumGiroscope;
-
-%% FILTERING
-filter_order = 2;
-w_n = 30; % w_n [rad / s]
-f_c = w_n / (2 * pi); % [Hz]
-f_s = 1/ Ts;
-
-[b,a] = butter(filter_order, f_c / (f_s/2));
-actual_phi_filtered = filter(b,a, actual_phi_quantized);
-actual_theta_filtered = filter(b, a, actual_theta_quantized);
 
 %% DERIVATION
 
@@ -50,43 +22,66 @@ else
     last_theta_quantized = evalin('base', 'last_theta_quantized');
 end
 
-K = 1.0;
-actual_phi_derived = K *(last_phi_quantized - actual_phi_quantized) / Ts;
-actual_theta_derived = K * (last_theta_quantized - actual_theta_quantized) / Ts;
+actual_phi_derived = (actual_phi_quantized - last_phi_quantized) / Ts;
+actual_theta_derived = (actual_theta_quantized - last_theta_quantized) / Ts;
 
 assignin('base','last_phi_quantized', actual_phi_quantized);
 assignin('base','last_theta_quantized', actual_theta_quantized);
 
 %% MOVING AVERAGE
 windowLen = 200;
-n = 1; % Shift units
 
-ise_window_phi = evalin( 'base', 'exist(''window_phi'',''var'') == 0' );
-ise_window_theta = evalin( 'base', 'exist(''window_theta'',''var'') == 0' );
+ise_window_phi = evalin('base', 'exist(''window_phi'',''var'') == 0' );
+ise_window_theta = evalin('base', 'exist(''window_theta'',''var'') == 0' );
+ise_window_phi_derived = evalin('base', 'exist(''window_phi_derived'',''var'') == 0' );
+ise_window_theta_derived = evalin('base', 'exist(''window_theta_derived'',''var'') == 0' );
 
-if ise_window_phi && ise_window_theta
+if ise_window_phi && ise_window_theta && ise_window_phi_derived && ise_window_theta_derived
     window_phi = zeros(windowLen,1);
     window_theta = zeros(windowLen,1);
-else 
+    window_phi_derived = zeros(windowLen,1);
+    window_theta_derived = zeros(windowLen,1);
+else
     window_phi = evalin('base', 'window_phi');
     window_theta = evalin('base', 'window_theta');
+    window_phi_derived = evalin('base', 'window_phi_derived');
+    window_theta_derived = evalin('base', 'window_theta_derived');
 end
 
+% PHI
 temp_window_phi = zeros(size(window_phi));
-temp_window_phi(n+1:end)= window_phi(1:end-n);
-temp_window_phi(1,1) = actual_phi_derived;
-actual_phi_derived = sum(window_phi) / windowLen;
+temp_window_phi(1:end-1)= window_phi(2:end);
+temp_window_phi(end) = actual_phi_quantized;
 window_phi = temp_window_phi;
+actual_phi_quantized = sum(window_phi) / windowLen;
 
+% THETA
 temp_window_theta = zeros(size(window_theta));
-temp_window_theta(n+1:end)= window_theta(1:end-n);
-temp_window_theta(1,1) = actual_theta_derived;
-actual_theta_deriveded = sum(window_theta) / windowLen;
+temp_window_theta(1:end-1)= window_theta(2:end);
+temp_window_theta(end) = actual_theta_quantized;
 window_theta = temp_window_theta;
+actual_theta_quantized = sum(window_theta) / windowLen;
+
+% PHI_P
+temp_window_phi_derived = zeros(size(window_phi_derived));
+temp_window_phi_derived(1:end-1)= window_phi_derived(2:end);
+temp_window_phi_derived(end) = actual_phi_derived;
+window_phi_derived = temp_window_phi_derived;
+actual_phi_derived = sum(window_phi_derived) / windowLen;
+
+% THETA_P
+temp_window_theta_derived = zeros(size(window_theta_derived));
+temp_window_theta_derived(1:end-1)= window_theta_derived(2:end);
+temp_window_theta_derived(end) = actual_theta_derived;
+window_theta_derived = temp_window_theta_derived;
+actual_theta_derived = sum(window_theta_derived) / windowLen;
 
 assignin('base','window_phi', window_phi);
 assignin('base','window_theta', window_theta);
+assignin('base','window_phi_derived', window_phi_derived);
+assignin('base','window_theta_derived', window_theta_derived);
+
 %% SENSED STATES COMPOSITION
-sensedStates = [actual_phi_quantized, actual_phi_derived, actual_theta_quantized, actual_theta_deriveded];
+sensedStates = [actual_phi_quantized, actual_phi_derived, actual_theta_quantized, actual_theta_derived];
 end
 
