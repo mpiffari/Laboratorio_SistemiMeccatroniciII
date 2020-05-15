@@ -2,14 +2,18 @@ L'approccio seguito per la stesura del modello dinamico del veicolo autobilancia
 
 Nello specifico, per la parte di stesura e definizione della dinamica, abbiamo inzialmente seguito una via risolutiva duale, portando avanti sia un'analisi letterale, sfruttando le potenzialità del \textbf{calcolo simbolico} messe a disposizione delle funzionalità di \textbf{live scripting}, sia uno studio numerico (considerando quindi le varie grandezze fisiche con i valori definiti delle specifiche di progetto).
 
-In linea di massima lo sviluppo del progetto ha seguito un andamento a step graduali, cadenziati da incontri settimanali in cui poter confrontare e consolidare lo \textit{stato di avanzamento dei lavori}: nello specifico, il lavoro ha seguito uno sviluppo in questa direzione, step by step, rappresentabile in linea di massima da queste \textit{pietre miliari}:
+In linea di massima lo sviluppo del progetto ha seguito un andamento a step graduali, cadenziati da incontri settimanali in cui poter confrontare e consolidare lo \textit{stato di avanzamento dei lavori}: nello specifico, il lavoro ha seguito uno sviluppo in questa direzione step by step, rappresentabile in linea di massima da queste \textit{pietre miliari}:
 \begin{itemize}
 	\item \textbf{Dinamica di ogni singolo corpo rigido}: abbiamo impostato il problema della dinamica andando a considerare il veicolo auto bilanciato come un insieme di corpi rigidi di cui poterne studiare la dinamica in maniera separata;
-	\item \textbf{Dinamica completa del VAB}: siamo andati poi a considerare il sistema nella sua completezza, andando ad unire i contributi dei corpi rigidi considerati in prima battuta singolarmente;
-	\item \textbf{Linearizzazione}: TODO
-	\item \textbf{Definizione del controllo}: prima lineare poi non lineare TODO
-	\item \textbf{Discretizzazione}: TOOD
-	\item TODO altri step
+	\item \textbf{Dinamica completa del VAB}: siamo andati poi a considerare il sistema nella sua completezza, andando ad unire i contributi dei corpi rigidi considerati in prima battuta singolarmente.
+	
+	Questo ci ha permesso di ottenere le equazioni del moto, in forma non lineare, le quali hanno permesso una completa descrizione del sistema che abbiamo modelizzato;
+	\item \textbf{Linearizzazione}: siamo poi andati a linearizzare queste equazioni dinamiche (appunto non lineari) nell'intorno dell'equilibrio;
+	\item \textbf{Definizione del controllo}: definizio del controllore tramite tecnica di \textit{pole placement};
+	\item \textbf{Modellizzazione del motore}: introduzione del modello del motore sulla base delle caratteristiche contenute nella specifica di progetto;
+	\item \textbf{Discretizzazione}: passaggio a tempo discreto per i segnali derivanti dal mondo analogico, ovvero per tutto ciò che concerne la parte di sensoristica;
+	\item \textbf{Non idealità}: siamo andati a modellizzare anche la presenza di disturbi, di natura stocastica e dovuti alla quantizzazione;
+	\item \textbf{Trasformazioni di blocchi in \textit{interpreted function}}: conversione delle funzionalità di controllo del motore e filtraggio dei segnali provenienti dai sensori in blocchi di codice \textit{Matlab} per favorirne poi la successiva conversione ed implementazione a bordo del controllore;
 \end{itemize}
 
 TODO: note varie
