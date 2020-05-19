@@ -34,6 +34,34 @@ Nel contesto del progetto del \textit{veicolo auto bilanciato}, siamo andati ad 
 	\item \textbf{K\_theta\_p}
 \end{itemize}
 
+Nello specifico, lo scambio di parametri tra server e controllore avviene tramite unfile \textit{.txt}, che permette, in maniera semplice e immediata, di implementare uno scambio di informazioni tra il server \textit{OPC-UA} strutturato in Python e l'ambiente \textit{real-time} introdotto a bordo del controllore \textit{Raspbery Pi 3}.
+
+
+In particolare abbiamo due files:
+\begin{itemize}
+	\item \textbf{Un file temporaneo} \textit{("GainParametersToController.txt")} utilizzato come pipeline per il passaggio dei parametri tra server e controllore. Questo risulta essere un file temporaneo che viene ad essere cancellato e ricreato ogni qualvolta che il server viene spento e successivamente riaccesso.
+	Nello specifico, ad ogni riaccensione, i valori iniziali di questo file, vengono settati con gli stessi valori presenti nel file \textit{definitivo}  (qualora quest'ultimo esista già: in caso contrario si procede con un inizializzazione dei parametri a 0);
+	
+	\item \textbf{Un file definitivo} \textit{("GainParametersConfirmed.txt")} il quale invece viene creato una e una sola volta e sul quale poi vengono salvati i parametri che saranno poi letti all'accensione successiva del server ed utilizzati come parametri iniziali per il controllore.
+\end{itemize}
+
+Questi file possono essere settati con i parametri presenti nel server che sono visibili in figura ~\ref{fig:OPCUA_params}, nello specifico:
+\begin{itemize}
+	\item \textbf{Submit change to controller} permette di scrivere i valori dei gains sul file \textit{"GainParametersToController.txt"};
+	
+	\item \textbf{Store definitively in file} permette di scrivere i valori dei gains sul file \textit{"GainParametersConfirmed.txt"};
+	
+	\item \textbf{SHUT DOWN SERVER} permette invece di spegnere il server e di cancellare successivamente il file temporaneo.
+\end{itemize}
+
+\begin{figure}[h]
+	\centering   	
+	\includegraphics[width=0.4\textwidth]{Immagini/OPC_UA_params.jpg}
+	\caption{Parametri impostabili lato client}
+	\label{fig:OPCUA_params}
+\end{figure}
+
+
 Abbiamo racchiuso in figura ~\ref{fig:OPCUA_diagram} il funzionamento di massima del codice lato server: codice che siamo andati a testare utilizzando un'apposita app per smartphone Android (\href{https://play.google.com/store/apps/details?id=com.prosysopc.ua.android2&hl=it}{OPC-UA Android client}).
 
 \begin{figure}[h]
