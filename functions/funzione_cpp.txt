@@ -1,0 +1,130 @@
+//============================================================================
+// Name        : Meccatronici.cpp
+// Author      : Calegari-Piffari
+// Version     :
+// Copyright   : Your copyright notice
+// Description : Hello World in C++, Ansi-style
+//============================================================================
+
+#include <iostream>
+using namespace std;
+
+const int windowWidth = 200;
+double k_simulazione_discreta[4];
+double phi = 0;
+double phi_precedente = 0;
+double phi_p = 0;
+double theta = 0;
+double theta_precedente = 0;
+double theta_p = 0;
+double Ts = 0.001;
+double phi_p_setpoint = 10;
+double m_a_phi[windowWidth] = {0};
+double m_a_phi_p[windowWidth] = {0};
+double m_a_theta[windowWidth] = {0};
+double m_a_theta_p[windowWidth] = {0};
+double m_a_motore [windowWidth] = {0};
+double integrator_controller = 0;
+double integrator_controller_motor = 0;
+double K_integrazione = 0.002;
+double desidered_cm = 0;
+double actual_cm = 0;
+
+void read_k(){
+	///////////////////////dovrei leggere i valori dal file////////////////////
+	k_simulazione_discreta[1] = 0;
+	k_simulazione_discreta[2] = 0;
+	k_simulazione_discreta[3] = 0;
+	k_simulazione_discreta[4] = 0;
+}
+
+void controllore(){
+
+	double cm_state_feedback  = k_simulazione_discreta[0]*phi + k_simulazione_discreta[1]*phi_p + k_simulazione_discreta[2]*theta + k_simulazione_discreta[3]*theta_p;
+	double difference_phi_p  = phi_p - phi_p_setpoint;
+	integrator_controller = integrator_controller + K_integrazione*Ts*difference_phi_p;
+	desidered_cm = integrator_controller - cm_state_feedback;
+}
+
+void controllore_motore(int counter){
+	//////////////////da verificare la media mobile, c'era un errore in matlab/////////////////
+	double cm_setpoint = desidered_cm;
+	double corrente_attuale_noise = rand();
+	//////////////////////////////////da rivedere le costanti/////////////////////////////////
+	double k_t = 0.1;
+	double Ts = 0.0001;
+	double P = 1;
+	double I = 980;
+	int windowWidth = 10;
+	if(cm_setpoint > 2)
+		cm_setpoint = 2;
+	if(cm_setpoint <-2)
+		cm_setpoint = -2;
+	double corrente_setpoint = cm_setpoint/k_t;
+	m_a_motore[counter] = corrente_attuale_noise;
+	double media_pesata = 0;
+	for(int i = 0; i<windowWidth;i++){
+		media_pesata = media_pesata + 1/windowWidth * m_a_motore[i];
+	}
+	double corrente_filtrata = media_pesata;
+	double differenza_corrente  = corrente_setpoint - corrente_filtrata;
+	integrator_controller_motor = I*Ts*differenza_corrente + integrator_controller_motor;
+	actual_cm = P*differenza_corrente + integrator_controller_motor;
+}
+
+void read_sensor_phi(int counter){
+	m_a_phi [counter] =  rand();
+	double media_pesata = 0;
+	for(int i = 0; i<windowWidth;i++){
+		media_pesata = media_pesata + 1/windowWidth * m_a_phi[i];
+	}
+	phi_precedente = phi;
+	phi = media_pesata;
+}
+
+void read_sensor_theta(int counter){
+	m_a_theta [counter] =  rand();
+	double media_pesata = 0;
+	for(int i = 0; i<windowWidth;i++){
+		media_pesata = media_pesata + 1/windowWidth * m_a_theta[i];
+	}
+	theta_precedente = theta;
+	theta = media_pesata;
+}
+
+void calculate_phi_p(int counter){
+	m_a_phi_p[counter] = (phi-phi_precedente)/Ts;
+	double media_pesata = 0;
+	for(int i = 0; i<windowWidth;i++){
+		media_pesata = media_pesata + 1/windowWidth * m_a_phi_p[i];
+	}
+	phi_p = media_pesata;
+}
+
+void calculate_theta_p(int counter){
+	m_a_theta_p[counter] = (theta-theta_precedente)/Ts;
+	double media_pesata = 0;
+	for(int i = 0; i<windowWidth;i++){
+		media_pesata = media_pesata + 1/windowWidth * m_a_theta_p[i];
+	}
+	theta_p = media_pesata;
+}
+
+
+int main() {
+	cout << "!!!Hello World!!!" << endl; // prints !!!Hello World!!!
+	int counter = 0;
+	while(true){
+		read_sensor_phi(counter);
+		read_sensor_theta(counter);
+		calculate_phi_p(counter);
+		calculate_theta_p(counter);
+		read_k();
+		controllore();
+		controllore_motore(counter);
+		counter = (counter+1)%windowWidth;
+		cout<<(actual_cm)<<endl;
+	}
+
+	return 0;
+}
