@@ -230,4 +230,120 @@ Sono da effettuare alcune annotazioni sugli addenti presenti nell'equazione ~\re
 \begin{itemize}
 	\item \textit{q} rappresenta la coordinata libera (nel nostro caso sarà $\theta$ e $\phi$);
 	\item al secondo membro della lagrangiana TODO
+	\item molto importante ai fini della correttezza delle equazioni  del moto è il valore da assegnare a \textit{torque}; infatti esso varia a seconda che il sistema agisca sulla coordinata libera \textit{q} a valle o a monte della trasmissione.
+	Nello specifico, si osserva che il motore è composto da due parti: lo statore e il rotore. Esse trasmettono una coppia uguale e inversa a ciò cui sono collegati: lo statore, posizionato nella base del Segway, influenza la coordinata $\theta$ ed esercita una coppia sullo chassy pari ad una generica \textit{$-2 C_m$}; il fattore moltiplicativo 2 è dovuto al fatto che nella base sono presenti due motori.
+	Parimenti, il rotore trasmette all'albero motore una coppia \textit{$C_m$}. A valle della trasmissione si misura dunque una coppia \textit{$\frac{C_m}{\tau}$} dovuta alla presenza della trasmissione; questa coppia ridotta all'albero dell'utilizzatore è la coppia che in definitiva va ad agire sulle ruote e quindi sulla coordinata $\phi$
 \end{itemize}
+Si ottiene dunque il seguente sistema di equazioni:
+\begin{center}
+	\label{eq:lagrangiana_theta_phy}
+	$\frac{d}{\mathrm{dt}}\left(\frac{\partial }{\partial \dot{\theta} }L\right)-\frac{\partial }{\partial \theta}L=\mathrm{-2 C_m}\ $\\
+	$\frac{d}{\mathrm{dt}}\left(\frac{\partial }{\partial \dot{\phi} }L\right)-\frac{\partial }{\partial \phi}L=\mathrm{\frac{C_m}{\tau}}\ $
+\end{center}
+dove $\tau$ è il rapporto di trasmissione calcolato come segue:
+\begin{center}
+	\label{eq:tau}
+	$\tau_1 = 0.1$\\
+	$\tau_2 = \frac{Z_in}{Z_out} = \frac{22}{26}$\\
+	$\tau = \tau_1 \cdot{\tau_2} = 0.085$	
+\end{center}
+
+La risoluzione delle equazioni \ref{eq:lagrangiana_theta_phy}, permette di ottenere due equazioni differenziali del secondo ordine che il comando \textit{matlabFunction()} va a scrivere in una funzione di matlab: questa funzione avrà come input i valori da cui dipendono le equazioni differenziali e moltiplicandoli tra di loro da come output il valore di $\ddot{\theta}$ e $\ddot{\phi}$.
+TODO (mettere le dipendende di theta pp e phi pp)
+
+\subsection{Linearizzazione}
+Il passo successivo che è stato svolto riguarda la linearizzazione; linearizzare è importante poiché il controllore viene progettato sul sistema lineare e poi testato sul sistema reale e quindi non lineare.
+
+Per tale ragione è necessario innanzitutto calcolare l'equilibrio del sistema, cioè il punto in cui $\ddot{\theta} = 0$:
+\begin{center}
+	$$\left(\begin{array}{c}
+		-0.01174364-\text{7.105427e-15}\,\mathrm{i}\\
+		3.129849-\text{7.105427e-15}\,\mathrm{i}
+	\end{array}\right)$$
+\end{center}
+
+I risultati ottenuti sono, circa, numeri naturali e rispondono a quanto ci aspettavamo: 
+\begin{itemize}
+	\item il sistema ha due equilibri, il primo $\theta = -0.01174364$ ci si aspetta che sia instabile in quanto il baricentro del sistema V.A.B. più Uomo è sopra all'asse delle ruote
+	\item  $\theta = 3.129849$ è un equilibrio stabile poiché il baricentro sta sotto l'asse delle ruote e un eventuale disturbo, dopo un transitorio, risulterebbe avere effetto nullo sul sistema.
+\end{itemize}
+
+Ovviamente, ai fini del controllo, si è linearizzato attorno al primo equilibrio; non avrebbe senso cpntrollare il sistema quando questo risulta capovolto.
+Il vettore degli stati e delle uscite sono i seguenti:
+\begin{center}
+	$$
+	x=\left\lbrack \begin{array}{c}
+		x_1 \to \phi \;\\
+		x_2 \to \dot{\phi \;} \\
+		x_{3\;} \to \theta \;\\
+		x_4 \to \dot{\theta \;} 
+	
+		\end{array}\right\rbrack
+	$$
+	
+	$$
+	y=\left\lbrack \begin{array}{c}
+	y_1\;\\
+	y_2\;
+	
+\end{array}\right\rbrack
+	$$
+\end{center}
+e vengono definite anche alcune variabili di supporto:
+\begin{center}
+	$$
+	\overset{\bullet \;}{x_1 \left(t\right)} =\bar{x_2 } =0\to f_1
+	$$
+	$$
+	\overset{\bullet \;}{x_2 \left(t\right)} =\overset{\bullet \bullet \;\;}{\phi \;} \to f_2
+	$$
+	$$
+	\overset{\bullet \;}{x_3 \left(t\right)} =\bar{x_4 } =0\to f_{3\;}
+	$$
+	$$
+	\overset{\bullet \;}{x_4 \left(t\right)=} \overset{\bullet \bullet \;\;}{\theta \;} \to f_4
+	$$
+	$$
+	y_{1\;} \left(t\right)=\phi =x_{1\;} \to g_1
+	$$
+	$$
+	y_{2\;} \left(t\right)=\theta =x_{2\;} \to g_2
+	$$
+\end{center}
+
+ricordando che un generico sistema dinamico può essere scritto come:
+\begin{center}
+	$$
+	G\left(s\right)=C\bullet {\left(\mathrm{sI}-A\right)}^{-1} \bullet B+D
+	$$
+\end{center}
+allora:
+\begin{center}
+	$$
+	A=\left\lbrack \begin{array}{cccc}
+	\frac{\partial }{\partial x_1 }f_{1\;}  & \frac{\partial }{\partial x_2 }f_{1\;}  & \frac{\partial }{\partial x_3 }f_{1\;}  & \frac{\partial }{\partial x_4 }f_{1\;} \\
+	\frac{\partial }{\partial x_1 }f_{2\;}  & \frac{\partial }{\partial x_2 }f_{2\;}  & \frac{\partial }{\partial x_3 }f_{2\;}  & \frac{\partial }{\partial x_4 }f_{2\;} \\
+	\frac{\partial }{\partial x_1 }f_3  & \frac{\partial }{\partial x_2 }f_3  & \frac{\partial }{\partial x_3 }f_3  & \frac{\partial }{\partial x_4 }f_3 \\
+	\frac{\partial }{\partial x_1 }f_4  & \frac{\partial }{\partial x_2 }f_4  & \frac{\partial }{\partial x_3 }f_4  & \frac{\partial }{\partial x_4 }f_4 
+	\end{array}\right\rbrack
+	$$
+	$$
+	B=\left\lbrack \begin{array}{c}
+	\frac{\partial }{\partial u}f_1 \\
+	\frac{\partial }{\partial u}f_2 \\
+	\frac{\partial }{\partial u}f_3 \\
+	\frac{\partial }{\partial u}f_4 
+	\end{array}\right\rbrack
+	$$
+	$$
+	C=\left\lbrack \begin{array}{cccc}
+	\frac{\partial }{\partial x_1 }g_{1\;}  & \frac{\partial }{\partial x_2 }g_{1\;}  & \frac{\partial }{\partial x_3 }g_{1\;}  & \frac{\partial }{\partial x_4 }g_{1\;} \\
+	\frac{\partial }{\partial x_1 }g_{1\;}  & \frac{\partial }{\partial x_2 }g_{1\;}  & \frac{\partial }{\partial x_3 }g_{1\;}  & \frac{\partial }{\partial x_4 }g_2 
+	\end{array}\right\rbrack
+	$$
+	$$
+	\;D=\left\lbrack \begin{array}{cc}
+	\frac{\partial }{\partial u}g_{1\;}  & \frac{\partial }{\partial u}g_2 
+	\end{array}\right\rbrack
+	$$
+\end{center}

@@ -1,4 +1,4 @@
-\babel@toc {english}{}
+\select@language {english}
 \contentsline {chapter}{\numberline {1}Introduzione}{1}{chapter.1}
 \contentsline {part}{I\hspace {1em}Dinamica}{3}{part.1}
 \contentsline {chapter}{\numberline {2}Scomposizione del VAB}{5}{chapter.2}
@@ -12,8 +12,9 @@
 \contentsline {subsection}{\numberline {2.3.5}Veicolo completo}{8}{subsection.2.3.5}
 \contentsline {subsection}{\numberline {2.3.6}Note sul calcolo delle componenti dinamiche}{8}{subsection.2.3.6}
 \contentsline {chapter}{\numberline {3}Equazioni del moto}{11}{chapter.3}
-\contentsline {part}{II\hspace {1em}Controllo}{13}{part.2}
-\contentsline {chapter}{\numberline {4}OPC - UA}{15}{chapter.4}
-\contentsline {section}{\numberline {4.1}Idea base OPC-UA}{15}{section.4.1}
-\contentsline {section}{\numberline {4.2}OPC-UA e V.A.B.}{16}{section.4.2}
-\contentsline {chapter}{\numberline {5}Rumore}{19}{chapter.5}
+\contentsline {subsection}{\numberline {3.0.1}Linearizzazione}{12}{subsection.3.0.1}
+\contentsline {part}{II\hspace {1em}Controllo}{15}{part.2}
+\contentsline {chapter}{\numberline {4}OPC - UA}{17}{chapter.4}
+\contentsline {section}{\numberline {4.1}Idea base OPC-UA}{17}{section.4.1}
+\contentsline {section}{\numberline {4.2}OPC-UA e V.A.B.}{18}{section.4.2}
+\contentsline {chapter}{\numberline {5}Rumore}{21}{chapter.5}

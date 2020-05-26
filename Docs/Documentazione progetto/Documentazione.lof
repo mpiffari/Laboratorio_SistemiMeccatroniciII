@@ -1,4 +1,4 @@
-\babel@toc {english}{}
+\select@language {english}
 \addvspace {10\p@ }
 \addvspace {10\p@ }
 \contentsline {figure}{\numberline {2.1}{\ignorespaces Baricentri dei singoli corpi rigidi\relax }}{6}{figure.caption.3}
@@ -6,7 +6,7 @@
 \contentsline {figure}{\numberline {2.3}{\ignorespaces Ragionamento per il calcolo dei contributi dinamici dello chassis\relax }}{9}{figure.caption.5}
 \addvspace {10\p@ }
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {4.1}{\ignorespaces Schema di massima dell'utilizzo di Raspberry Pi 3\relax }}{15}{figure.caption.6}
-\contentsline {figure}{\numberline {4.2}{\ignorespaces Parametri impostabili lato client\relax }}{17}{figure.caption.7}
-\contentsline {figure}{\numberline {4.3}{\ignorespaces Diagramma rappresentante le funzionalit\IeC {\`a} del server\relax }}{18}{figure.caption.8}
+\contentsline {figure}{\numberline {4.1}{\ignorespaces Schema di massima dell'utilizzo di Raspberry Pi 3\relax }}{17}{figure.caption.6}
+\contentsline {figure}{\numberline {4.2}{\ignorespaces Parametri impostabili lato client\relax }}{19}{figure.caption.7}
+\contentsline {figure}{\numberline {4.3}{\ignorespaces Diagramma rappresentante le funzionalit\IeC {\`a} del server\relax }}{20}{figure.caption.8}
 \addvspace {10\p@ }
