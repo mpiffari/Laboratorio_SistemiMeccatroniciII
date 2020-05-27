@@ -251,7 +251,7 @@ dove $\tau$ è il rapporto di trasmissione calcolato come segue:
 La risoluzione delle equazioni \ref{eq:lagrangiana_theta_phy}, permette di ottenere due equazioni differenziali del secondo ordine che il comando \textit{matlabFunction()} va a scrivere in una funzione di matlab: questa funzione avrà come input i valori da cui dipendono le equazioni differenziali e moltiplicandoli tra di loro da come output il valore di $\ddot{\theta}$ e $\ddot{\phi}$.
 TODO (mettere le dipendende di theta pp e phi pp)
 
-\subsection{Linearizzazione}
+\subsection{Linearizzazione} TODO linearizzazione attorno alla massa 70 kg
 Il passo successivo che è stato svolto riguarda la linearizzazione; linearizzare è importante poiché il controllore viene progettato sul sistema lineare e poi testato sul sistema reale e quindi non lineare.
 
 Per tale ragione è necessario innanzitutto calcolare l'equilibrio del sistema, cioè il punto in cui $\ddot{\theta} = 0$:
@@ -347,3 +347,17 @@ allora:
 	\end{array}\right\rbrack
 	$$
 \end{center}
+
+Sostituendo i valori numerici dei vari simboli si ottengono le seguenti matrici:
+
+\begin{center}
+		$$
+		\left(\begin{array}{c}
+		\frac{2.75}{s^2 }-\frac{\text{1.749e+13}}{\text{2.392e+13}\,s^2 -\text{4.398e+12}\,s^4 }\\ \\
+		\frac{2.75}{s}-\frac{\text{1.749e+13}}{\text{2.392e+13}\,s-\text{4.398e+12}\,s^3 }\\ \\
+		-\frac{\text{1.149e+12}}{\text{4.398e+12}\,s^2 -\text{2.392e+13}}\\ \\
+		-\frac{\text{1.149e+12}\,s}{\text{4.398e+12}\,s^2 -\text{2.392e+13}}
+		\end{array}\right)
+		$$
+\end{center}
+Si può notare come la prima e la seconda riga della matrice differiscano solo per un fattore derivativo, così come la terza e quarta riga; questo è ovvio ed atteso in quanto $x_2$ è a derivata di $x_1$ e $x_4$ la derivata di $x_3$
