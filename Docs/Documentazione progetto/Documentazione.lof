@@ -1,16 +1,18 @@
 \select@language {english}
 \addvspace {10\p@ }
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {2.1}{\ignorespaces Baricentri dei singoli corpi rigidi\relax }}{6}{figure.caption.3}
+\contentsline {figure}{\numberline {2.1}{\ignorespaces Baricentri dei singoli corpi rigidi\relax }}{5}{figure.caption.3}
 \contentsline {figure}{\numberline {2.2}{\ignorespaces Lunghezze di supporto\relax }}{6}{figure.caption.4}
 \contentsline {figure}{\numberline {2.3}{\ignorespaces Ragionamento per il calcolo dei contributi dinamici dello chassis\relax }}{9}{figure.caption.5}
 \addvspace {10\p@ }
 \addvspace {10\p@ }
 \contentsline {figure}{\numberline {4.1}{\ignorespaces Implementazione simulink delle equazioni differenziali\relax }}{17}{figure.caption.6}
 \contentsline {figure}{\numberline {4.2}{\ignorespaces Implementazione simulink del sistema linearizzato\relax }}{18}{figure.caption.7}
-\contentsline {figure}{\numberline {4.3}{\ignorespaces Schema concettuale del controllo,\cite {feedback_state}\relax }}{18}{figure.caption.8}
+\contentsline {figure}{\numberline {4.3}{\ignorespaces Posizione poli in anello aperto\relax }}{18}{figure.caption.8}
+\contentsline {figure}{\numberline {4.4}{\ignorespaces Schema concettuale del controllo,\cite {feedback_state}\relax }}{19}{figure.caption.9}
+\contentsline {figure}{\numberline {4.5}{\ignorespaces Root locus del sistema in anello chiuso\relax }}{20}{figure.caption.10}
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {5.1}{\ignorespaces Schema di massima dell'utilizzo di Raspberry Pi 3\relax }}{23}{figure.caption.9}
-\contentsline {figure}{\numberline {5.2}{\ignorespaces Parametri impostabili lato client\relax }}{25}{figure.caption.10}
-\contentsline {figure}{\numberline {5.3}{\ignorespaces Diagramma rappresentante le funzionalit\IeC {\`a} del server\relax }}{26}{figure.caption.11}
+\contentsline {figure}{\numberline {5.1}{\ignorespaces Schema di massima dell'utilizzo di Raspberry Pi 3\relax }}{23}{figure.caption.11}
+\contentsline {figure}{\numberline {5.2}{\ignorespaces Parametri impostabili lato client\relax }}{25}{figure.caption.12}
+\contentsline {figure}{\numberline {5.3}{\ignorespaces Diagramma rappresentante le funzionalit\IeC {\`a} del server\relax }}{26}{figure.caption.13}
 \addvspace {10\p@ }
