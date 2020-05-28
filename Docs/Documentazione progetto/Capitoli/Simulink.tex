@@ -123,8 +123,22 @@ Con il comando \textit{place} di Matlab si ottine dunque:
 Il sistema in anello chiuso ha i seguenti poli:
 \begin{figure}[H]
 	\centering   	
-	\includegraphics[width=0.70\textwidth]{Immagini/root_locus_closed_loop.png}
+	\includegraphics[width=1\textwidth]{Immagini/root_locus_closed_loop.png}
 	\caption{Root locus del sistema in anello chiuso}
 	\label{fig:closed_loop_root}
 \end{figure}
 
+\section{Motore}
+Il passo successivo è stato quello di andare a modellizzare il motore presente a bordo dello Chassy; questo è necessario in quanto si deve tenere conto, in primo luogo, del ritardo che gli attuatori ( cioè il motore) introducono nel sistema e che per questo potrebbe diventare instabile.
+\begin{figure}[H]
+	\centering   	
+	\includegraphics[width=0.70\textwidth]{Immagini/motor.png}
+	\caption{Schema a blocchi del motore}
+	\label{fig:motor}
+\end{figure}
+
+I valori delle componenti in Fig.\ref{fig:motor} sono presi dal datasheet del motore.
+Il controllo del motore DC in questione e stato ottenuto tramite una retroazione in corrente che permette quindi di definire un setpoint alla corrente presente nel motore. Questo si è reso necessario poiché il controllore, attraverso il vettore K e lo stato del sistema, definisce la coppia che il motore dovrebbe erogare. In un motore DC la correlazione tra coppia erogata e corrente esiste ed è ben definita e si tratta di $k_t$ TODO equazione tra corrente e coppia\\
+il controllore è stato così calcolato:
+
+TODO anti wind up, uscita, grafici transitori, 
