@@ -18,9 +18,14 @@ Dove $M_c$ sarebbe la massa del passeggero, $\theta e \dot{\theta}$ lo stato del
 \end{figure}
 In Fig.\ref{fig:non_linear_system} le \textit{interpreted function} altro non sono che  $f_{\ddot{\phi}}$ e $f_{\ddot{\theta}}$. A valle di esse sono presenti degli integratori che permettono di ottenere lo stato $x$ completo del sistema. Si può facilmente notare come $\dot{\theta} e \theta$ siano collegate direttamente all'input delle \textit{interpreted function}.
 Si è dunque proceduto a  simulare il sistema per verificare la bontà di quanto ottenuto; in particolare, il sistema in anello aperto, dovrebbe oscillare all'infinito vista la mancanza di attriti nel modello.
-\\
-TODO grafico e foto sistema simulink non lineare anello aperto e chiuso
-\\
+
+\begin{figure}[H]
+	\centering   	
+	\includegraphics[width=0.6\textwidth]{Immagini/open_loop_response_non_linear.png}
+	\caption{Risposta in anello aperto del sistema reale}
+	\label{fig:open_loop_response_non_linear}
+\end{figure}
+La simulazione, il cui risultato è riportato in Fig.\ref{fig:open_loop_response_non_linear} è stata svolta per 5 secondi e con un angolo iniziale di 4°; il grafico mostra dunque l'andamento di $\theta$ nel tempo e della posizione che in termini matematici si esprime come $posizione = \phi \cdot{r_{ruota}}$
 Si è inoltre creato un altro modello sfruttando il sistema lineare ottenuto prima  con l'obbiettivo di semplificare il problema e di velocizzare le simulazioni con lo scopo di testare rapidamente nuove tecniche di controllo che se avessero dato esito positivo sul modello lineare sarebbero poi state testate sul simulink che imita il comportamento reale del sistema.
 \begin{figure}[H]
 	\centering   	
@@ -29,9 +34,13 @@ Si è inoltre creato un altro modello sfruttando il sistema lineare ottenuto pri
 	\label{fig:linear_system}
 \end{figure}
 
-TODO grafico e foto sistema lineare anello aperto e chiuso
-\\
-In questo caso, la simulazione in anello aperto mostra che il sistema diverge; questo perché la linearizzazione ha senso attorno al punto di equilibrio da cui è stata ottenuta, distante da quel punto il sistema lineare non approssima più il sistema reale ed anche un eventuale controllo ottenuto da esso non garantisce buone performance distante da quel punto.
+\begin{figure}[H]
+	\centering   	
+	\includegraphics[width=0.6\textwidth]{Immagini/linear_open_loop.png}
+	\caption{Risposta in anello aperto del sistema lineare}
+	\label{fig:open_loop_response}
+\end{figure}
+In questo caso, la simulazione in anello aperto mostra che il sistema diverge; questo perché la linearizzazione ha senso attorno al punto di equilibrio da cui è stata ottenuta, distante da quel punto il sistema lineare non approssima più il sistema reale ed anche un eventuale controllo ottenuto da esso non garantisce buone performance distante da quel punto. Si nota, in Fig.\ref{fig:open_loop_response} che il punto di partenza è 4° e il sistema, lineare, diverga quasi immediatamente; la differenza con la risposta del sistema non lineare in Fig.\ref{fig:open_loop_response_non_linear}
 \begin{figure}[H]
 	\centering   	
 	\includegraphics[width=0.6\textwidth]{Immagini/root_locus_open_loop.png}
@@ -127,12 +136,27 @@ Il sistema in anello chiuso ha i seguenti poli:
 	\caption{Root locus del sistema in anello chiuso}
 	\label{fig:closed_loop_root}
 \end{figure}
+Si va ora ad analizzare la risposta del sistema al controllo ottenuto nei punti precedenti, per assicurarci, che quanto scritto sopra valga oltre che nella teoria anche nella pratica:
+\begin{figure}[H]
+	\centering   	
+	\includegraphics[width=0.7\textwidth]{Immagini/closed_loop_non_linear.png}
+	\caption{Risposta del sistema non lineare in anello chiuso}
+	\label{fig:closed_loop_non_linear_response}
+\end{figure}
+\begin{figure}[H]
+	\centering   	
+	\includegraphics[width=0.7\textwidth]{Immagini/closed_loop_linear.png}
+	\caption{Risposta del sistema lineare in anello chiuso}
+	\label{fig:closed_loop_non_linear_response}
+\end{figure}
+TODO: come spieghiamo la differenza? rifare la simulazione?
+
 
 \section{Motore}
 Il passo successivo è stato quello di andare a modellizzare il motore presente a bordo dello Chassy; questo è necessario in quanto si deve tenere conto, in primo luogo, del ritardo che gli attuatori ( cioè il motore) introducono nel sistema e che per questo potrebbe diventare instabile.
 \begin{figure}[H]
 	\centering   	
-	\includegraphics[width=0.70\textwidth]{Immagini/motor.png}
+	\includegraphics[width=1\textwidth]{Immagini/motor.png}
 	\caption{Schema a blocchi del motore}
 	\label{fig:motor}
 \end{figure}
@@ -142,3 +166,15 @@ Il controllo del motore DC in questione e stato ottenuto tramite una retroazione
 il controllore è stato così calcolato:
 
 TODO anti wind up, uscita, grafici transitori, 
+\begin{figure}[H]
+	\centering   	
+	\includegraphics[width=0.7\textwidth]{Immagini/motore.png}
+	\caption{Schema a blocchi del motore}
+	\label{fig:motor}
+\end{figure}
+\begin{figure}[H]
+	\centering   	
+	\includegraphics[width=0.7\textwidth]{Immagini/motore_zoom.png}
+	\caption{Schema a blocchi del motore}
+	\label{fig:motor}
+\end{figure}

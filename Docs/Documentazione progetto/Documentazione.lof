@@ -7,13 +7,19 @@
 \addvspace {10\p@ }
 \addvspace {10\p@ }
 \contentsline {figure}{\numberline {4.1}{\ignorespaces Implementazione simulink delle equazioni differenziali\relax }}{17}{figure.caption.6}
-\contentsline {figure}{\numberline {4.2}{\ignorespaces Implementazione simulink del sistema linearizzato\relax }}{18}{figure.caption.7}
-\contentsline {figure}{\numberline {4.3}{\ignorespaces Posizione poli in anello aperto\relax }}{18}{figure.caption.8}
-\contentsline {figure}{\numberline {4.4}{\ignorespaces Schema concettuale del controllo,\cite {feedback_state}\relax }}{19}{figure.caption.9}
-\contentsline {figure}{\numberline {4.5}{\ignorespaces Root locus del sistema in anello chiuso\relax }}{20}{figure.caption.10}
-\contentsline {figure}{\numberline {4.6}{\ignorespaces Schema a blocchi del motore\relax }}{21}{figure.caption.11}
+\contentsline {figure}{\numberline {4.2}{\ignorespaces Risposta in anello aperto del sistema reale\relax }}{18}{figure.caption.7}
+\contentsline {figure}{\numberline {4.3}{\ignorespaces Implementazione simulink del sistema linearizzato\relax }}{18}{figure.caption.8}
+\contentsline {figure}{\numberline {4.4}{\ignorespaces Risposta in anello aperto del sistema lineare\relax }}{19}{figure.caption.9}
+\contentsline {figure}{\numberline {4.5}{\ignorespaces Posizione poli in anello aperto\relax }}{19}{figure.caption.10}
+\contentsline {figure}{\numberline {4.6}{\ignorespaces Schema concettuale del controllo,\cite {feedback_state}\relax }}{20}{figure.caption.11}
+\contentsline {figure}{\numberline {4.7}{\ignorespaces Root locus del sistema in anello chiuso\relax }}{21}{figure.caption.12}
+\contentsline {figure}{\numberline {4.8}{\ignorespaces Risposta del sistema non lineare in anello chiuso\relax }}{22}{figure.caption.13}
+\contentsline {figure}{\numberline {4.9}{\ignorespaces Risposta del sistema lineare in anello chiuso\relax }}{22}{figure.caption.14}
+\contentsline {figure}{\numberline {4.10}{\ignorespaces Schema a blocchi del motore\relax }}{23}{figure.caption.15}
+\contentsline {figure}{\numberline {4.11}{\ignorespaces Schema a blocchi del motore\relax }}{23}{figure.caption.16}
+\contentsline {figure}{\numberline {4.12}{\ignorespaces Schema a blocchi del motore\relax }}{24}{figure.caption.17}
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {5.1}{\ignorespaces Schema di massima dell'utilizzo di Raspberry Pi 3\relax }}{25}{figure.caption.12}
-\contentsline {figure}{\numberline {5.2}{\ignorespaces Parametri impostabili lato client\relax }}{27}{figure.caption.13}
-\contentsline {figure}{\numberline {5.3}{\ignorespaces Diagramma rappresentante le funzionalit\IeC {\`a} del server\relax }}{28}{figure.caption.14}
+\contentsline {figure}{\numberline {5.1}{\ignorespaces Schema di massima dell'utilizzo di Raspberry Pi 3\relax }}{27}{figure.caption.18}
+\contentsline {figure}{\numberline {5.2}{\ignorespaces Parametri impostabili lato client\relax }}{29}{figure.caption.19}
+\contentsline {figure}{\numberline {5.3}{\ignorespaces Diagramma rappresentante le funzionalit\IeC {\`a} del server\relax }}{30}{figure.caption.20}
 \addvspace {10\p@ }
