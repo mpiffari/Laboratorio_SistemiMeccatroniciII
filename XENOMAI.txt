@@ -1,0 +1,13 @@
+Passi seguiti:
+- Download VnC Viewer (https://www.realvnc.com/en/connect/download/viewer/)
+- Log in account vnc viewer
+- Check ip raspberry --> ifconfig (https://www.youtube.com/watch?v=1lazSswIsjY)
+- sudo raspi.config --> menù di configurazione raspberry (per connessione wireless) --> Localisation networking to italy
+- sudo iwlist wlan0 scan --> lista di reti wifi
+- sudo nano /etc/wpa_supplicant/wpa_supplicant.conf --> network configurations (aggiunge rete a cui connettersi)
+- Verificare connessione con comando ifconfig wlan0 (deve esserci linea inet)
+(In alternativa connettere a hotspot)
+
+XENOMAI patch
+- https://lemariva.com/blog/2018/07/raspberry-pi-xenomai-patching-tutorial-for-kernel-4-14-y (Problema di spazio al primo comando)
+- http://www.simplerobot.net/2018/06/build-realtime-xenomai-3-kernel-for_3.html --> Fatta fino a patching
