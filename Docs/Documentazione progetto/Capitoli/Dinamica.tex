@@ -39,11 +39,11 @@ Nello specifico abbiamo introdotto i seguenti parametri, specificati anche in fi
 	\begin{center}
 		$l_c = 0.55\bullet h_c + \frac{h_b}{2}$
 	\end{center}
-	\item \textbf{$l_b$}: spostamento verso il basso, lungo l'asse z, del baricentro dello chassis. Da specifiche del progetto sappiamo che questa grandezza ha valore (con segno negativo) di:
+	\item \textbf{$l_b$}: rappresenta lo spostamento verso il basso, lungo l'asse z, del baricentro dello chassis. Da specifiche del progetto sappiamo che questa grandezza ha valore (con segno negativo) di
 	\begin{center}
 		$l_b = 0.1 m$
 	\end{center}
-	\item \textbf{$\beta$}: angolo formato con la verticale dalla congiungente tra il centro del sistema di riferimento e il punto $P_a$. Si ricava, con un semplice approccio trigonometrico, che l'angolo in questione ha questa forma
+	\item \textbf{$\beta$}: angolo formato con la verticale dalla congiungente tra il centro del sistema di riferimento e il punto $P_a$. Si ricava, con un semplice approccio trigonometrico che, l'angolo in questione, ha questa forma
 	\begin{center}
 		$\arctan{(\frac{\frac{w_b}{2}}{\frac{h_a}{2} + \frac{h_b}{2}})}$
 	\end{center}
@@ -187,22 +187,20 @@ In sostanza quindi avremo:
 		\item Componente di massa lungo x;
 		\item Componente di massa lungo z;
 		\item Componente di massa rotazionale: dalla meccanica è noto che, un corpo con una certa massa che si trova in uno stato di rotazione, avrà un contirbuto inerziale che dipende dal braccio rispetto al quale avviene la rotazione.
-		Nello specifico, per ogni singolo corpo rigido che è stato preso in esame, abbiamo considerato, secondo il teorema di \textit{Huygens-Steiner}, il quale permette di definire l'inerzia di un corpo come la somma di due diverse componenti:
+		Nello specifico, per ogni singolo corpo rigido che è stato preso in esame, abbiamo considerato il teorema di \textit{Huygens-Steiner}, il quale permette di definire l'inerzia di un corpo come la somma di due diverse componenti:
 		\begin{itemize}
 			\item Momento d'inerzia definito rispetto all'asse passante per il centro di massa: questo parametro rappresenta il valore che è fornito dalle specifiche del progetto;
-			\item prodotto tra la massa \textit{m} del corpo preso in considerazione e la distanza tra l'asse in esame e quello passante per il centro di massa;
+			\item Prodotto tra la massa \textit{m} del corpo preso in considerazione e la distanza tra l'asse in esame e quello passante per il centro di massa;
 		\end{itemize}
 		Questa terza componente è visibile nelle matrici di massa in posizione $(3, 1)$: si sottolinea come invece, per la matrice ~\ref{matrix:mr}, non sia presente la componente esplicitata dal teorema di \textit{Huygens-Steiner} per il fatto che il centro di massa della ruota coincide con quello del sistema di riferimento XZ;
  	\end{itemize}
- 	\item Nel calcolo simbolico in ambiente \textit{Matlab} siamo andati ad utilizzare le funzionalità di \textit{collect} e \textit{simplify}, per permettere di ridurre e semplificare le equazioni. Nello specifico, con il comando simplify, tramite l'opzione \textit{Steps}, siamo andati a settare il numeor di step che l'algoritmo di calcolo simbolico andrà a seguire per poter ridurre e semplificare il maggior numero di termini ($\uparrow Steps, \uparrow $\textit{Compattezza eq symb});
+ 	\item Nel calcolo simbolico in ambiente \textit{Matlab} siamo andati ad utilizzare le funzionalità di \textit{collect} e \textit{simplify}, per permettere di ridurre e semplificare le equazioni. Nello specifico, con il comando simplify, tramite l'opzione \textit{Steps}, siamo andati a settare il numero di step che l'algoritmo di calcolo simbolico andrà a seguire per poter ridurre e semplificare il maggior numero di termini ($\uparrow Steps, \uparrow $\textit{Compattezza eq symb});
  	
  	\item Le ruote, nel calcolo della dinamica completa del VAB, sono state considerate con un contirbuto doppio;
  	
- 	\item Nello studio dello chassis (base), abbiamo seguito questo approccio. Il baricentro della base stessa sappiamo essere posizionato ad una quota differente rispetto al centro del sistem di coordinate XZ preso come riferimento.
- 	
+ 	\item Nello studio dello chassis (base), abbiamo seguito questo approccio: il baricentro della base stessa sappiamo essere posizionato ad una quota differente rispetto al centro del sistem di coordinate XZ preso come riferimento.
  	Per questo motivo il suo contributo in termini cinetici e potenziali dipende dal valore dell'inclinazione dello chassis stesso, ovvero dal valore dell'angolo \textit{caratterizzante} il sistema $\theta$: questo concetto è evidenziato in figura ~\ref{fig:chassis}.
- 	
- 	L'aggiunta di \textit{$\pi$} al valore di $\theta$ è necessaria per poter rendere sensibile i valori di energia cinetica e potenziale al \textit{quadrante} in cui si trova ad essere posizionato il centro di amssa della base stessa ($P_b$).
+ 	L'aggiunta di \textit{$\pi$} al valore di $\theta$ è necessaria per poter rendere sensibile i valori di energia cinetica e potenziale al \textit{quadrante} in cui si trova ad essere posizionato il centro di massa della base stessa ($P_b$).
  	
  	\begin{figure}[h]
  		\centering   	
