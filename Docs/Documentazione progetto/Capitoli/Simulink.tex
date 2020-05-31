@@ -162,10 +162,8 @@ Il passo successivo è stato quello di andare a modellizzare il motore presente 
 \end{figure}
 
 I valori delle componenti in Fig.\ref{fig:motor} sono presi dal datasheet del motore.
-Il controllo del motore DC in questione e stato ottenuto tramite una retroazione in corrente che permette quindi di definire un setpoint alla corrente presente nel motore. Questo si è reso necessario poiché il controllore, attraverso il vettore K e lo stato del sistema, definisce la coppia che il motore dovrebbe erogare. In un motore DC la correlazione tra coppia erogata e corrente esiste ed è ben definita e si tratta di $k_t$ TODO equazione tra corrente e coppia\\
-il controllore è stato così calcolato:
-
-TODO anti wind up, uscita, grafici transitori, 
+Il controllo del motore DC in questione e stato ottenuto tramite una retroazione in corrente che permette quindi di definire un setpoint alla corrente presente nel motore. Questo si è reso necessario poiché il controllore, attraverso il vettore K e lo stato del sistema, definisce la coppia che il motore dovrebbe erogare. In un motore DC la correlazione tra coppia erogata e corrente esiste ed è ben definita e si tratta di $k_t$.
+Il controllore è stato realizzato seguendo metodi già noti in letteratura TODO: scrivere la formula o trovare un posto che la spieghi 
 \begin{figure}[H]
 	\centering   	
 	\includegraphics[width=0.7\textwidth]{Immagini/motore.png}
