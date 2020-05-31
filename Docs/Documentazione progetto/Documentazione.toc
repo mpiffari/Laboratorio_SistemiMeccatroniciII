@@ -1,4 +1,4 @@
-\babel@toc {english}{}
+\select@language {english}
 \contentsline {chapter}{\numberline {1}Introduzione}{1}{chapter.1}
 \contentsline {part}{I\hspace {1em}Dinamica}{3}{part.1}
 \contentsline {chapter}{\numberline {2}Scomposizione del VAB}{5}{chapter.2}
@@ -18,8 +18,8 @@
 \contentsline {section}{\numberline {4.1}Simulazione del sistema reale}{17}{section.4.1}
 \contentsline {section}{\numberline {4.2}Controllore}{19}{section.4.2}
 \contentsline {section}{\numberline {4.3}Motore}{22}{section.4.3}
-\contentsline {part}{III\hspace {1em}Controllo}{25}{part.3}
-\contentsline {chapter}{\numberline {5}OPC - UA}{27}{chapter.5}
-\contentsline {section}{\numberline {5.1}Idea base OPC-UA}{27}{section.5.1}
-\contentsline {section}{\numberline {5.2}OPC-UA e V.A.B.}{28}{section.5.2}
-\contentsline {chapter}{\numberline {6}Rumore}{31}{chapter.6}
+\contentsline {part}{III\hspace {1em}Controllo}{27}{part.3}
+\contentsline {chapter}{\numberline {5}OPC - UA}{29}{chapter.5}
+\contentsline {section}{\numberline {5.1}Idea base OPC-UA}{29}{section.5.1}
+\contentsline {section}{\numberline {5.2}OPC-UA e V.A.B.}{30}{section.5.2}
+\contentsline {chapter}{\numberline {6}Rumore}{33}{chapter.6}

@@ -1,4 +1,4 @@
-\babel@toc {english}{}
+\select@language {english}
 \addvspace {10\p@ }
 \addvspace {10\p@ }
 \contentsline {figure}{\numberline {2.1}{\ignorespaces Baricentri dei singoli corpi rigidi\relax }}{5}{figure.caption.3}
@@ -16,10 +16,11 @@
 \contentsline {figure}{\numberline {4.8}{\ignorespaces Risposta del sistema non lineare in anello chiuso\relax }}{22}{figure.caption.13}
 \contentsline {figure}{\numberline {4.9}{\ignorespaces Risposta del sistema lineare in anello chiuso\relax }}{22}{figure.caption.14}
 \contentsline {figure}{\numberline {4.10}{\ignorespaces Schema a blocchi del motore\relax }}{23}{figure.caption.15}
-\contentsline {figure}{\numberline {4.11}{\ignorespaces Schema a blocchi del motore\relax }}{23}{figure.caption.16}
-\contentsline {figure}{\numberline {4.12}{\ignorespaces Schema a blocchi del motore\relax }}{24}{figure.caption.17}
+\contentsline {figure}{\numberline {4.11}{\ignorespaces Transitorio del motore\relax }}{23}{figure.caption.16}
+\contentsline {figure}{\numberline {4.12}{\ignorespaces Zoom del grafico in figura Fig.\ref {fig:motore}\relax }}{24}{figure.caption.17}
+\contentsline {figure}{\numberline {4.13}{\ignorespaces Clamp della coppia erogata da parte del motore\relax }}{24}{figure.caption.18}
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {5.1}{\ignorespaces Schema di massima dell'utilizzo di Raspberry Pi 3\relax }}{27}{figure.caption.18}
-\contentsline {figure}{\numberline {5.2}{\ignorespaces Parametri impostabili lato client\relax }}{29}{figure.caption.19}
-\contentsline {figure}{\numberline {5.3}{\ignorespaces Diagramma rappresentante le funzionalit\IeC {\`a} del server\relax }}{30}{figure.caption.20}
+\contentsline {figure}{\numberline {5.1}{\ignorespaces Schema di massima dell'utilizzo di Raspberry Pi 3\relax }}{29}{figure.caption.19}
+\contentsline {figure}{\numberline {5.2}{\ignorespaces Parametri impostabili lato client\relax }}{31}{figure.caption.20}
+\contentsline {figure}{\numberline {5.3}{\ignorespaces Diagramma rappresentante le funzionalit\IeC {\`a} del server\relax }}{32}{figure.caption.21}
 \addvspace {10\p@ }

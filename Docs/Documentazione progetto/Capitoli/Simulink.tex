@@ -169,12 +169,26 @@ TODO anti wind up, uscita, grafici transitori,
 \begin{figure}[H]
 	\centering   	
 	\includegraphics[width=0.7\textwidth]{Immagini/motore.png}
-	\caption{Schema a blocchi del motore}
-	\label{fig:motor}
+	\caption{Transitorio del motore}
+	\label{fig:motore}
 \end{figure}
 \begin{figure}[H]
 	\centering   	
 	\includegraphics[width=0.7\textwidth]{Immagini/motore_zoom.png}
-	\caption{Schema a blocchi del motore}
-	\label{fig:motor}
+	\caption{Zoom del grafico in figura Fig.\ref{fig:motore}}
+	\label{fig:motore_zoom}
 \end{figure}
+
+Come si può notare il picco di coppia massimo è minore di 2; questo è dovuto al fatto che, per ragioni esterne, nel motore può scorrere ua corrente di massimo 20A e quindi:
+\begin{center}
+	$C_{m,max} = I_{max}\cdot{K_{motore}} = 20 A\cdot{10 \dfrac{N\cdot{m}}{A}}=2N\cdot{m}$
+\end{center}
+
+Un esempio in cui la coppia richiesta supera i $2N\cdot{m}$ è il seguente:
+\begin{figure}[H]
+	\centering   	
+	\includegraphics[width=0.8\textwidth]{Immagini/saturazione.png}
+	\caption{Clamp della coppia erogata da parte del motore}
+	\label{fig:clamp_motore}
+\end{figure}
+In Fig.\ref{fig:clamp_motore} è anche possibile notare come l'assenza del blocchetto denominato \textit{Torque saturation}, presente in Fig.\ref{fig:motor}, satura l'azione integrale dell'attuatore e inserisce un ritardo non secondario nell'azione di controllo.
