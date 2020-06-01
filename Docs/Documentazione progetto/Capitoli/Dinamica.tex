@@ -30,20 +30,20 @@ Prima di andare a definire le componenti di energia potenziale e cinetica di ogn
 
 Nello specifico abbiamo introdotto i seguenti parametri, specificati anche in figura ~\ref{fig:VAB_lunghezze}:
 \begin{itemize}
-	\item \textbf{$l_a$}: rappresenta la congiungente tra il centro del sistema di riferimento e il centro dell'asta, utilizzata appunto come manubrio, che abbiamo individuato come
+	\item $\mathbf{l_a}$: rappresenta la congiungente tra il centro del sistema di riferimento \textit{XZ} e il centro dell'asta, utilizzata appunto come manubrio, che abbiamo individuato come
 	\begin{center}
 		{\Large $\sqrt{(\frac{h_a}{2} + \frac{h_b}{2})^2 + (\frac{w_b}{2})^2}$}
 	\end{center}
-	\item \textbf{$l_c$}: (TODO: check) questa grandezza invece rappresenta per noi l'altezza del baricentro del corpo dell'utente, la quale ovviamente andrà a dipendere dal valore di inclinazione del corpo stesso.
+	\item $\mathbf{l_c}$: (TODO: check) questa grandezza invece rappresenta per noi l'altezza del baricentro del corpo dell'utente, la quale ovviamente andrà a dipendere dal valore di inclinazione del corpo stesso.
 	Considerando il corpo inzialmente in posizione verticale, avremo che questa grandezza corrisponde alla congiungente dal centro del sistema di riferimento al punto $P_c$, che equivale a dire che
 	\begin{center}
-		$l_c = 0.55\bullet h_c + \frac{h_b}{2}$
+		$l_c = 0.55 h_c + \frac{h_b}{2}$
 	\end{center}
-	\item \textbf{$l_b$}: rappresenta lo spostamento verso il basso, lungo l'asse z, del baricentro dello chassis. Da specifiche del progetto sappiamo che questa grandezza ha valore (con segno negativo) di
+	\item $\mathbf{l_b}$: rappresenta lo spostamento verso il basso, lungo l'asse z, del baricentro dello chassis. Da specifiche del progetto sappiamo che questa grandezza ha valore (con segno negativo) di
 	\begin{center}
 		$l_b = 0.1 m$
 	\end{center}
-	\item \textbf{$\beta$}: angolo formato con la verticale dalla congiungente tra il centro del sistema di riferimento e il punto $P_a$. Si ricava, con un semplice approccio trigonometrico che, l'angolo in questione, ha questa forma
+	\item $\mathbf{\beta}$: angolo formato con la verticale dalla congiungente tra il centro del sistema di riferimento e il punto $P_a$. Si ricava, con un semplice approccio trigonometrico che, l'angolo in questione, ha questa forma:
 	\begin{center}
 		$\arctan{(\frac{\frac{w_b}{2}}{\frac{h_a}{2} + \frac{h_b}{2}})}$
 	\end{center}
@@ -52,7 +52,7 @@ Nello specifico abbiamo introdotto i seguenti parametri, specificati anche in fi
 \begin{figure}[h]
 	\centering   	
 	\includegraphics[width=0.6\textwidth]{Immagini/VAB_additionalMeasures.png}
-	\caption{Lunghezze di supporto}
+	\caption{Grandezze di supporto}
 	\label{fig:VAB_lunghezze}
 \end{figure}
 
@@ -60,116 +60,121 @@ Nello specifico abbiamo introdotto i seguenti parametri, specificati anche in fi
 Per ognuno dei corpi rigidi definiti in precedenza siamo andati appunto a calcolare:
 
 \begin{itemize}
-	\item \textbf{Coordinate spaziali P} espresse nel sistema di riferimento XZ. A queste due coordinate cartesiane ne va aggiunta una terza, relativa alle coordinate angolari (per poter tener così conto dei contirbuti inerziali);
+	\item \textbf{Coordinate spaziali P} espresse nel sistema di riferimento XZ. A queste due coordinate cartesiane ne va aggiunta una terza, relativa alle coordinate angolari (per poter tener così conto dei contirbuti inerziali dei corpi);
 	\item \textbf{Vettore delle velocità V} $\rightarrow$ vettore $3\times 1$
 	\item \textbf{Matrice delle masse M} $\rightarrow$ matrice $3\times 3$
-	\item \textbf{Energia cinetica T} $\rightarrow \frac{1}{2}\bullet V^T \bullet M \bullet V$
+	\item \textbf{Energia cinetica T} $\rightarrow \frac{1}{2} V^T M V$
 	\item \textbf{Energia potenziale U}
-	\item \textbf{Lagrangiana \textit{parziale} L}
+	\item \textbf{Lagrangiana \textit{parziale} L del singolo corpo rigido}
 \end{itemize}
 
 \subsection{Asta}
 \begin{itemize}
+	
 	\item \textbf{$P_a = \left(\begin{array}{c}
 		r\,\phi \left(t\right)+l_a \,\mathrm{sin}\left(\beta +\theta \left(t\right)\right)\\
 		l_a \,\mathrm{cos}\left(\beta +\theta \left(t\right)\right)\\
 		\theta \left(t\right)
 		\end{array}\right)$}
-
+	\\\\
 	\item \textbf{$V_a = \left(\begin{array}{c}
 		r\,\dot{\phi \left(t\right)}+l_a \,\mathrm{cos}\left(\beta +\theta \left(t\right)\right)\,\dot{\theta \left(t\right)}\\
 		-l_a \,\mathrm{sin}\left(\beta +\theta \left(t\right)\right)\,\dot{\theta \left(t\right)}\\
 		\dot{\theta \left(t\right)}
 		\end{array}\right)$}
-	
+	\\\\
 	\item \textbf{$M_a = \left(\begin{array}{ccc}
 		m_a  & 0 & 0\\
 		0 & m_a  & 0\\
 		0 & 0 & m_a \,{l_a }^2 +J_a 
 		\end{array}\right)$}
-	
+	\\\\
 	\item \textbf{$T_a = m_a \,{l_a }^2 \,{{\left(\dot{\theta \left(t\right)}\right)}}^2 +\frac{m_a \,r^2 \,{{\left(\dot{\phi \left(t\right)}\right)}}^2 }{2}+\frac{J_a \,{{\left(\dot{\theta \left(t\right)}\right)}}^2 }{2}+m_a \,\mathrm{cos}\left(\beta +\theta \left(t\right)\right)\,l_a \,r\,\dot{\theta \left(t\right)}\,\dot{\phi \left(t\right)}$}
-	
+	\\
 	\item \textbf{$U_a = g\,l_a \,m_a \,\mathrm{cos}\left(\beta +\theta \left(t\right)\right)$}
-	
+	\\
 	\item \textbf{$L_a = m_a \,{l_a }^2 \,{{\left(\dot{\theta \left(t\right)}\right)}}^2 +\frac{m_a \,r^2 \,{{\left(\dot{\phi \left(t\right)}\right)}}^2 }{2}+\frac{J_a \,{{\left(\dot{\theta \left(t\right)}\right)}}^2 }{2}+m_a \,\mathrm{cos}\left(\beta +\theta \left(t\right)\right)\,l_a \,r\,\dot{\theta \left(t\right)}\,\dot{\phi \left(t\right)}-g\,m_a \,\mathrm{cos}\left(\beta +\theta \left(t\right)\right)\,l_a$}
 \end{itemize}
+\newpage
 \subsection{Chassis (base)}
 \begin{itemize}
+	
 	\item \textbf{$P_b = \left(\begin{array}{c}
 		r\,\phi \left(t\right)-l_b \,\mathrm{sin}\left(\theta \left(t\right)\right)\\
 		-l_b \,\mathrm{cos}\left(\theta \left(t\right)\right)\\
 		\theta \left(t\right)
 		\end{array}\right)$}
-	
+	\\\\
 	\item \textbf{$V_b = \left(\begin{array}{c}
 		r\,\dot{\phi \left(t\right)}-l_b \,\mathrm{cos}\left(\theta \left(t\right)\right)\,\dot{\theta \left(t\right)}\\
 		l_b \,\mathrm{sin}\left(\theta \left(t\right)\right)\,\dot{\theta \left(t\right)}\\
 		\dot{\theta \left(t\right)}
 		\end{array}\right)$}
-	
+	\\\\
 	\item \textbf{$M_b = \left(\begin{array}{ccc}
 		m_b  & 0 & 0\\
 		0 & m_b  & 0\\
 		0 & 0 & m_b \,{l_b }^2 +J_b 
 		\end{array}\right)$}
-	
+	\\\\
 	\item \textbf{$T_b = m_b \,{l_b }^2 \,{{\left(\dot{\theta \left(t\right)}\right)}}^2 +\frac{m_b \,r^2 \,{{\left(\dot{\phi \left(t\right)}\right)}}^2 }{2}+\frac{J_b \,{{\left(\dot{\theta \left(t\right)}\right)}}^2 }{2}-m_b \,\mathrm{cos}\left(\theta \left(t\right)\right)\,l_b \,r\,\dot{\theta \left(t\right)}\,\dot{\phi \left(t\right)}$}
-	
+	\\
 	\item \textbf{$U_b = -g\,l_b \,m_b \,\mathrm{cos}\left(\theta \left(t\right)\right)$}
-	
+	\\
 	\item \textbf{$L_b = m_b \,{l_b }^2 \,{{\left(\dot{\theta \left(t\right)}\right)}}^2 +\frac{m_b \,r^2 \,{{\left(\dot{\phi \left(t\right)}\right)}}^2 }{2}+\frac{J_b \,{{\left(\dot{\theta \left(t\right)}\right)}}^2 }{2}-m_b \,\mathrm{cos}\left(\theta \left(t\right)\right)\,l_b \,r\,\dot{\theta \left(t\right)}\,\dot{\phi \left(t\right)}+g\,m_b \,\mathrm{cos}\left(\theta \left(t\right)\right)\,l_b$}
 \end{itemize}
 \subsection{Utente}
 \begin{itemize}
+	
 	\item \textbf{$P_c = \left(\begin{array}{c}
 		r\,\phi \left(t\right)+l_c \,\mathrm{sin}\left(\alpha +\theta \left(t\right)\right)\\
 		l_c \,\mathrm{cos}\left(\alpha +\theta \left(t\right)\right)\\
 		\alpha +\theta \left(t\right)
 		\end{array}\right)$}
-	
+	\\\\
 	\item \textbf{$V_c = \left(\begin{array}{c}
 		r\,\dot{\phi \left(t\right)}+l_c \,\mathrm{cos}\left(\alpha +\theta \left(t\right)\right)\,\dot{\theta \left(t\right)}\\
 		-l_c \,\mathrm{sin}\left(\alpha +\theta \left(t\right)\right)\,\dot{\theta \left(t\right)}\\
 		\dot{\theta \left(t\right)}
 		\end{array}\right)$}
-	
+	\\\\
 	\item \textbf{$M_c = \left(\begin{array}{ccc}
 		m_c  & 0 & 0\\
 		0 & m_c  & 0\\
 		0 & 0 & m_c \,{l_c }^2 +J_c 
 		\end{array}\right)$}
-	
+	\\\\
 	\item \textbf{$T_c = m_c \,{l_c }^2 \,{{\left(\dot{\theta \left(t\right)}\right)}}^2 +\frac{m_c \,r^2 \,{{\left(\dot{\phi \left(t\right)}\right)}}^2 }{2}+\frac{J_c \,{{\left(\dot{\theta \left(t\right)}\right)}}^2 }{2}+m_c \,\mathrm{cos}\left(\alpha +\theta \left(t\right)\right)\,l_c \,r\,\dot{\theta \left(t\right)}\,\dot{\phi \left(t\right)}$}
-	
+	\\
 	\item \textbf{$U_c = g\,l_c \,m_c \,\mathrm{cos}\left(\alpha +\theta \left(t\right)\right)$}
-	
+	\\
 	\item \textbf{$L_c = m_c \,{l_c }^2 \,{{\left(\dot{\theta \left(t\right)}\right)}}^2 +\frac{m_c \,r^2 \,{{\left(\dot{\phi \left(t\right)}\right)}}^2 }{2}+\frac{J_c \,{{\left(\dot{\theta \left(t\right)}\right)}}^2 }{2}+m_c \,\mathrm{cos}\left(\alpha +\theta \left(t\right)\right)\,l_c \,r\,\dot{\theta \left(t\right)}\,\dot{\phi \left(t\right)}-g\,m_c \,\mathrm{cos}\left(\alpha +\theta \left(t\right)\right)\,l_c$}
 \end{itemize}
 \subsection{Ruota}
 \begin{itemize}
+	
 	\item \textbf{$P_r = \left(\begin{array}{c}
 		r\,\phi \left(t\right)\\
 		0\\
 		\phi \left(t\right)
 		\end{array}\right)$}
-	
+	\\\\
 	\item \textbf{$V_r = \left(\begin{array}{c}
 		r\,\dot{\phi \left(t\right)}\\
 		0\\
 		\dot{\phi \left(t\right)}
 		\end{array}\right)$}
-	
+	\\\\
 	\item \textbf{$M_r = \left(\begin{array}{ccc}
 		m_r  & 0 & 0\\
 		0 & m_r  & 0\\
 		0 & 0 & J_r 
 		\end{array}\right)$} \label{matrix:mr}
-	
+	\\\\
 	\item \textbf{$T_r = \frac{{\left(m_r \,r^2 +J_r \right)}\,{{\left(\dot{\phi \left(t\right)}\right)}}^2 }{2}$}
-	
+	\\
 	\item \textbf{$U_r = 0$}
-	
+	\\
 	\item \textbf{$L_r = \frac{{\left(m_r \,r^2 +J_r \right)}\,{{\left(\dot{\phi \left(t\right)}\right)}}^2 }{2}$}
 \end{itemize}
 
@@ -177,7 +182,7 @@ Per ognuno dei corpi rigidi definiti in precedenza siamo andati appunto a calcol
 Una volta trovati le componenti dinamiche dei singoli corpi rigidi, possiamo andare a definire l'energia cinetica e potenziale totale del sistema, per poter poi andare a calcolare l'equazione di Lagrange per l'intero sistema.
 In sostanza quindi avremo:
 \begin{center}
-	$L = L_a + L_b + L_c + 2 \bullet L_r$
+	$L = L_a + L_b + L_c + 2 L_r$
 \end{center}
 
 \subsection{Note sul calcolo delle componenti dinamiche}
@@ -186,15 +191,19 @@ In sostanza quindi avremo:
 	\begin{itemize}
 		\item Componente di massa lungo x;
 		\item Componente di massa lungo z;
-		\item Componente di massa rotazionale: dalla meccanica è noto che, un corpo con una certa massa che si trova in uno stato di rotazione, avrà un contirbuto inerziale che dipende dal braccio rispetto al quale avviene la rotazione.
-		Nello specifico, per ogni singolo corpo rigido che è stato preso in esame, abbiamo considerato il teorema di \textit{Huygens-Steiner}, il quale permette di definire l'inerzia di un corpo come la somma di due diverse componenti:
+		\item Componente di massa rotazionale: dalla meccanica è noto che un corpo, con una certa massa che si trova in uno stato di rotazione, avrà un contirbuto inerziale che dipende dal braccio rispetto all'asse intorno al quale avviene la rotazione.
+		
+		Nello specifico abbiamo considerato il teorema di \textit{Huygens-Steiner} , per ogni singolo corpo rigido che è stato preso in esame.
+		
+		Esso permette di definire l'inerzia di un corpo come la somma di due diverse componenti:
 		\begin{itemize}
-			\item Momento d'inerzia definito rispetto all'asse passante per il centro di massa: questo parametro rappresenta il valore che è fornito dalle specifiche del progetto;
-			\item Prodotto tra la massa \textit{m} del corpo preso in considerazione e la distanza tra l'asse in esame e quello passante per il centro di massa;
+			\item Momento d'inerzia definito rispetto all'asse passante per il centro di massa: questo parametro rappresenta il valore che è fornito dalle specifiche del progetto per gli specific corpi;
+			\item Prodotto tra la massa \textit{m} del corpo preso in considerazione e la distanza tra l'asse rispetto a cui si riferisce la rotazione e quello passante per il centro di massa;
 		\end{itemize}
-		Questa terza componente è visibile nelle matrici di massa in posizione $(3, 1)$: si sottolinea come invece, per la matrice ~\ref{matrix:mr}, non sia presente la componente esplicitata dal teorema di \textit{Huygens-Steiner} per il fatto che il centro di massa della ruota coincide con quello del sistema di riferimento XZ;
+	
+		Questa componente inerziale è visibile nelle matrici di massa in posizione $(3, 1)$: si sottolinea come invece, per la matrice di massa relativa alle ruote (matrice ~\ref{matrix:mr}), non sia presente la componente esplicitata dal teorema di \textit{Huygens-Steiner} per il fatto che il centro di massa della ruota coincide con quello del sistema di riferimento XZ, e quindi di conseguenza non è necessaria alcuna traslazione di asse;
  	\end{itemize}
- 	\item Nel calcolo simbolico in ambiente \textit{Matlab} siamo andati ad utilizzare le funzionalità di \textit{collect} e \textit{simplify}, per permettere di ridurre e semplificare le equazioni. Nello specifico, con il comando simplify, tramite l'opzione \textit{Steps}, siamo andati a settare il numero di step che l'algoritmo di calcolo simbolico andrà a seguire per poter ridurre e semplificare il maggior numero di termini ($\uparrow Steps, \uparrow $\textit{Compattezza eq symb});
+ 	\item Nel calcolo simbolico in ambiente \textit{Matlab} siamo andati ad utilizzare le funzionalità di \textit{collect} e \textit{simplify}, per permettere di ridurre e semplificare le equazioni. Nello specifico, con il comando simplify, tramite l'opzione \textit{Steps}, siamo andati a settare il numero di step che l'algoritmo di calcolo simbolico andrà ad eseguire per poter ridurre e semplificare il maggior numero di termini ($\uparrow Steps, \uparrow $\textit{Compattezza eq symb});
  	
  	\item Le ruote, nel calcolo della dinamica completa del VAB, sono state considerate con un contirbuto doppio;
  	
@@ -212,6 +221,7 @@ In sostanza quindi avremo:
 \end{itemize}
 
 \chapter{Equazioni del moto}
+\section{Lagrangiana}
 Una volta definita la dinamica del sistema ed ottenuta quindi l'equazione di Lagrange che ne caratterizza il comportamento, andiamo a ricavare le equazioni del moto, le quali consentono di definire l'andamento delle \textit{coordinate libere} (scelte in fase inziale di progetto) che sappiamo essere
 \begin{itemize}
 	\item $\phi = q_1 =$ \textit{angolo di rotazione delle ruote}
@@ -221,59 +231,99 @@ Una volta definita la dinamica del sistema ed ottenuta quindi l'equazione di Lag
 In particolare possiamo definire le cosidette \textit{equazioni di Eulero-Lagrange}, ovvero un insieme di n equazioni differenziali (con n pari al numero di coordinate libere del sistema), la cui risoluzione fornisce le equazioni del moto del sistema.
 \begin{center}
 	\label{eq:lagrangiana}
-	$\frac{d}{\mathrm{dt}}\left(\frac{\partial }{\partial \dot{q} }L\right)-\frac{\partial }{\partial q}L=\mathrm{torque}\ $
+	$\frac{d}{\mathrm{dt}}\left(\frac{\partial }{\partial \dot{q_i} }L\right)-\frac{\partial }{\partial q_i}L=\mathrm{Q_i}\ \rightarrow i = 1,...,n$
 \end{center}
 
-Sono da effettuare alcune annotazioni sugli addenti presenti nell'equazione ~\ref{eq:lagrangiana}:
+Sono da effettuare alcune annotazioni sugli addenti presenti nell'equazione precedente  (eq~\ref{eq:lagrangiana}):
 \begin{itemize}
-	\item \textit{q} rappresenta la coordinata libera (nel nostro caso sarà $\theta$ e $\phi$);
-	\item al secondo membro della lagrangiana TODO
-	\item molto importante ai fini della correttezza delle equazioni  del moto è il valore da assegnare a \textit{torque}; infatti esso varia a seconda che il sistema agisca sulla coordinata libera \textit{q} a valle o a monte della trasmissione.
-	Nello specifico, si osserva che il motore è composto da due parti: lo statore e il rotore. Esse trasmettono una coppia uguale e inversa a ciò cui sono collegati: lo statore, posizionato nella base del Segway, influenza la coordinata $\theta$ ed esercita una coppia sullo chassy pari ad una generica \textit{$-2 C_m$}; il fattore moltiplicativo 2 è dovuto al fatto che nella base sono presenti due motori.
-	Parimenti, il rotore trasmette all'albero motore una coppia \textit{$C_m$}. A valle della trasmissione si misura dunque una coppia \textit{$\frac{C_m}{\tau}$} dovuta alla presenza della trasmissione; questa coppia ridotta all'albero dell'utilizzatore è la coppia che in definitiva va ad agire sulle ruote e quindi sulla coordinata $\phi$
+	\item \textit{q} rappresenta la coordinata libera (nel nostro caso saranno $\theta$ e $\phi$);
+	\item al secondo membro della lagrangiana troviamo le componenti generalizzate, relative alle forze attive esterne. Nel nostro sistema andiamo a modellizzare, come forze attive, quelle che sono le forze motrici immesse dai motori che gestiscono il movimento del V.A.B.: in particolare, nel nostro caso, per il legame matematico tra le componenti generalizzate e il concetto di lavoro virtuale, avremo che l'equazione lagrangiana sarà equiparata al valore di torque immessa dal motore nel sistema;
+	\item molto importante, ai fini della correttezza delle equazioni del moto, è il valore da assegnare al secondo membro \textit{torque}; infatti esso varia a seconda che il sistema agisca sulla coordinata libera \textit{q} a valle o a monte della trasmissione.
+	
+	Nello specifico, si osserva che il motore è composto da due parti: lo statore e il rotore. Esse trasmettono una coppia uguale e inversa ai corpi a cui sono solidalmente collegati: lo statore, posizionato nella base del Segway, influenza la coordinata libera $\theta$ ed esercita una coppia sullo chassis pari ad una generica coppia \textit{$-2 C_m$}.
+	Il fattore moltiplicativo 2 è dovuto al fatto che nella base sono presenti due motori.
+	
+	Nello stesso modo, il rotore, trasmette all'albero motore una coppia \textit{$C_m$}: a valle della trasmissione si misura dunque una coppia \textit{$\frac{C_m}{\tau}$} dovuta alla presenza della trasmissione
+	Questa coppia ridotta all'albero dell'utilizzatore è la coppia che in definitiva va ad agire sulle ruote e quindi sulla coordinata $\phi$.
 \end{itemize}
-Si ottiene dunque il seguente sistema di equazioni:
+
+\newpage
+Si ottiene dunque il seguente sistema di equazioni, la cui risoluzione permette di ottenere due equazioni differenziali del secondo ordine nelle variabili $\theta$ e $\phi$:
 \begin{center}
-	\label{eq:lagrangiana_theta_phy}
-	$\frac{d}{\mathrm{dt}}\left(\frac{\partial }{\partial \dot{\theta} }L\right)-\frac{\partial }{\partial \theta}L=\mathrm{-2 C_m}\ $\\
-	$\frac{d}{\mathrm{dt}}\left(\frac{\partial }{\partial \dot{\phi} }L\right)-\frac{\partial }{\partial \phi}L=\mathrm{\frac{C_m}{\tau}}\ $
+	$
+	\begin{cases}
+		\label{eq:lagrangiana_theta_phi}
+		\begin{array}{c}
+			\frac{d}{\mathrm{dt}}\left(\frac{\partial }{\partial \dot{\theta} }L\right)-\frac{\partial }{\partial \theta}L=\mathrm{-2 C_m} \\
+			\frac{d}{\mathrm{dt}}\left(\frac{\partial }{\partial \dot{\phi} }L\right)-\frac{\partial }{\partial \phi}L=\mathrm{\frac{C_m}{\tau}}
+		\end{array}
+	\end{cases}
+	$
 \end{center}
-dove $\tau$ è il rapporto di trasmissione calcolato come segue:
+dove $\tau$ è il rapporto di trasmissione il cui calcolo è riportato nella sezione ~\ref{sec:rapp_di_trasmissione}.
+La soluzione di questo sistema di equazioni verrà ad essere utilizzata per rappresentare il comportamento del sistema reale, basandosi su una coppia di equazioni non lineare: questa tematica verrà poi approfondita direttamente nella sezione ~\ref{sec:simulazione_reale}.
+
+\section{Rapporto di trasmissione}
+\label{sec:rapp_di_trasmissione}
+Come da specifiche del progetto, ognuno dei due motori è collegato alle ruote mediante una doppia sequenza di riduttori:
+\begin{itemize}
+	\item Un primo riduttore epicicloidale con rapporto di trasmissione $\tau_1 = 0.1$;
+	\item Un secondo riduttore, una cinghia dentata che presenta un rapporto di trasmissione facilmente calcolabile come rapporto tra il numero dei denti dei due alberi, essendo il passo uguale in entrambi gli alberi.
+	\begin{center}
+		$\tau_2 = \frac{Numero\_denti\_puleggia\_ingresso}{Numero\_denti\_puleggia\_uscita} = \frac{Z_{in}}{Z_{out}} = \frac{22}{26}$
+	\end{center}
+\end{itemize}
+
+Il rapporto di trasmissione completo $\tau$ è quindi definito come:
 \begin{center}
-	\label{eq:tau}
-	$\tau_1 = 0.1$\\
-	$\tau_2 = \frac{Z_in}{Z_out} = \frac{22}{26}$\\
 	$\tau = \tau_1 \cdot{\tau_2} = 0.085$	
 \end{center}
 
-La risoluzione delle equazioni \ref{eq:lagrangiana_theta_phy}, permette di ottenere due equazioni differenziali del secondo ordine che il comando \textit{matlabFunction()} va a scrivere in una funzione di matlab: questa funzione avrà come input i valori da cui dipendono le equazioni differenziali e moltiplicandoli tra di loro da come output il valore di $\ddot{\theta}$ e $\ddot{\phi}$.
-TODO (mettere le dipendende di theta pp e phi pp)
+\section{Linearizzazione}
+TODO linearizzazione attorno alla massa 70 kg
 
-\subsection{Linearizzazione} TODO linearizzazione attorno alla massa 70 kg
-Il passo successivo che è stato svolto riguarda la linearizzazione; linearizzare è importante poiché il controllore viene progettato sul sistema lineare e poi testato sul sistema reale e quindi non lineare.
+Nell'approccio alla modellistica dei sistemi dinamici, uno step molto importante è quello che concerne la linearizzazione del sistema, ovvero il passaggio da un insieme di equazioni non lineari ad un set di equazioni lineari definite nell'intorno di un punto specifico dello stato del sistema: questo nuovo sistema di equazioni andrà a definire un sistema lineare in grado di approssimare il comportamento dinamico del sistema non lineare vicino all'equilibrio.
 
-Per tale ragione è necessario innanzitutto calcolare l'equilibrio del sistema, cioè il punto in cui $\ddot{\theta} = 0$:
+Il punto in questione è quello in cui la variazione dello stato del sistema è nullo: deto quindi $\mathbf{x}(t)$ il vettore di stato, l'equilibrio sarà dato da $\dot{\mathbf{x}(t)}$.
+
+Perciò, il passo successivo alla risoluzione del sistema di equazioni di Lagrange in $\theta$ e $\phi$ che è stato svolto riguarda la linearizzazione: nel contesto del controllo, linearizzare è importante poiché permette di progettare il controllore stesso sul sistema lineare, potendo poi testarlo direttamente sul sistema reale (ovvero quello descritto da equazioni non lineari).
+
+\subsection{Calcolo della posizione di equilibrio}
+Per poter quindi procedere con la linearizzazione, è necessario innanzitutto calcolare l'equilibrio del sistema, cioè il punto in cui $\ddot{\theta} = 0$, ovvero quando il sistema risulta essere in una condizione di equilibrio dinamico (nessuna accelerazione $\rightarrow$ velcoità costante $\rightarrow$ posizione lineare):
 \begin{center}
-	$$\left(\begin{array}{c}
+	$\left(\begin{array}{c}
 		-0.01174364-\text{7.105427e-15}\,\mathrm{i}\\
 		3.129849-\text{7.105427e-15}\,\mathrm{i}
-	\end{array}\right)$$
+	\end{array}\right)$
 \end{center}
 
-I risultati ottenuti sono, circa, numeri naturali e rispondono a quanto ci aspettavamo: 
+Queste posizioni di equilibrio le abbiamo ottenute per mezzo della istruzione Matlab ~\ref{code:matalab_eq}, nella quale si vede come, partendo dall'equazione differenziale del sistema non lineare espressa in termini di $\ddot{\theta}$ si ricava la posizione di equilibrio del sistema.
+\begin{lstlisting} [caption={Calcolo posizione di equilbrio},captionpos=b]
+equilibri = solve(subs(theta2_differenziabile,{q_1 q_1_p q_2_p u},{0,0,0,0})==0,q_2)
+\end{lstlisting}
+
+Come si vede, siamo interessati solamente al valore di equilibrio relativo di $\theta$: per questo motivo che poniamo a 0 (valore arbitrario) i valori di $\phi$ e $\dot{\phi}$, poichè non risultano essere di interesse per il calcolo dell'equilibrio.
+
+I risultati ottenuti sono, con buona approssimazione, considerabili numeri naturali e rispondono a quanto ci aspettavamo: essendo presente un offset ($w_b$) tra quello che è il baricentro del sistema di riferimento e quello relativo al manubrio, non ci aspettavamo di ottenere due equilibri perfettamente di 0° (posizione verticale a "testa in sù") e di 180° (posizione verticale a "testa in giù").
+
+Per completezza e per avere comunque un feedback più concreto, abbiamo provato ad azzerare il valore di $w_b$, andando a ricalcoare la posizione di equilibrio, ottenendo effettivamente un valore pari a 0°.
+
+Dal risultato ottenuto, considerando nulla la componente immaginaria, possiamo notare che (osservazioni comuni per i sistemi assimilabili al pendolo):
+
 \begin{itemize}
-	\item il sistema ha due equilibri, il primo $\theta = -0.01174364$ ci si aspetta che sia instabile in quanto il baricentro del sistema V.A.B. più Uomo è sopra all'asse delle ruote
-	\item  $\theta = 3.129849$ è un equilibrio stabile poiché il baricentro sta sotto l'asse delle ruote e un eventuale disturbo, dopo un transitorio, risulterebbe avere effetto nullo sul sistema.
+	\item il sistema ha due equilibri, il primo $\theta = -0.01174364 \text{ rad} = -0.67 \text{ deg}$ ci si aspetta che sia instabile in quanto il baricentro del sistema V.A.B. (compreso di utente a bordo) risulta essere sopra all'asse delle ruote;
+	\item  $\theta = 3.129849 \text{ rad} = 179.32 \text{ deg}$ è un equilibrio stabile poiché il baricentro sta sotto l'asse delle ruote e, un eventuale disturbo, dopo un tempo di transitorio, risulterebbe avere effetto nullo sullo stato del sistema.
 \end{itemize}
 
-Ovviamente, ai fini del controllo, si è linearizzato attorno al primo equilibrio; non avrebbe senso cpntrollare il sistema quando questo risulta capovolto.
-Il vettore degli stati e delle uscite sono i seguenti:
+\subsection{Calcolo del sistema lineare}
+Ovviamente, ai fini del controllo, si è linearizzato attorno al primo equilibrio; non avrebbe infatti senso controllare il sistema quando questo risulta essere capovolto (cosa che risulta essere fisicamente impossibile, se il veicolo autobilanciato viene fatto muovere su una superficie).
+I vettori che definiscono lo stato e le uscite del sistema sono i seguenti:
 \begin{center}
 	$$
 	x=\left\lbrack \begin{array}{c}
 		x_1 \to \phi \;\\
 		x_2 \to \dot{\phi \;} \\
-		x_{3\;} \to \theta \;\\
+		x_3 \to \theta \;\\
 		x_4 \to \dot{\theta \;} 
 	
 		\end{array}\right\rbrack

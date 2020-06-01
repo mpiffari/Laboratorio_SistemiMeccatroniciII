@@ -3,6 +3,11 @@ Data la straordinarietà degli eventi che erano in corso dal punto di vista sani
 
 Abbiamo così adottato una metodologia di lavoro basata su prototipi sempre più simili a quello che dovrebbe essere il sistema reale.
 \section{Simulazione del sistema reale}
+\label{sec:simulazione_reale}
+La risoluzione del sistema di equazioni sopra riportato permette di ottenere due equazioni differenziali del secondo ordine che il comando \textit{matlabFunction()} va a scrivere in una funzione di matlab: questa funzione avrà come input i valori da cui dipendono le equazioni differenziali e moltiplicandoli tra di loro da come output il valore di $\ddot{\theta}$ e $\ddot{\phi}$.
+TODO (mettere le dipendende di theta pp e phi pp)
+
+
 Il primo compito che abbiamo risolto è stato quello di implementare le equazioni differenziali ottenute nel capitolo precedente:
 \begin{itemize}
 	\item $\ddot{\phi} = f_{\ddot{\phi}} (M_c,\theta,\dot{\theta},C_m)$
