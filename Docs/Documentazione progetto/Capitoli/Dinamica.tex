@@ -280,16 +280,16 @@ Il rapporto di trasmissione completo $\tau$ è quindi definito come:
 \end{center}
 
 \section{Linearizzazione}
-TODO linearizzazione attorno alla massa 70 kg
+TODO linearizzazione attorno alla massa 70 kg e rileggere paragrafo
 
 Nell'approccio alla modellistica dei sistemi dinamici, uno step molto importante è quello che concerne la linearizzazione del sistema, ovvero il passaggio da un insieme di equazioni non lineari ad un set di equazioni lineari definite nell'intorno di un punto specifico dello stato del sistema: questo nuovo sistema di equazioni andrà a definire un sistema lineare in grado di approssimare il comportamento dinamico del sistema non lineare vicino all'equilibrio.
 
 Il punto in questione è quello in cui la variazione dello stato del sistema è nullo: deto quindi $\mathbf{x}(t)$ il vettore di stato, l'equilibrio sarà dato da $\dot{\mathbf{x}(t)}$.
 
-Perciò, il passo successivo alla risoluzione del sistema di equazioni di Lagrange in $\theta$ e $\phi$ che è stato svolto riguarda la linearizzazione: nel contesto del controllo, linearizzare è importante poiché permette di progettare il controllore stesso sul sistema lineare, potendo poi testarlo direttamente sul sistema reale (ovvero quello descritto da equazioni non lineari).
+Perciò, il passo successivo alla risoluzione del sistema di equazioni di Lagrange in $\theta$ e $\phi$ che è stato svolto riguarda la linearizzazione: nel contesto del controllo, linearizzare è importante poiché permette di progettare il controllore stesso sul sistema tangente a quello reale (ovvero il sistema lineare), potendo poi testarlo direttamente sul sistema reale (ovvero quello descritto da equazioni non lineari).
 
 \subsection{Calcolo della posizione di equilibrio}
-Per poter quindi procedere con la linearizzazione, è necessario innanzitutto calcolare l'equilibrio del sistema, cioè il punto in cui $\ddot{\theta} = 0$, ovvero quando il sistema risulta essere in una condizione di equilibrio dinamico (nessuna accelerazione $\rightarrow$ velcoità costante $\rightarrow$ posizione lineare):
+Per poter quindi procedere con la linearizzazione, è necessario innanzitutto calcolare l'equilibrio del sistema, cioè il punto in cui $\mathbf{\ddot{\theta} = 0}$: questa condizione corrisponde  ad una situazione in cui lo stato del sistema risulta essere in una condizione di equilibrio dinamico, ovvero quando la sua variazione nel tempo è nulla (nessuna accelerazione $\rightarrow$ velocità costante $\rightarrow$ posizione lineare):
 \begin{center}
 	$\left(\begin{array}{c}
 		-0.01174364-\text{7.105427e-15}\,\mathrm{i}\\
@@ -311,92 +311,138 @@ Per completezza e per avere comunque un feedback più concreto, abbiamo provato 
 Dal risultato ottenuto, considerando nulla la componente immaginaria, possiamo notare che (osservazioni comuni per i sistemi assimilabili al pendolo):
 
 \begin{itemize}
-	\item il sistema ha due equilibri, il primo $\theta = -0.01174364 \text{ rad} = -0.67 \text{ deg}$ ci si aspetta che sia instabile in quanto il baricentro del sistema V.A.B. (compreso di utente a bordo) risulta essere sopra all'asse delle ruote;
-	\item  $\theta = 3.129849 \text{ rad} = 179.32 \text{ deg}$ è un equilibrio stabile poiché il baricentro sta sotto l'asse delle ruote e, un eventuale disturbo, dopo un tempo di transitorio, risulterebbe avere effetto nullo sullo stato del sistema.
+	\item il sistema ha due equilibri; il primo ($\theta = -0.01174364 \text{ rad} = -0.67 \text{ deg}$) ci si aspetta che sia instabile in quanto il baricentro del sistema V.A.B. (compreso di utente a bordo) risulta essere sopra all'asse delle ruote;
+	\item il secondo ($\theta = 3.129849 \text{ rad} = 179.32 \text{ deg}$) è un equilibrio stabile, poiché il baricentro sta sotto l'asse delle ruote e, un eventuale disturbo dopo un certo tempo di transitorio, risulterebbe avere effetto nullo sullo stato del sistema, che ritornerebbe alla medesima posizione;
 \end{itemize}
 
 \subsection{Calcolo del sistema lineare}
-Ovviamente, ai fini del controllo, si è linearizzato attorno al primo equilibrio; non avrebbe infatti senso controllare il sistema quando questo risulta essere capovolto (cosa che risulta essere fisicamente impossibile, se il veicolo autobilanciato viene fatto muovere su una superficie).
-I vettori che definiscono lo stato e le uscite del sistema sono i seguenti:
+Ovviamente, ai fini del controllo, si è linearizzato attorno al primo equilibrio; non avrebbe infatti senso controllare il sistema quando questo risulta essere capovolto (cosa che per di più risulta essere fisicamente impossibile, se il veicolo autobilanciato viene fatto muovere su una superficie).
+
+I vettori che definiscono le \textbf{variabili di stato del sistema} e le \textbf{uscite del sistema} sono i seguenti:
 \begin{center}
-	$$
-	x=\left\lbrack \begin{array}{c}
-		x_1 \to \phi \;\\
-		x_2 \to \dot{\phi \;} \\
-		x_3 \to \theta \;\\
-		x_4 \to \dot{\theta \;} 
+	$
+	x=\text{variabili di stato = }\left\lbrack 
+	\begin{array}{c}
+		x_1 \to \phi\\
+		x_2 \to \dot{\phi}\\
+		x_3 \to \theta\\
+		x_4 \to \dot{\theta} 
+	\end{array}\right\rbrack
+	$
 	
-		\end{array}\right\rbrack
-	$$
-	
-	$$
-	y=\left\lbrack \begin{array}{c}
-	y_1\;\\
-	y_2\;
-	
-\end{array}\right\rbrack
-	$$
-\end{center}
-e vengono definite anche alcune variabili di supporto:
-\begin{center}
-	$$
-	\overset{\bullet \;}{x_1 \left(t\right)} =\bar{x_2 } =0\to f_1
-	$$
-	$$
-	\overset{\bullet \;}{x_2 \left(t\right)} =\overset{\bullet \bullet \;\;}{\phi \;} \to f_2
-	$$
-	$$
-	\overset{\bullet \;}{x_3 \left(t\right)} =\bar{x_4 } =0\to f_{3\;}
-	$$
-	$$
-	\overset{\bullet \;}{x_4 \left(t\right)=} \overset{\bullet \bullet \;\;}{\theta \;} \to f_4
-	$$
-	$$
-	y_{1\;} \left(t\right)=\phi =x_{1\;} \to g_1
-	$$
-	$$
-	y_{2\;} \left(t\right)=\theta =x_{2\;} \to g_2
-	$$
+	$
+	y=\text{output del sistema = }\left\lbrack 
+	\begin{array}{c}
+		y_1 \to \ddot{\theta}\\
+		y_2 \to \ddot{\phi}
+	\end{array}\right\rbrack
+	$
 \end{center}
 
-ricordando che un generico sistema dinamico può essere scritto come:
+Per individuare il risultato finale della linearizzazione, abbiamo seguito un approccio matriciale: nello specifico abbiamo utilizzato la notazione matriciale nel caso di sistemi SIMO (\textit{Single Input Multiple Output}), la cui stesura ha utilizzato le seguenti funzioni di supporto:
+
 \begin{center}
-	$$
-	G\left(s\right)=C\bullet {\left(\mathrm{sI}-A\right)}^{-1} \bullet B+D
-	$$
+	$
+	\begin{cases}
+		\begin{array}{c}
+			\mathbf{f_1} \to {\dot{x_1} \left(t\right)} =\bar{x_2 } =0\\
+			\mathbf{f_2} \to {\dot{x_2} \left(t\right)} = {\ddot{\phi} \;}\\
+			\mathbf{f_3} \to {\dot{x_3} \left(t\right)} =\bar{x_4 } =0\\
+			\mathbf{f_4} \to {\dot{x_4} \left(t\right)=} {\ddot{\theta} \;}\\
+			\mathbf{g_1} \to y_{1\;} \left(t\right)=\phi = x_{1\;}\\
+			\mathbf{g_2} \to y_{2\;} \left(t\right)=\theta =x_{2\;}\\
+		\end{array}
+	\end{cases}
+	$
 \end{center}
-allora:
+
+Sfruttando le caratteristiche \textit{matematiche} del sistema non lineare, ottenibili tramite lo sviluppo in serie di Taylor nell'intorno dell'equilibrio, possiamo definire i termini matriciali che permettono di definire il sistema, secondo le seguenti equazioni:
+
 \begin{center}
 	$$
-	A=\left\lbrack \begin{array}{cccc}
-	\frac{\partial }{\partial x_1 }f_{1\;}  & \frac{\partial }{\partial x_2 }f_{1\;}  & \frac{\partial }{\partial x_3 }f_{1\;}  & \frac{\partial }{\partial x_4 }f_{1\;} \\
-	\frac{\partial }{\partial x_1 }f_{2\;}  & \frac{\partial }{\partial x_2 }f_{2\;}  & \frac{\partial }{\partial x_3 }f_{2\;}  & \frac{\partial }{\partial x_4 }f_{2\;} \\
-	\frac{\partial }{\partial x_1 }f_3  & \frac{\partial }{\partial x_2 }f_3  & \frac{\partial }{\partial x_3 }f_3  & \frac{\partial }{\partial x_4 }f_3 \\
-	\frac{\partial }{\partial x_1 }f_4  & \frac{\partial }{\partial x_2 }f_4  & \frac{\partial }{\partial x_3 }f_4  & \frac{\partial }{\partial x_4 }f_4 
+	\begin{cases}
+		\begin{array}{c}
+		\dot{x}\left(t\right) = Ax(t) + Bu(t)\\
+		y\left(t\right) = Cx(t) + Du(t)\\
+		\end{array}
+	\end{cases}
+	$$
+	$
+	A=\left\lbrack
+	\begin{array}{cccc}
+		\frac{\partial }{\partial x_1 }f_{1\;}  & \frac{\partial }{\partial x_2 }f_{1\;}  & \frac{\partial }{\partial x_3 }f_{1\;}  & \frac{\partial }{\partial x_4 }f_{1\;} \\\\
+		\frac{\partial }{\partial x_1 }f_{2\;}  & \frac{\partial }{\partial x_2 }f_{2\;}  & \frac{\partial }{\partial x_3 }f_{2\;}  & \frac{\partial }{\partial x_4 }f_{2\;} \\\\
+		\frac{\partial }{\partial x_1 }f_3  & \frac{\partial }{\partial x_2 }f_3  & \frac{\partial }{\partial x_3 }f_3  & \frac{\partial }{\partial x_4 }f_3 \\\\
+		\frac{\partial }{\partial x_1 }f_4  & \frac{\partial }{\partial x_2 }f_4  & \frac{\partial }{\partial x_3 }f_4  & \frac{\partial }{\partial x_4 }f_4 
 	\end{array}\right\rbrack
-	$$
-	$$
-	B=\left\lbrack \begin{array}{c}
-	\frac{\partial }{\partial u}f_1 \\
-	\frac{\partial }{\partial u}f_2 \\
-	\frac{\partial }{\partial u}f_3 \\
-	\frac{\partial }{\partial u}f_4 
+	$
+	$
+	B=\left\lbrack 
+	\begin{array}{c}
+		\frac{\partial }{\partial u}f_1 \\\\
+		\frac{\partial }{\partial u}f_2 \\\\
+		\frac{\partial }{\partial u}f_3 \\\\
+		\frac{\partial }{\partial u}f_4 
 	\end{array}\right\rbrack
-	$$
-	$$
-	C=\left\lbrack \begin{array}{cccc}
-	\frac{\partial }{\partial x_1 }g_{1\;}  & \frac{\partial }{\partial x_2 }g_{1\;}  & \frac{\partial }{\partial x_3 }g_{1\;}  & \frac{\partial }{\partial x_4 }g_{1\;} \\
-	\frac{\partial }{\partial x_1 }g_{1\;}  & \frac{\partial }{\partial x_2 }g_{1\;}  & \frac{\partial }{\partial x_3 }g_{1\;}  & \frac{\partial }{\partial x_4 }g_2 
+	$
+	$
+	C=\left\lbrack 
+	\begin{array}{cccc}
+		\frac{\partial }{\partial x_1 }g_{1\;}  & \frac{\partial }{\partial x_2 }g_{1\;}  & \frac{\partial }{\partial x_3 }g_{1\;}  & \frac{\partial }{\partial x_4 }g_{1\;} \\\\
+		\frac{\partial }{\partial x_1 }g_{1\;}  & \frac{\partial }{\partial x_2 }g_{1\;}  & \frac{\partial }{\partial x_3 }g_{1\;}  & \frac{\partial }{\partial x_4 }g_2 
 	\end{array}\right\rbrack
-	$$
+	$
 	$$
 	\;D=\left\lbrack \begin{array}{cc}
-	\frac{\partial }{\partial u}g_{1\;}  & \frac{\partial }{\partial u}g_2 
+		\frac{\partial }{\partial u}g_{1\;}  & \frac{\partial }{\partial u}g_2 
 	\end{array}\right\rbrack
 	$$
 \end{center}
 
-Sostituendo i valori numerici dei vari simboli si ottengono le seguenti matrici:
+Nel specifico del veicolo autobilanciato, nel caso con utente con peso di \textit{70 kg} e altezza \textit{1.77 m}, siamo andati ad ottenere i seguenti valori numerici per le matrici in esame:
+
+\begin{center}
+	$
+	A=\left\lbrack
+	\begin{array}{cccc}
+		0  & 1.0  & 0  & 0 \\\\
+		0 & 0 & -15.2286 & 0 \\\\
+		0  & 0  & 0  & 1.0 \\\\
+		0  & 0  & 5.43924 & 0
+	\end{array}\right\rbrack
+	$
+	$
+	B=\left\lbrack \begin{array}{c}
+		0 \\\\
+		2.7498 \\\\
+		0 \\\\
+		-0.2612 
+	\end{array}\right\rbrack
+	$
+	$
+	C=\left\lbrack 
+	\begin{array}{cccc}
+		1  & 0 & 0 & 0 \\\\
+		0  & 1 & 0  & 0
+	\end{array}\right\rbrack
+	$
+	$$
+	\;D=\left\lbrack 
+	\begin{array}{cc}
+		0 & 0
+	\end{array}\right\rbrack
+	$$
+\end{center}
+
+
+Ricordando infine che un generico sistema dinamico può essere scritto come:
+
+\begin{center}
+	$
+	G\left(s\right)=C {\left(\mathrm{sI}-A\right)}^{-1} B+D
+	$
+\end{center}
+sostituendo i valori numerici matriciali ottenuti al passo precedente, possiamo ottenere il sistema di equazioni, le quali rappresentano l'insieme delle funzioni di trasferimento caratterizzanti il sistema:
 
 \begin{center}
 		$$
@@ -408,4 +454,6 @@ Sostituendo i valori numerici dei vari simboli si ottengono le seguenti matrici:
 		\end{array}\right)
 		$$
 \end{center}
-Si può notare come la prima e la seconda riga della matrice differiscano solo per un fattore derivativo, così come la terza e quarta riga; questo è ovvio ed atteso in quanto $x_2$ è a derivata di $x_1$ e $x_4$ la derivata di $x_3$
+Si può notare come la prima e la seconda riga della matrice differiscano solo per un fattore derivativo, così come la terza e quarta riga; questo è ovvio ed atteso in quanto $x_2$ è a derivata di $x_1$ e $x_4$ la derivata di $x_3$.
+
+Nello specifico, queste funzionalità di linearizzazione, sono state racchiuse all'interno del \textit{live script} Matlab nominato \textit{VAB\_simulazioni\_discrete.mlx}: in questo modo siamo stati in grado di rendere più efficace ed efficiente la prosecuzione della simulazione, non dovendo eseguire ogni volta anche questa parte di calcolo matematico relativo alla linearizzazione. Siamo andati infatti a sfruttare le funzionalità di salvataggio offerte da Matlab, per salvare in un file \textit{.mat} l'intera \textit{workspace} (file che abbiamo nominato \textit{WS\_VAB\_wb\_0\_5.mat}), in maniera tale da permettere, agli script che ne avessero bisogno, di aprire il workspace e leggere tutte le variabili di interesse.
