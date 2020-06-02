@@ -1,3 +1,104 @@
+\section{Controllore}
+Il problema della scelta del controllore è stato risolto mediante l'utilizzo dell'assegnazione degli autovalori ottenuti tramite retroazione dello stato; si affronta quindi un problema di regolazione: il moto del sistema è composto completamente dal moto libero che si vuole controllare e annullare in un tempo a piacere. Il posizionamento dei poli, e quindi la scelta del guadagno del regolatore, va eseguita sul solo sistema lineare:
+\begin{figure}[H]
+	\centering   	
+	\includegraphics[width=0.70\textwidth]{Immagini/feedback_state.png}
+	\caption{Schema concettuale del controllo,\cite{feedback_state}}
+	\label{fig:feedback_state}
+\end{figure}
+Ciò che si nota in Fig.\ref{fig:feedback_state} può essere riscritto matematicamente:
+\begin{center}
+	$$
+	\begin{cases}
+	\begin{array}{c}
+	x\left(t\right)=Ax{\left(t\right)}+Bu\left(t\right)\\
+	y{\left(t\right)}=Cx{\left(t\right)}+Du\left(t\right)
+	\end{array}
+	\end{cases}
+	$$
+	$$
+	u{\left(t\right)}=-Kx{\left(t\right)}+w{\left(t\right)}	
+	$$
+\end{center}Dunque:
+\begin{center}
+	
+	$$
+	x{\left(t\right)}=Ax{\left(t\right)}+Bu{\left(t\right)}=Ax{\left(t\right)}+B{\left(-Kx{\left(t\right)}+w{\left(t\right)}\right)}
+	$$
+	$$
+	=Ax{\left(t\right)}-BKx{\left(t\right)}+Bw\left(t\right)={\left(A-BK\right)}x{\left(t\right)}+Bw{\left(t\right)}
+	$$
+	$$
+	A_{closedloop} =A-BK
+	$$
+\end{center}
+Per scegliere il valore di guadagno del controllore, è necessario scegliere la posizione desiderata dei poli:
+\begin{center}
+	$$
+	G{\left(S\right)}=\frac{\omega {\;}_n^{2\;} }{s^2 +2\xi \omega {\;}_n s+\omega {\;}_n^{2\;} }
+	$$
+\end{center}
+\begin{center}
+	in cui:
+	$$
+	\xi =0\ldotp 7
+	$$
+	$$
+	\omega {\;}_{n\;} =2\bullet \pi \bullet f_{\mathrm{propria}}
+	$$
+\end{center}Dovendo posizionare due coppie di poli complessi coniugati si sono scelte due frequenze ad una decade di distanza
+\begin{center}
+	
+	$$
+	f_{\mathrm{propria\theta}} =  0.2
+	$$
+	$$
+	f_{\mathrm{propria\phi}} =  0.02
+	$$
+\end{center}Per motivi esterni il motore ha una coppia massima molto limitata ed è stato dunque necessario posizionare i poli in modo che non fossero troppo veloci.
+\begin{center}
+	
+	$$
+	polo_{\theta} = \left(\begin{array}{c}
+	-\frac{7\,\pi }{250}+\frac{\pi \,\sqrt{51}\,\mathrm{i}}{250}\\
+	-\frac{7\,\pi }{250}-\frac{\pi \,\sqrt{51}\,\mathrm{i}}{250}
+	\end{array}\right)
+	$$
+	$$
+	polo_{\phi} = \left(\begin{array}{c}
+	-\frac{7\,\pi }{25}+\frac{\pi \,\sqrt{51}\,\mathrm{i}}{25}\\
+	-\frac{7\,\pi }{25}-\frac{\pi \,\sqrt{51}\,\mathrm{i}}{25}
+	\end{array}\right)
+	$$
+\end{center}	Questi quattro poli si può notare che abbiano parte reale negativa; la stabilità in questo modo è raggiunta.\\
+Con il comando \textit{place} di Matlab si ottine dunque:
+\begin{center}
+	
+	$	K =[  -0.0023  , -0.0278, -28.1397  , -7.7022]$
+	
+\end{center}
+Il sistema in anello chiuso ha i seguenti poli:
+\begin{figure}[H]
+	\centering   	
+	\includegraphics[width=1\textwidth]{Immagini/root_locus_closed_loop.png}
+	\caption{Root locus del sistema in anello chiuso}
+	\label{fig:closed_loop_root}
+\end{figure}
+Si va ora ad analizzare la risposta del sistema al controllo ottenuto nei punti precedenti, per assicurarci, che quanto scritto sopra valga oltre che nella teoria anche nella pratica:
+\begin{figure}[H]
+	\centering   	
+	\includegraphics[width=0.7\textwidth]{Immagini/closed_loop_non_linear.png}
+	\caption{Risposta del sistema non lineare in anello chiuso}
+	\label{fig:closed_loop_non_linear_response}
+\end{figure}
+\begin{figure}[H]
+	\centering   	
+	\includegraphics[width=0.7\textwidth]{Immagini/closed_loop_linear.png}
+	\caption{Risposta del sistema lineare in anello chiuso}
+	\label{fig:closed_loop_non_linear_response}
+\end{figure}
+TODO: come spieghiamo la differenza? rifare la simulazione?
+
 \chapter{OPC - UA}
 Per quanto riguarda la parte di controllo, il sistema presenta un articolato insieme di controllori inter-operanti tra di loro: nello specifico ad ogni singolo controllore sono affidate delle mansioni ben specifiche, tutte ovviamente volte al controllo e alla stabilizzazione del \textit{veicolo auto bilanciato}.
 

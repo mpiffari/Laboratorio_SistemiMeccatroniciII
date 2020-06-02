@@ -14,16 +14,18 @@
 \contentsline {chapter}{\numberline {3}Equazioni del moto}{11}{chapter.3}
 \contentsline {section}{\numberline {3.1}Lagrangiana}{11}{section.3.1}
 \contentsline {section}{\numberline {3.2}Rapporto di trasmissione}{12}{section.3.2}
-\contentsline {section}{\numberline {3.3}Linearizzazione}{12}{section.3.3}
-\contentsline {subsection}{\numberline {3.3.1}Calcolo della posizione di equilibrio}{12}{subsection.3.3.1}
-\contentsline {subsection}{\numberline {3.3.2}Calcolo del sistema lineare}{13}{subsection.3.3.2}
-\contentsline {part}{II\hspace {1em}Simulink}{15}{part.2}
-\contentsline {chapter}{\numberline {4}Simulazione}{17}{chapter.4}
-\contentsline {section}{\numberline {4.1}Simulazione del sistema reale}{17}{section.4.1}
-\contentsline {section}{\numberline {4.2}Controllore}{20}{section.4.2}
-\contentsline {section}{\numberline {4.3}Motore}{23}{section.4.3}
-\contentsline {part}{III\hspace {1em}Controllo}{27}{part.3}
-\contentsline {chapter}{\numberline {5}OPC - UA}{29}{chapter.5}
-\contentsline {section}{\numberline {5.1}Idea base OPC-UA}{29}{section.5.1}
-\contentsline {section}{\numberline {5.2}OPC-UA e V.A.B.}{30}{section.5.2}
-\contentsline {chapter}{\numberline {6}Rumore}{33}{chapter.6}
+\contentsline {section}{\numberline {3.3}Sistema non lineare}{12}{section.3.3}
+\contentsline {section}{\numberline {3.4}Linearizzazione}{13}{section.3.4}
+\contentsline {subsection}{\numberline {3.4.1}Calcolo della posizione di equilibrio}{13}{subsection.3.4.1}
+\contentsline {subsection}{\numberline {3.4.2}Calcolo del sistema lineare}{14}{subsection.3.4.2}
+\contentsline {part}{II\hspace {1em}Controllo}{17}{part.2}
+\contentsline {section}{\numberline {3.5}Controllore}{19}{section.3.5}
+\contentsline {chapter}{\numberline {4}OPC - UA}{23}{chapter.4}
+\contentsline {section}{\numberline {4.1}Idea base OPC-UA}{23}{section.4.1}
+\contentsline {section}{\numberline {4.2}OPC-UA e V.A.B.}{24}{section.4.2}
+\contentsline {chapter}{\numberline {5}Rumore}{27}{chapter.5}
+\contentsline {part}{III\hspace {1em}Simulink}{29}{part.3}
+\contentsline {chapter}{\numberline {6}Simulazione}{31}{chapter.6}
+\contentsline {section}{\numberline {6.1}Simulazione del sistema lineare}{31}{section.6.1}
+\contentsline {section}{\numberline {6.2}Simulazione del sistema reale}{31}{section.6.2}
+\contentsline {section}{\numberline {6.3}Motore}{33}{section.6.3}

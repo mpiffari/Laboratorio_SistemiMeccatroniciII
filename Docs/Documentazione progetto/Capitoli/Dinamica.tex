@@ -279,6 +279,28 @@ Il rapporto di trasmissione completo $\tau$ è quindi definito come:
 	$\tau = \tau_1 \cdot{\tau_2} = 0.085$	
 \end{center}
 
+\section{Sistema non lineare}
+La risoluzione del sistema di equazioni sopra riportato permette di ottenere due equazioni differenziali del secondo ordine: queste soluzioni sono state ottenute sfruttando la potnezialità del calcolo simbolico messo a disposizione da Matlab, come si vede nel listato seguente.
+
+\begin{lstlisting} [caption={Risoluzione del sistema di equazioni},captionpos=b]
+syms u_star
+theta2_differenziabile = subs(theta2,{phi,vel,theta,vel_ang,C_m},{q_1 q_1_p q_2 q_2_p u})
+phi2_differenziabile = subs(phi2,{phi,vel,theta,vel_ang,C_m},{q_1 q_1_p q_2 q_2_p u })
+\end{lstlisting}
+
+Le soluzioni così ottenute rappresentano e governano la dinamica del sistema: esse verranno quindi utilizzate per andare ad analizzare il comportamento del sistema considerato reale, utlizzando il controllore che è stato progettato sul sistema linearizzato.
+
+Un passaggio importante per la simulazione del sistema non lineare, è quello rappresentato dal salvataggio di queste due equazioni in esame: infatti esse sono, per forza di cose, richiamate all'interno della simulazione \textit{Simulink}: per fare ciò abbiamo utilizzato il comando \textit{matlabFunction()}, il quale va a scrivere in una funzione di matlab le due equazioni in esame.
+
+\begin{lstlisting} [caption={Salvataggio in funzioni Matlab},captionpos=b]
+matlabFunction(theta2_differenziabile,'File','theta_secondo');
+matlabFunction(phi2_differenziabile,'File','phi_secondo');
+\end{lstlisting}
+
+Nello specifico queste funzioni avranno come input i valori da cui dipendono le equazioni differenziali e, moltiplicandoli tra di loro, fornirà come output i valori di $\ddot{\theta}$ e $\ddot{\phi}$.
+
+TODO (mettere le dipendende di theta pp e phi pp)
+
 \section{Linearizzazione}
 TODO linearizzazione attorno alla massa 70 kg e rileggere paragrafo
 
