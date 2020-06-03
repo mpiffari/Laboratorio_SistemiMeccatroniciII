@@ -18,13 +18,18 @@
 \BOOKMARK [2][-]{subsection.3.4.1}{Calcolo della posizione di equilibrio}{section.3.4}% 18
 \BOOKMARK [2][-]{subsection.3.4.2}{Calcolo del sistema lineare}{section.3.4}% 19
 \BOOKMARK [-1][-]{part.2}{II Controllo}{}% 20
-\BOOKMARK [0][-]{section.3.5}{Controllore}{part.2}% 21
-\BOOKMARK [0][-]{chapter.4}{OPC - UA}{part.2}% 22
-\BOOKMARK [1][-]{section.4.1}{Idea base OPC-UA}{chapter.4}% 23
-\BOOKMARK [1][-]{section.4.2}{OPC-UA e V.A.B.}{chapter.4}% 24
-\BOOKMARK [0][-]{chapter.5}{Rumore}{part.2}% 25
-\BOOKMARK [-1][-]{part.3}{III Simulink}{}% 26
-\BOOKMARK [0][-]{chapter.6}{Simulazione}{part.3}% 27
-\BOOKMARK [1][-]{section.6.1}{Simulazione del sistema lineare}{chapter.6}% 28
-\BOOKMARK [1][-]{section.6.2}{Simulazione del sistema reale}{chapter.6}% 29
-\BOOKMARK [1][-]{section.6.3}{Motore}{chapter.6}% 30
+\BOOKMARK [0][-]{chapter.4}{Introduzione}{part.2}% 21
+\BOOKMARK [0][-]{chapter.5}{Analisi in anello aperto}{part.2}% 22
+\BOOKMARK [0][-]{chapter.6}{Controllore}{part.2}% 23
+\BOOKMARK [1][-]{section.6.1}{Posizionamento dei poli continui}{chapter.6}% 24
+\BOOKMARK [1][-]{section.6.2}{Posizionamento dei poli discreti}{chapter.6}% 25
+\BOOKMARK [0][-]{chapter.7}{OPC - UA}{part.2}% 26
+\BOOKMARK [1][-]{section.7.1}{Idea base OPC-UA}{chapter.7}% 27
+\BOOKMARK [1][-]{section.7.2}{OPC-UA e V.A.B.}{chapter.7}% 28
+\BOOKMARK [0][-]{chapter.8}{Rumore}{part.2}% 29
+\BOOKMARK [-1][-]{part.3}{III Simulink}{}% 30
+\BOOKMARK [0][-]{chapter.9}{Simulazione}{part.3}% 31
+\BOOKMARK [1][-]{section.9.1}{Simulazione del sistema lineare}{chapter.9}% 32
+\BOOKMARK [1][-]{section.9.2}{Simulazione del sistema reale}{chapter.9}% 33
+\BOOKMARK [1][-]{section.9.3}{Discretizzazione}{chapter.9}% 34
+\BOOKMARK [1][-]{section.9.4}{Motore}{chapter.9}% 35

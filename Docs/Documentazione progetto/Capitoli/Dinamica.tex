@@ -283,9 +283,8 @@ Il rapporto di trasmissione completo $\tau$ è quindi definito come:
 La risoluzione del sistema di equazioni sopra riportato permette di ottenere due equazioni differenziali del secondo ordine: queste soluzioni sono state ottenute sfruttando la potnezialità del calcolo simbolico messo a disposizione da Matlab, come si vede nel listato seguente.
 
 \begin{lstlisting} [caption={Risoluzione del sistema di equazioni},captionpos=b]
-syms u_star
-theta2_differenziabile = subs(theta2,{phi,vel,theta,vel_ang,C_m},{q_1 q_1_p q_2 q_2_p u})
-phi2_differenziabile = subs(phi2,{phi,vel,theta,vel_ang,C_m},{q_1 q_1_p q_2 q_2_p u })
+theta2_diff = subs(theta2,{phi,vel,theta,vel_ang,C_m},{q_1 q_1_p q_2 q_2_p u})
+phi2_diff = subs(phi2,{phi,vel,theta,vel_ang,C_m},{q_1 q_1_p q_2 q_2_p u })
 \end{lstlisting}
 
 Le soluzioni così ottenute rappresentano e governano la dinamica del sistema: esse verranno quindi utilizzate per andare ad analizzare il comportamento del sistema considerato reale, utlizzando il controllore che è stato progettato sul sistema linearizzato.
@@ -293,11 +292,11 @@ Le soluzioni così ottenute rappresentano e governano la dinamica del sistema: e
 Un passaggio importante per la simulazione del sistema non lineare, è quello rappresentato dal salvataggio di queste due equazioni in esame: infatti esse sono, per forza di cose, richiamate all'interno della simulazione \textit{Simulink}: per fare ciò abbiamo utilizzato il comando \textit{matlabFunction()}, il quale va a scrivere in una funzione di matlab le due equazioni in esame.
 
 \begin{lstlisting} [caption={Salvataggio in funzioni Matlab},captionpos=b]
-matlabFunction(theta2_differenziabile,'File','theta_secondo');
-matlabFunction(phi2_differenziabile,'File','phi_secondo');
+matlabFunction(theta2_diff,'File','theta_secondo');
+matlabFunction(phi2_diff,'File','phi_secondo');
 \end{lstlisting}
 
-Nello specifico queste funzioni avranno come input i valori da cui dipendono le equazioni differenziali e, moltiplicandoli tra di loro, fornirà come output i valori di $\ddot{\theta}$ e $\ddot{\phi}$.
+Nello specifico queste funzioni avranno come input i valori da cui dipendono le equazioni differenziali e, componendoli algebricamente tra di loro, fornirà come output i valori di $\ddot{\theta}$ e $\ddot{\phi}$.
 
 TODO (mettere le dipendende di theta pp e phi pp)
 
@@ -367,9 +366,9 @@ Per individuare il risultato finale della linearizzazione, abbiamo seguito un ap
 	$
 	\begin{cases}
 		\begin{array}{c}
-			\mathbf{f_1} \to {\dot{x_1} \left(t\right)} =\bar{x_2 } =0\\
+			\mathbf{f_1} \to {\dot{x_1} \left(t\right)} =\overline{x_2 } =0\text{ (poichè all'equilibrio)}\\
 			\mathbf{f_2} \to {\dot{x_2} \left(t\right)} = {\ddot{\phi} \;}\\
-			\mathbf{f_3} \to {\dot{x_3} \left(t\right)} =\bar{x_4 } =0\\
+			\mathbf{f_3} \to {\dot{x_3} \left(t\right)} =\overline{x_4 } =0\text{ (poichè all'equilibrio)}\\
 			\mathbf{f_4} \to {\dot{x_4} \left(t\right)=} {\ddot{\theta} \;}\\
 			\mathbf{g_1} \to y_{1\;} \left(t\right)=\phi = x_{1\;}\\
 			\mathbf{g_2} \to y_{2\;} \left(t\right)=\theta =x_{2\;}\\
