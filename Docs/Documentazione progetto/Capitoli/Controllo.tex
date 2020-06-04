@@ -1,7 +1,8 @@
-\chapter{Introduzione}
+\section{Introduzione}
 Per rendere maggiormente leggibile il codice Matlab e, allo stesso tempo, ridurre i tempi necessari per l'esecuzione, abbiamo deciso di dividere le varie funzionalità in diversi \textit{livescript}: in particolar modo la parte relativa allo studio ed alla definizione del controllore, siamo andati ad inserirla all'interno del file \textit{GainCalculator.mlx} dove si può vedere che. come prima istruzione, si va a caricare dal workspace, risultante dalla linearizzazione, le matrici A-B-C-D che definiscono il sistema lineare modellizzato.
 
-\chapter{Analisi in anello aperto}
+\section{Analisi in anello aperto}
+\label{sec:open_loop_analysis}
 Prima di procedere con l'individuazione del controllore più adatto per stabilizzare il V.A.B., siamo andati ad effettuare una breve analisi sul sistema ad anello aperto, per ottenere così alcuni spunti sulla correttezza del modello che era stato steso fino a quel punto.
 
 Come noto dalla teoria, il sistema risulta essere asintoticamente stabile se gli autovalori della matrice A risultano avere tutti parte reale negativa; è instabile invece se è presente almeno un autovalore con parte reale strettamente positiva.
@@ -23,7 +24,7 @@ Questa breve analisi ci ha permesso di avere una conferma numerica del fatto ovv
 	\label{fig:r_locus_openloop}
 \end{figure}
 
-\chapter{Controllore}
+\section{Controllore}
 Per quanto riguarda il sistema del veicolo autobilanciato, siamo andati a far riferimento a quella classe di problemi definiti come \textit{problemi di regolazione}, in cui il sistema si presenta inizialmente con una condizione iniziale dello stato non nulla, condizione che si intende di riportare a zero con una velocità di convergenza assegnata.
 
 Nello specifico, questo tipo di problema relativo alla scelta del controllore, è stato risolto mediante l'utilizzo dell'assegnazione degli autovalori ottenuti tramite retroazione dello stato, in cui il moto del sistema è composto completamente dal moto libero che si vuole controllare e annullare in un tempo a piacere.
@@ -42,7 +43,7 @@ Ciò che è riportato graficamente in figura \ref{fig:feedback_state}, può esse
 	$
 	\begin{cases}
 	\begin{array}{c}
-	x\left(t\right)=Ax{\left(t\right)}+Bu\left(t\right)\\
+	\dot{x}\left(t\right)=Ax{\left(t\right)}+Bu\left(t\right)\\
 	y{\left(t\right)}=Cx{\left(t\right)}+Du\left(t\right)
 	\end{array}
 	\end{cases}
@@ -66,7 +67,7 @@ Dunque, sostituendo la legge di controllo nell'equazione di stato del sistema, p
 	$$
 \end{center}
 
-\section{Posizionamento dei poli continui}
+\subsection{Posizionamento dei poli continui}
 Per scegliere il valore da assegnare a K, e quindi definire il guadagno del controllore, è necessario scegliere la posizione desiderata dei poli, in base a quelle che sono le specifiche di velocità desiderate.
 
 \begin{center}
@@ -147,12 +148,12 @@ Come si vede in figura ~\ref{fig:closed_loop_root}, grazie al posizionamento deg
 	\label{fig:closed_loop_root}
 \end{figure}
 
-\section{Posizionamento dei poli discreti}
+\subsection{Posizionamento dei poli discreti}
 TODO
 
 Nello sviluppo del sistema, come presenteremo poi nella sezione di simulazioni (sezione TODO), siamo andati anche ad inserire il passaggio a tempo discreto, a seconda di quelle che sono le specifiche temporali del controllore.
 
-\chapter{OPC - UA}
+\section{OPC - UA}
 Per quanto riguarda la parte di controllo, il sistema presenta un articolato insieme di controllori inter-operanti tra di loro: nello specifico ad ogni singolo controllore sono affidate delle mansioni ben specifiche, tutte ovviamente volte al controllo e alla stabilizzazione del \textit{veicolo auto bilanciato}.
 
 In questa fase dello sviluppo del progetto, siamo andati ad implementare parte del codice che verrà installato, in un secondo momento, a bordo del raspberry: esso infatti svolge, all'interno del sistema (come si vede in figura ~\ref{fig:OPCUA_schema}) una comunicazione a due direzioni, che ne determinano due comportamenti differenti:
@@ -170,7 +171,7 @@ In questa fase dello sviluppo del progetto, siamo andati ad implementare parte d
 
 In questa fase abbiamo quindi sviluppato la parte relativa all'utilizzo di \textit{Raspberry Pi 3} come \textit{server OPCUA}.
 
-\section{Idea base OPC-UA}
+\subsection{Idea base OPC-UA}
 L'\textit{Open Platform Communications Unified Architecture} (OPC UA) è un protocollo di comunicazione automatico per l'automazione industriale. 
 
 OPC UA sostituisce il protocollo \textit{OPC Classic}, conservando tutte le funzionalità del predecessore. Poiché OPC Classic era stato costruito su una tecnologia Microsoft detta modello a oggetti per componenti distribuiti, era vincolato a Microsoft, ma questa caratteristica è diventata sempre più limitante.
@@ -225,6 +226,6 @@ Abbiamo racchiuso in figura ~\ref{fig:OPCUA_diagram} il funzionamento di massima
 	\label{fig:OPCUA_diagram}
 \end{figure}
 
-\chapter{Rumore}
+\section{Rumore}
 Piattaforma inerziale --> PSD
 Questione anti windup --> coppia già limitata quindi nessun vincolo di saturazione

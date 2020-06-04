@@ -1,4 +1,4 @@
-\chapter{Simulazione}
+\section{Simulazione}
 
 TODO: rivdere questa introduzione (io la rivedrei)
 
@@ -22,12 +22,12 @@ Si va ora ad analizzare la risposta del sistema al controllo ottenuto nei punti 
 TODO: come spieghiamo la differenza? rifare la simulazione?
 
 
-\section{Simulazione del sistema lineare}
+\subsection{Simulazione del sistema lineare}
 
-\section{Simulazione del sistema reale}
+\subsection{Simulazione del sistema reale}
 \label{sec:simulazione_reale}
 
-\section{Discretizzazione}
+\subsection{Discretizzazione}
 
 Il primo compito che abbiamo risolto è stato quello di implementare le equazioni differenziali ottenute nel capitolo precedente:
 \begin{itemize}
@@ -67,16 +67,11 @@ Si è inoltre creato un altro modello sfruttando il sistema lineare ottenuto pri
 	\label{fig:open_loop_response}
 \end{figure}
 In questo caso, la simulazione in anello aperto mostra che il sistema diverge; questo perché la linearizzazione ha senso attorno al punto di equilibrio da cui è stata ottenuta, distante da quel punto il sistema lineare non approssima più il sistema reale ed anche un eventuale controllo ottenuto da esso non garantisce buone performance distante da quel punto. Si nota, in Fig.\ref{fig:open_loop_response} che il punto di partenza è 4° e il sistema, lineare, diverga quasi immediatamente; la differenza con la risposta del sistema non lineare in Fig.\ref{fig:open_loop_response_non_linear}
-\begin{figure}[H]
-	\centering   	
-	\includegraphics[width=0.6\textwidth]{Immagini/root_locus_open_loop.png}
-	\caption{Posizione poli in anello aperto}
-	\label{fig:open_loop_root}
-\end{figure}
-Come si vede in Fig.\ref{fig:open_loop_root}, ci sono due poli reali, uno negativo e uno positivo; questo dimostra come il sistema sia instabile in anello aperto e necessiti di controllo.
+
+Come già verificato in precedenza (sezione ~\ref{sec:open_loop_analysis}) ci sono due poli reali, uno negativo e uno positivo; questo dimostra come il sistema sia instabile in anello aperto e necessiti di controllo.
 
 
-\section{Motore}
+\subsection{Motore}
 Il passo successivo è stato quello di andare a modellizzare il motore presente a bordo dello Chassy; questo è necessario in quanto si deve tenere conto, in primo luogo, del ritardo che gli attuatori ( cioè il motore) introducono nel sistema e che per questo potrebbe diventare instabile.
 \begin{figure}[H]
 	\centering   	

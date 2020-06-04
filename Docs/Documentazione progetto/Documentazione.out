@@ -1,35 +1,27 @@
 \BOOKMARK [0][-]{chapter.1}{Introduzione}{}% 1
-\BOOKMARK [-1][-]{part.1}{I Dinamica}{}% 2
-\BOOKMARK [0][-]{chapter.2}{Scomposizione del VAB}{part.1}% 3
-\BOOKMARK [1][-]{section.2.1}{Considerazioni iniziali}{chapter.2}% 4
-\BOOKMARK [1][-]{section.2.2}{Grandezze di supporto}{chapter.2}% 5
-\BOOKMARK [1][-]{section.2.3}{Calcolo componenti dinamiche e potenziali per ogni corpo rigido del sistema}{chapter.2}% 6
-\BOOKMARK [2][-]{subsection.2.3.1}{Asta}{section.2.3}% 7
-\BOOKMARK [2][-]{subsection.2.3.2}{Chassis \(base\)}{section.2.3}% 8
-\BOOKMARK [2][-]{subsection.2.3.3}{Utente}{section.2.3}% 9
-\BOOKMARK [2][-]{subsection.2.3.4}{Ruota}{section.2.3}% 10
-\BOOKMARK [2][-]{subsection.2.3.5}{Veicolo completo}{section.2.3}% 11
-\BOOKMARK [2][-]{subsection.2.3.6}{Note sul calcolo delle componenti dinamiche}{section.2.3}% 12
-\BOOKMARK [0][-]{chapter.3}{Equazioni del moto}{part.1}% 13
-\BOOKMARK [1][-]{section.3.1}{Lagrangiana}{chapter.3}% 14
-\BOOKMARK [1][-]{section.3.2}{Rapporto di trasmissione}{chapter.3}% 15
-\BOOKMARK [1][-]{section.3.3}{Sistema non lineare}{chapter.3}% 16
-\BOOKMARK [1][-]{section.3.4}{Linearizzazione}{chapter.3}% 17
-\BOOKMARK [2][-]{subsection.3.4.1}{Calcolo della posizione di equilibrio}{section.3.4}% 18
-\BOOKMARK [2][-]{subsection.3.4.2}{Calcolo del sistema lineare}{section.3.4}% 19
-\BOOKMARK [-1][-]{part.2}{II Controllo}{}% 20
-\BOOKMARK [0][-]{chapter.4}{Introduzione}{part.2}% 21
-\BOOKMARK [0][-]{chapter.5}{Analisi in anello aperto}{part.2}% 22
-\BOOKMARK [0][-]{chapter.6}{Controllore}{part.2}% 23
-\BOOKMARK [1][-]{section.6.1}{Posizionamento dei poli continui}{chapter.6}% 24
-\BOOKMARK [1][-]{section.6.2}{Posizionamento dei poli discreti}{chapter.6}% 25
-\BOOKMARK [0][-]{chapter.7}{OPC - UA}{part.2}% 26
-\BOOKMARK [1][-]{section.7.1}{Idea base OPC-UA}{chapter.7}% 27
-\BOOKMARK [1][-]{section.7.2}{OPC-UA e V.A.B.}{chapter.7}% 28
-\BOOKMARK [0][-]{chapter.8}{Rumore}{part.2}% 29
-\BOOKMARK [-1][-]{part.3}{III Simulink}{}% 30
-\BOOKMARK [0][-]{chapter.9}{Simulazione}{part.3}% 31
-\BOOKMARK [1][-]{section.9.1}{Simulazione del sistema lineare}{chapter.9}% 32
-\BOOKMARK [1][-]{section.9.2}{Simulazione del sistema reale}{chapter.9}% 33
-\BOOKMARK [1][-]{section.9.3}{Discretizzazione}{chapter.9}% 34
-\BOOKMARK [1][-]{section.9.4}{Motore}{chapter.9}% 35
+\BOOKMARK [0][-]{chapter.2}{Dinamica}{}% 2
+\BOOKMARK [1][-]{section.2.1}{Scomposizione del VAB}{chapter.2}% 3
+\BOOKMARK [2][-]{subsection.2.1.1}{Considerazioni iniziali}{section.2.1}% 4
+\BOOKMARK [2][-]{subsection.2.1.2}{Grandezze di supporto}{section.2.1}% 5
+\BOOKMARK [2][-]{subsection.2.1.3}{Calcolo componenti dinamiche e potenziali per ogni corpo rigido del sistema}{section.2.1}% 6
+\BOOKMARK [1][-]{section.2.2}{Equazioni del moto}{chapter.2}% 7
+\BOOKMARK [2][-]{subsection.2.2.1}{Lagrangiana}{section.2.2}% 8
+\BOOKMARK [2][-]{subsection.2.2.2}{Rapporto di trasmissione}{section.2.2}% 9
+\BOOKMARK [2][-]{subsection.2.2.3}{Sistema non lineare}{section.2.2}% 10
+\BOOKMARK [2][-]{subsection.2.2.4}{Linearizzazione}{section.2.2}% 11
+\BOOKMARK [0][-]{chapter.3}{Controllo}{}% 12
+\BOOKMARK [1][-]{section.3.1}{Introduzione}{chapter.3}% 13
+\BOOKMARK [1][-]{section.3.2}{Analisi in anello aperto}{chapter.3}% 14
+\BOOKMARK [1][-]{section.3.3}{Controllore}{chapter.3}% 15
+\BOOKMARK [2][-]{subsection.3.3.1}{Posizionamento dei poli continui}{section.3.3}% 16
+\BOOKMARK [2][-]{subsection.3.3.2}{Posizionamento dei poli discreti}{section.3.3}% 17
+\BOOKMARK [1][-]{section.3.4}{OPC - UA}{chapter.3}% 18
+\BOOKMARK [2][-]{subsection.3.4.1}{Idea base OPC-UA}{section.3.4}% 19
+\BOOKMARK [1][-]{section.3.5}{OPC-UA e V.A.B.}{chapter.3}% 20
+\BOOKMARK [1][-]{section.3.6}{Rumore}{chapter.3}% 21
+\BOOKMARK [0][-]{chapter.4}{Simulink}{}% 22
+\BOOKMARK [1][-]{section.4.1}{Simulazione}{chapter.4}% 23
+\BOOKMARK [2][-]{subsection.4.1.1}{Simulazione del sistema lineare}{section.4.1}% 24
+\BOOKMARK [2][-]{subsection.4.1.2}{Simulazione del sistema reale}{section.4.1}% 25
+\BOOKMARK [2][-]{subsection.4.1.3}{Discretizzazione}{section.4.1}% 26
+\BOOKMARK [2][-]{subsection.4.1.4}{Motore}{section.4.1}% 27

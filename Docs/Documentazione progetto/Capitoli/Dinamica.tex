@@ -1,5 +1,5 @@
-\chapter{Scomposizione del VAB}
-\section{Considerazioni iniziali}
+\section{Scomposizione del VAB}
+\subsection{Considerazioni iniziali}
 Per il calcolo delle equazioni dinamiche del sistema siamo andati a considerare ogni singolo corpo rigido componente il sistema, calcolandone le grandezze fisiche di posizione e velocità, seguendo un approccio cartesiano. 
 Nello specifico abbiamo considerato il sistema composto da:
 \begin{itemize}
@@ -25,7 +25,7 @@ Ognuno di questi corpi rigidi separati è individuato da un punto, che ne rappre
 	\label{fig:VAB_baricentri}
 \end{figure} 
 
-\section{Grandezze di supporto}
+\subsection{Grandezze di supporto}
 Prima di andare a definire le componenti di energia potenziale e cinetica di ogni singolo corpo, siamo andati ad introdurre alcune grandezze geometriche di supporto che definiremo qui di seguito.
 
 Nello specifico abbiamo introdotto i seguenti parametri, specificati anche in figura ~\ref{fig:VAB_lunghezze}:
@@ -56,7 +56,7 @@ Nello specifico abbiamo introdotto i seguenti parametri, specificati anche in fi
 	\label{fig:VAB_lunghezze}
 \end{figure}
 
-\section{Calcolo componenti dinamiche e potenziali per ogni corpo rigido del sistema}
+\subsection{Calcolo componenti dinamiche e potenziali per ogni corpo rigido del sistema}
 Per ognuno dei corpi rigidi definiti in precedenza siamo andati appunto a calcolare:
 
 \begin{itemize}
@@ -68,7 +68,7 @@ Per ognuno dei corpi rigidi definiti in precedenza siamo andati appunto a calcol
 	\item \textbf{Lagrangiana \textit{parziale} L del singolo corpo rigido}
 \end{itemize}
 
-\subsection{Asta}
+\subsubsection{Asta}
 \begin{itemize}
 	
 	\item \textbf{$P_a = \left(\begin{array}{c}
@@ -96,7 +96,7 @@ Per ognuno dei corpi rigidi definiti in precedenza siamo andati appunto a calcol
 	\item \textbf{$L_a = m_a \,{l_a }^2 \,{{\left(\dot{\theta \left(t\right)}\right)}}^2 +\frac{m_a \,r^2 \,{{\left(\dot{\phi \left(t\right)}\right)}}^2 }{2}+\frac{J_a \,{{\left(\dot{\theta \left(t\right)}\right)}}^2 }{2}+m_a \,\mathrm{cos}\left(\beta +\theta \left(t\right)\right)\,l_a \,r\,\dot{\theta \left(t\right)}\,\dot{\phi \left(t\right)}-g\,m_a \,\mathrm{cos}\left(\beta +\theta \left(t\right)\right)\,l_a$}
 \end{itemize}
 \newpage
-\subsection{Chassis (base)}
+\subsubsection{Chassis (base)}
 \begin{itemize}
 	
 	\item \textbf{$P_b = \left(\begin{array}{c}
@@ -123,7 +123,7 @@ Per ognuno dei corpi rigidi definiti in precedenza siamo andati appunto a calcol
 	\\
 	\item \textbf{$L_b = m_b \,{l_b }^2 \,{{\left(\dot{\theta \left(t\right)}\right)}}^2 +\frac{m_b \,r^2 \,{{\left(\dot{\phi \left(t\right)}\right)}}^2 }{2}+\frac{J_b \,{{\left(\dot{\theta \left(t\right)}\right)}}^2 }{2}-m_b \,\mathrm{cos}\left(\theta \left(t\right)\right)\,l_b \,r\,\dot{\theta \left(t\right)}\,\dot{\phi \left(t\right)}+g\,m_b \,\mathrm{cos}\left(\theta \left(t\right)\right)\,l_b$}
 \end{itemize}
-\subsection{Utente}
+\subsubsection{Utente}
 \begin{itemize}
 	
 	\item \textbf{$P_c = \left(\begin{array}{c}
@@ -150,7 +150,7 @@ Per ognuno dei corpi rigidi definiti in precedenza siamo andati appunto a calcol
 	\\
 	\item \textbf{$L_c = m_c \,{l_c }^2 \,{{\left(\dot{\theta \left(t\right)}\right)}}^2 +\frac{m_c \,r^2 \,{{\left(\dot{\phi \left(t\right)}\right)}}^2 }{2}+\frac{J_c \,{{\left(\dot{\theta \left(t\right)}\right)}}^2 }{2}+m_c \,\mathrm{cos}\left(\alpha +\theta \left(t\right)\right)\,l_c \,r\,\dot{\theta \left(t\right)}\,\dot{\phi \left(t\right)}-g\,m_c \,\mathrm{cos}\left(\alpha +\theta \left(t\right)\right)\,l_c$}
 \end{itemize}
-\subsection{Ruota}
+\subsubsection{Ruota}
 \begin{itemize}
 	
 	\item \textbf{$P_r = \left(\begin{array}{c}
@@ -178,14 +178,14 @@ Per ognuno dei corpi rigidi definiti in precedenza siamo andati appunto a calcol
 	\item \textbf{$L_r = \frac{{\left(m_r \,r^2 +J_r \right)}\,{{\left(\dot{\phi \left(t\right)}\right)}}^2 }{2}$}
 \end{itemize}
 
-\subsection{Veicolo completo}
+\subsubsection{Veicolo completo}
 Una volta trovati le componenti dinamiche dei singoli corpi rigidi, possiamo andare a definire l'energia cinetica e potenziale totale del sistema, per poter poi andare a calcolare l'equazione di Lagrange per l'intero sistema.
 In sostanza quindi avremo:
 \begin{center}
 	$L = L_a + L_b + L_c + 2 L_r$
 \end{center}
 
-\subsection{Note sul calcolo delle componenti dinamiche}
+\subsubsection{Note sul calcolo delle componenti dinamiche}
 \begin{itemize}
 	\item Nel calcolo della matrice di massa abbiamo considerato tre componenti:
 	\begin{itemize}
@@ -220,8 +220,8 @@ In sostanza quindi avremo:
  	
 \end{itemize}
 
-\chapter{Equazioni del moto}
-\section{Lagrangiana}
+\section{Equazioni del moto}
+\subsection{Lagrangiana}
 Una volta definita la dinamica del sistema ed ottenuta quindi l'equazione di Lagrange che ne caratterizza il comportamento, andiamo a ricavare le equazioni del moto, le quali consentono di definire l'andamento delle \textit{coordinate libere} (scelte in fase inziale di progetto) che sappiamo essere
 \begin{itemize}
 	\item $\phi = q_1 =$ \textit{angolo di rotazione delle ruote}
@@ -263,7 +263,7 @@ Si ottiene dunque il seguente sistema di equazioni, la cui risoluzione permette 
 dove $\tau$ è il rapporto di trasmissione il cui calcolo è riportato nella sezione ~\ref{sec:rapp_di_trasmissione}.
 La soluzione di questo sistema di equazioni verrà ad essere utilizzata per rappresentare il comportamento del sistema reale, basandosi su una coppia di equazioni non lineare: questa tematica verrà poi approfondita direttamente nella sezione ~\ref{sec:simulazione_reale}.
 
-\section{Rapporto di trasmissione}
+\subsection{Rapporto di trasmissione}
 \label{sec:rapp_di_trasmissione}
 Come da specifiche del progetto, ognuno dei due motori è collegato alle ruote mediante una doppia sequenza di riduttori:
 \begin{itemize}
@@ -279,7 +279,7 @@ Il rapporto di trasmissione completo $\tau$ è quindi definito come:
 	$\tau = \tau_1 \cdot{\tau_2} = 0.085$	
 \end{center}
 
-\section{Sistema non lineare}
+\subsection{Sistema non lineare}
 La risoluzione del sistema di equazioni sopra riportato permette di ottenere due equazioni differenziali del secondo ordine: queste soluzioni sono state ottenute sfruttando la potnezialità del calcolo simbolico messo a disposizione da Matlab, come si vede nel listato seguente.
 
 \begin{lstlisting} [caption={Risoluzione del sistema di equazioni},captionpos=b]
@@ -300,7 +300,7 @@ Nello specifico queste funzioni avranno come input i valori da cui dipendono le 
 
 TODO (mettere le dipendende di theta pp e phi pp)
 
-\section{Linearizzazione}
+\subsection{Linearizzazione}
 TODO linearizzazione attorno alla massa 70 kg e rileggere paragrafo
 
 Nell'approccio alla modellistica dei sistemi dinamici, uno step molto importante è quello che concerne la linearizzazione del sistema, ovvero il passaggio da un insieme di equazioni non lineari ad un set di equazioni lineari definite nell'intorno di un punto specifico dello stato del sistema: questo nuovo sistema di equazioni andrà a definire un sistema lineare in grado di approssimare il comportamento dinamico del sistema non lineare vicino all'equilibrio.
@@ -309,7 +309,7 @@ Il punto in questione è quello in cui la variazione dello stato del sistema è 
 
 Perciò, il passo successivo alla risoluzione del sistema di equazioni di Lagrange in $\theta$ e $\phi$ che è stato svolto riguarda la linearizzazione: nel contesto del controllo, linearizzare è importante poiché permette di progettare il controllore stesso sul sistema tangente a quello reale (ovvero il sistema lineare), potendo poi testarlo direttamente sul sistema reale (ovvero quello descritto da equazioni non lineari).
 
-\subsection{Calcolo della posizione di equilibrio}
+\subsubsection{Calcolo della posizione di equilibrio}
 Per poter quindi procedere con la linearizzazione, è necessario innanzitutto calcolare l'equilibrio del sistema, cioè il punto in cui $\mathbf{\ddot{\theta} = 0}$: questa condizione corrisponde  ad una situazione in cui lo stato del sistema risulta essere in una condizione di equilibrio dinamico, ovvero quando la sua variazione nel tempo è nulla (nessuna accelerazione $\rightarrow$ velocità costante $\rightarrow$ posizione lineare):
 \begin{center}
 	$\left(\begin{array}{c}
@@ -327,7 +327,13 @@ Come si vede, siamo interessati solamente al valore di equilibrio relativo di $\
 
 I risultati ottenuti sono, con buona approssimazione, considerabili numeri naturali e rispondono a quanto ci aspettavamo: essendo presente un offset ($w_b$) tra quello che è il baricentro del sistema di riferimento e quello relativo al manubrio, non ci aspettavamo di ottenere due equilibri perfettamente di 0° (posizione verticale a "testa in sù") e di 180° (posizione verticale a "testa in giù").
 
-Per completezza e per avere comunque un feedback più concreto, abbiamo provato ad azzerare il valore di $w_b$, andando a ricalcoare la posizione di equilibrio, ottenendo effettivamente un valore pari a 0°.
+Per completezza e per avere comunque un feedback più concreto, abbiamo provato ad azzerare il valore di $w_b$, andando a ricalcolare la posizione di equilibrio, ottenendo effettivamente i valori di
+\begin{center}
+	$\left(\begin{array}{c}
+	0°
+	180°
+	\end{array}\right)$
+\end{center}
 
 Dal risultato ottenuto, considerando nulla la componente immaginaria, possiamo notare che (osservazioni comuni per i sistemi assimilabili al pendolo):
 
@@ -336,7 +342,7 @@ Dal risultato ottenuto, considerando nulla la componente immaginaria, possiamo n
 	\item il secondo ($\theta = 3.129849 \text{ rad} = 179.32 \text{ deg}$) è un equilibrio stabile, poiché il baricentro sta sotto l'asse delle ruote e, un eventuale disturbo dopo un certo tempo di transitorio, risulterebbe avere effetto nullo sullo stato del sistema, che ritornerebbe alla medesima posizione;
 \end{itemize}
 
-\subsection{Calcolo del sistema lineare}
+\subsubsection{Calcolo del sistema lineare}
 Ovviamente, ai fini del controllo, si è linearizzato attorno al primo equilibrio; non avrebbe infatti senso controllare il sistema quando questo risulta essere capovolto (cosa che per di più risulta essere fisicamente impossibile, se il veicolo autobilanciato viene fatto muovere su una superficie).
 
 I vettori che definiscono le \textbf{variabili di stato del sistema} e le \textbf{uscite del sistema} sono i seguenti:
