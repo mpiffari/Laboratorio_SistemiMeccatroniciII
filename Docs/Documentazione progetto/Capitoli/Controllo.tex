@@ -8,7 +8,6 @@ Prima di procedere con l'individuazione del controllore più adatto per stabiliz
 Come noto dalla teoria, il sistema risulta essere asintoticamente stabile se gli autovalori della matrice A risultano avere tutti parte reale negativa; è instabile invece se è presente almeno un autovalore con parte reale strettamente positiva.
 
 Abbiamo quindi calcolato gli autovalori con il comando seguente:
-
 \begin{lstlisting} [caption={Calcolo autovalori matrice A (non simbolica)},captionpos=b]
 eig(A_real)
 \end{lstlisting}
@@ -124,7 +123,7 @@ Nella nostra simulazione i valori numerici ottenuti per i poli sono stati i segu
 	$$
 \end{center}	
 
-Con il comando \textit{place} di Matlab si ottine dunque:
+Con il comando \textit{place} di Matlab si ottiene dunque:
 \begin{center}
 	
 	$	K =[  -0.0023  , -0.0278, -28.1397  , -7.7022]$
@@ -151,7 +150,9 @@ Come si vede in figura ~\ref{fig:closed_loop_root}, grazie al posizionamento deg
 \subsection{Posizionamento dei poli discreti}
 TODO
 
-Nello sviluppo del sistema, come presenteremo poi nella sezione di simulazioni (sezione TODO), siamo andati anche ad inserire il passaggio a tempo discreto, a seconda di quelle che sono le specifiche temporali del controllore.
+Nello sviluppo del sistema, come presenteremo poi nella sezione di simulazioni (sezione TODO), siamo andati anche ad inserire il passaggio a tempo discreto, a seconda di quelle che sono le specifiche temporali di campionamento del controllore.
+
+Nel definire quindi un controllo a tempo discreto è stato necessario anche andare a riportare il posizionamento dei poli in ambito discreto.
 
 \section{OPC - UA}
 Per quanto riguarda la parte di controllo, il sistema presenta un articolato insieme di controllori inter-operanti tra di loro: nello specifico ad ogni singolo controllore sono affidate delle mansioni ben specifiche, tutte ovviamente volte al controllo e alla stabilizzazione del \textit{veicolo auto bilanciato}.
