@@ -17,17 +17,13 @@ Si va ora ad analizzare la risposta del sistema al controllo ottenuto nei punti 
 	\centering   	
 	\includegraphics[width=0.7\textwidth]{Immagini/closed_loop_linear.png}
 	\caption{Risposta del sistema lineare in anello chiuso}
-	\label{fig:closed_loop_non_linear_response}
+	\label{fig:closed_loop_linear_response}
 \end{figure}
 TODO: come spieghiamo la differenza? rifare la simulazione?
 
 
-\subsection{Simulazione del sistema lineare}
 
-\subsection{Simulazione del sistema reale}
-\label{sec:simulazione_reale}
-
-\subsection{Discretizzazione}
+\subsection{Simulazione del sistema non lineare}
 
 Il primo compito che abbiamo risolto è stato quello di implementare le equazioni differenziali ottenute nel capitolo precedente:
 \begin{itemize}
@@ -36,7 +32,7 @@ Il primo compito che abbiamo risolto è stato quello di implementare le equazion
 \end{itemize}
 
 Dove $M_c$ sarebbe la massa del passeggero, $\theta e \dot{\theta}$ lo stato del sistema e $C_m$  la coppia erogata dal motore. Si può notare come entrambe le equazioni differenziali siano indipendenti dalla coordinata libera $\phi$.
- \begin{figure}[H]
+\begin{figure}[H]
 	\centering   	
 	\includegraphics[width=1\textwidth]{Immagini/non_linear_system.png}
 	\caption{Implementazione simulink delle equazioni differenziali}
@@ -52,6 +48,8 @@ Si è dunque proceduto a  simulare il sistema per verificare la bontà di quanto
 	\label{fig:open_loop_response_non_linear}
 \end{figure}
 La simulazione, il cui risultato è riportato in Fig.\ref{fig:open_loop_response_non_linear} è stata svolta per 5 secondi e con un angolo iniziale di 4°; il grafico mostra dunque l'andamento di $\theta$ nel tempo e della posizione che in termini matematici si esprime come $posizione = \phi \cdot{r_{ruota}}$
+\label{sec:simulazione_reale}
+\subsection{Simulazione del sistema lineare}
 Si è inoltre creato un altro modello sfruttando il sistema lineare ottenuto prima  con l'obbiettivo di semplificare il problema e di velocizzare le simulazioni con lo scopo di testare rapidamente nuove tecniche di controllo che se avessero dato esito positivo sul modello lineare sarebbero poi state testate sul simulink che imita il comportamento reale del sistema.
 \begin{figure}[H]
 	\centering   	
@@ -70,9 +68,8 @@ In questo caso, la simulazione in anello aperto mostra che il sistema diverge; q
 
 Come già verificato in precedenza (sezione ~\ref{sec:open_loop_analysis}) ci sono due poli reali, uno negativo e uno positivo; questo dimostra come il sistema sia instabile in anello aperto e necessiti di controllo.
 
-
 \subsection{Motore}
-Il passo successivo è stato quello di andare a modellizzare il motore presente a bordo dello Chassy; questo è necessario in quanto si deve tenere conto, in primo luogo, del ritardo che gli attuatori ( cioè il motore) introducono nel sistema e che per questo potrebbe diventare instabile.
+Il passo successivo è stato quello di andare a modellizzare il motore presente a bordo dello chassis; questo è necessario in quanto si deve tenere conto, in primo luogo, del ritardo che gli attuatori ( cioè il motore) introducono nel sistema e che per questo potrebbe diventare instabile.
 \begin{figure}[H]
 	\centering   	
 	\includegraphics[width=1\textwidth]{Immagini/motor.png}
@@ -109,3 +106,7 @@ Un esempio in cui la coppia richiesta supera i $2N\cdot{m}$ è il seguente:
 	\label{fig:clamp_motore}
 \end{figure}
 In Fig.\ref{fig:clamp_motore} è anche possibile notare come l'assenza del blocchetto denominato \textit{Torque saturation}, presente in Fig.\ref{fig:motor}, satura l'azione integrale dell'attuatore e inserisce un ritardo non secondario nell'azione di controllo.
+\subsection{Discretizzazione}
+
+
+

@@ -15,13 +15,14 @@
 \BOOKMARK [1][-]{section.3.3}{Controllore}{chapter.3}% 15
 \BOOKMARK [2][-]{subsection.3.3.1}{Posizionamento dei poli continui}{section.3.3}% 16
 \BOOKMARK [2][-]{subsection.3.3.2}{Posizionamento dei poli discreti}{section.3.3}% 17
-\BOOKMARK [1][-]{section.3.4}{OPC - UA}{chapter.3}% 18
-\BOOKMARK [2][-]{subsection.3.4.1}{Idea base OPC-UA}{section.3.4}% 19
-\BOOKMARK [1][-]{section.3.5}{OPC-UA e V.A.B.}{chapter.3}% 20
-\BOOKMARK [1][-]{section.3.6}{Rumore}{chapter.3}% 21
-\BOOKMARK [0][-]{chapter.4}{Simulink}{}% 22
-\BOOKMARK [1][-]{section.4.1}{Simulazione}{chapter.4}% 23
-\BOOKMARK [2][-]{subsection.4.1.1}{Simulazione del sistema lineare}{section.4.1}% 24
-\BOOKMARK [2][-]{subsection.4.1.2}{Simulazione del sistema reale}{section.4.1}% 25
-\BOOKMARK [2][-]{subsection.4.1.3}{Discretizzazione}{section.4.1}% 26
-\BOOKMARK [2][-]{subsection.4.1.4}{Motore}{section.4.1}% 27
+\BOOKMARK [2][-]{subsection.3.3.3}{Setpoint di velocit\340}{section.3.3}% 18
+\BOOKMARK [1][-]{section.3.4}{OPC - UA}{chapter.3}% 19
+\BOOKMARK [2][-]{subsection.3.4.1}{Idea base OPC-UA}{section.3.4}% 20
+\BOOKMARK [1][-]{section.3.5}{OPC-UA e V.A.B.}{chapter.3}% 21
+\BOOKMARK [1][-]{section.3.6}{Rumore}{chapter.3}% 22
+\BOOKMARK [0][-]{chapter.4}{Simulink}{}% 23
+\BOOKMARK [1][-]{section.4.1}{Simulazione}{chapter.4}% 24
+\BOOKMARK [2][-]{subsection.4.1.1}{Simulazione del sistema non lineare}{section.4.1}% 25
+\BOOKMARK [2][-]{subsection.4.1.2}{Simulazione del sistema lineare}{section.4.1}% 26
+\BOOKMARK [2][-]{subsection.4.1.3}{Motore}{section.4.1}% 27
+\BOOKMARK [2][-]{subsection.4.1.4}{Discretizzazione}{section.4.1}% 28

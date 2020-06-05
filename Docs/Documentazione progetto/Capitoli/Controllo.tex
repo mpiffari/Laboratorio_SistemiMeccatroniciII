@@ -153,7 +153,25 @@ TODO
 Nello sviluppo del sistema, come presenteremo poi nella sezione di simulazioni (sezione TODO), siamo andati anche ad inserire il passaggio a tempo discreto, a seconda di quelle che sono le specifiche temporali di campionamento del controllore.
 
 Nel definire quindi un controllo a tempo discreto è stato necessario anche andare a riportare il posizionamento dei poli in ambito discreto.
-
+\subsection{Setpoint di velocità}
+Oltre al controllo del moto libero del sistema è stata implementata anche la possibilità di inserire un setpoint sulla velocità a fine transitorio del Segway. In questo modo si apre la possibilità per l'utente finale di impostare la velocità desiderata e di mantenerla nel tempo nonostante i vari disturbi che in un sistema reale influiranno sulla macchina(vento, salita, discesa..) 
+\begin{figure}[H]
+	\centering   	
+	\includegraphics[width=0.75\textwidth]{Immagini/y_setpoint.png}
+	\caption{chiusura dell'anello di controllo di $\dot{\phi}$ con un controllore \textit{PI}}
+	\label{fig:y_setpoint}
+\end{figure}
+In Fig.\ref{fig:y_setpoint} si nota come l'anello di $\dot{\phi}$ sia esterno rispetto all'anello di retroazione dello stato; solitamente si procede dunque nel progettare il controllore avendo cura di lasciare una decade di spazio tra la frequenza del polo dell' integratore e la coppia di poli più lenta del controllore della retroazione dello stato.
+In questo caso, per ragioni puramente pratiche, non è stato possibile : il sistema presenta una risposta particolarmente lenta agli input viste le limitazioni di coppia di cui si approfondirà successivamente; sarebbe quindi stato necessario quindi troppo tempo per raggiungere il setpoint di velocità se si fosse proceduto a lasciare una decade di distanza. Si è invece proceduto a posizionare il polo dell'integratore tramite la funzione di Tuning offerta da Matlab Simulink stesso:
+\begin{figure}[H]
+	\centering   	
+	\includegraphics[width=0.75\textwidth]{Immagini/pid_tuning.png}
+	\caption{Taratura del controllore}
+	\label{fig:pid_tuning}
+\end{figure}
+Il tuning è stato effettuato sul sistema lineare in quanto Matlab richiede un sistema lineare per questo tipo di tecniche. Da notare inoltre, in Fig.\ref{fig:pid_tuning} che la frequenza $f_3 = \dfrac{0.041 \textit{rad/s}}{2\pi} = 0.0065 Hz$ che è circa $\dfrac{1}{3} 	f_{\mathrm{propria\phi}}$.
+Sempre in Fig.\ref{fig:pid_tuning} si osserva come comunque, non avendo rispettato la decade di distanza, il sistema sia comunque molto lento e arrivi a regime in circa 70 \textit{s}.
+TODO: perchè arriva a 0.5? per la retroazione interna?
 \section{OPC - UA}
 Per quanto riguarda la parte di controllo, il sistema presenta un articolato insieme di controllori inter-operanti tra di loro: nello specifico ad ogni singolo controllore sono affidate delle mansioni ben specifiche, tutte ovviamente volte al controllo e alla stabilizzazione del \textit{veicolo auto bilanciato}.
 
