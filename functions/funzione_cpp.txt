@@ -8,11 +8,12 @@
 
 #include <iostream>
 #include <cstdlib>
-#include <stdio.h> 
+#include <stdio.h>
 #include <string.h>
 #include <fstream>
 using namespace std;
-
+double calcola_m_a(double*);
+double calcola_m_a(double*,int);
 const char* tempPassingFilePath = ".\\GainParametersToController.txt";
 const char* definitivePassingFilePath = ".\\GainParametersConfirmed.txt";
 const int windowWidth = 200;
@@ -37,10 +38,10 @@ double desidered_cm = 0;
 double actual_cm = 0;
 
 void read_k(){
-	
+
 	ifstream tempGainFile;
 	ifstream confirmedGainFile;
-	
+
 	// First: try to open temp file (which temporary gains passed from opc ua client)
 	tempGainFile.open(tempPassingFilePath);
 	if(!tempGainFile) {
@@ -61,7 +62,7 @@ void read_k(){
 			    		char* token = strtok(copy, " ");
 						token = strtok(NULL, copy); // Get the second token (the double value)
 						cout << "Gain value read: -> K" << index << " = " << token << endl;
-						free(copy); 
+						free(copy);
 			    		k_simulazione_discreta[index] = atof(token);
 			    		cout << "Gain value parsed -> K" << index << " = " << k_simulazione_discreta[index] << endl;
 					}
@@ -85,7 +86,7 @@ void read_k(){
 		    		char* token = strtok(copy, " ");
 					token = strtok(NULL, copy); // Get the second token (the double value)
 					cout << "Gain value read: -> K" << index << " = " << token << endl;
-					free(copy); 
+					free(copy);
 		    		k_simulazione_discreta[index] = atof(token);
 		    		cout << "Gain value parsed -> K" << index << " = " << k_simulazione_discreta[index] << endl;
 				}
@@ -115,17 +116,13 @@ void controllore_motore(int counter){
 	double Ts = 0.0001;
 	double P = 1;
 	double I = 980;
-	int windowWidth = 10;
 	if(cm_setpoint > 2)
 		cm_setpoint = 2;
 	if(cm_setpoint <-2)
 		cm_setpoint = -2;
 	double corrente_setpoint = cm_setpoint/k_t;
 	m_a_motore[counter] = corrente_attuale_noise;
-	double media_pesata = 0;
-	for(int i = 0; i<windowWidth;i++){
-		media_pesata = media_pesata + 1/windowWidth * m_a_motore[i];
-	}
+	double media_pesata = calcola_m_a(m_a_motore);
 	double corrente_filtrata = media_pesata;
 	double differenza_corrente  = corrente_setpoint - corrente_filtrata;
 	integrator_controller_motor = I*Ts*differenza_corrente + integrator_controller_motor;
@@ -134,42 +131,48 @@ void controllore_motore(int counter){
 
 void read_sensor_phi(int counter){
 	m_a_phi [counter] =  rand();
-	double media_pesata = 0;
-	for(int i = 0; i<windowWidth;i++){
-		media_pesata = media_pesata + 1/windowWidth * m_a_phi[i];
-	}
+	double media_pesata = calcola_m_a(m_a_phi);
 	phi_precedente = phi;
 	phi = media_pesata;
 }
 
 void read_sensor_theta(int counter){
 	m_a_theta [counter] =  rand();
-	double media_pesata = 0;
-	for(int i = 0; i<windowWidth;i++){
-		media_pesata = media_pesata + 1/windowWidth * m_a_theta[i];
-	}
+	double media_pesata = calcola_m_a(m_a_theta);
 	theta_precedente = theta;
 	theta = media_pesata;
 }
 
 void calculate_phi_p(int counter){
 	m_a_phi_p[counter] = (phi-phi_precedente)/Ts;
-	double media_pesata = 0;
-	for(int i = 0; i<windowWidth;i++){
-		media_pesata = media_pesata + 1/windowWidth * m_a_phi_p[i];
-	}
+	double media_pesata = calcola_m_a(m_a_phi_p);
 	phi_p = media_pesata;
 }
 
 void calculate_theta_p(int counter){
 	m_a_theta_p[counter] = (theta-theta_precedente)/Ts;
-	double media_pesata = 0;
-	for(int i = 0; i<windowWidth;i++){
-		media_pesata = media_pesata + 1/windowWidth * m_a_theta_p[i];
-	}
+	double media_pesata = calcola_m_a(m_a_theta_p);
 	theta_p = media_pesata;
 }
 
+double calcola_m_a(double* media_mobile){
+
+	double media_pesata = 0;
+	for(int i = 0; i<windowWidth;i++){
+		media_pesata = media_pesata + 1/windowWidth * media_mobile[i];
+	}
+	return media_pesata;
+
+}
+double calcola_m_a(double* media_mobile,int windowWidth){
+
+	double media_pesata = 0;
+	for(int i = 0; i<windowWidth;i++){
+		media_pesata = media_pesata + 1/windowWidth * media_mobile[i];
+	}
+	return media_pesata;
+
+}
 
 int main() {
 	cout << "!!!Hello World!!!" << endl; // prints !!!Hello World!!!
