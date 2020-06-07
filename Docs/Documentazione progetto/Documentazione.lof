@@ -26,3 +26,5 @@
 \contentsline {figure}{\numberline {4.10}{\ignorespaces Clamp della coppia erogata da parte del motore\relax }}{28}{figure.caption.31}
 \contentsline {figure}{\numberline {4.11}{\ignorespaces Simulink\relax }}{28}{figure.caption.32}
 \contentsline {figure}{\numberline {4.12}{\ignorespaces Modello Simulink del controllore\relax }}{29}{figure.caption.33}
+\contentsline {figure}{\numberline {4.13}{\ignorespaces Modello Simulink dei sensori \textit {encoder} e \textit {I.M.U.}\relax }}{31}{figure.caption.34}
+\contentsline {figure}{\numberline {4.14}{\ignorespaces Modello Simulink discreto del motore\relax }}{32}{figure.caption.35}
