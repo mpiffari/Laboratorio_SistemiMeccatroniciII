@@ -2,11 +2,6 @@
 #include <signal.h>
 #include <unistd.h>
 #include <alchemy/task.h>
-
-RT_TASK hello_task;
-
-// function to be executed by task
-#include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 #include <strings.h>
@@ -14,9 +9,9 @@ RT_TASK hello_task;
 #define MAX_LINE_LENGTH 100
 #define WINDOW_WIDTH 200
 
-#define TEMP_FILE_NAME "C:\\Users\\miche\\OneDrive\\Desktop\\II anno Magistrale\\\Meccatronici II\\Progetto\\functions\\GainParametersToController.txt"
-#define CONFIRMED_FILE_NAME "C:\\Users\\miche\\OneDrive\\Desktop\\I anno Magistrale\\\Meccatronici II\\Progetto\\functions\\GainParametersConfirmed.txt"
-
+#define TEMP_FILE_NAME "/home/Laboratorio_SistemiMeccatroniciII/functions/GainParametersToController.txt"
+#define CONFIRMED_FILE_NAME "/home/Laboratorio_SistemiMeccatroniciII/functions/GainParametersConfirmed.txt"
+RT_TASK hello_task;
 double calcola_m_a(double*);
 
 double k_simulazione_discreta[4];
@@ -160,7 +155,7 @@ double calcola_m_a(double* media_mobile){
 
 }
 
-int wrap() {
+void wrap() {
 	printf("START");
 	int counter = 0;
 	RTIME period  = 1000000000;
@@ -182,21 +177,9 @@ int wrap() {
 		before= now;
 	}
 
-	return 0;
+	return;
 }
 
-void helloWorld(void *arg)
-{
-  	
-  
-  while(1){
-	
-	printf("Hello World che bella giornata!\n");
-	printf("%lld\n-----------------\n",now);
-	rt_task_wait_period(NULL);
-  }
-  return;
-}
 
 int main(int argc, char* argv[])
 {
