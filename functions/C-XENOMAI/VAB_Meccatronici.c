@@ -1,7 +1,7 @@
 /*
  ============================================================================
  Name        : VAB_Meccatronici.c
- Author      : Michele Piffari
+ Author      : Michele Piffari Andrea Calegari
  Version     :
  Copyright   : No copyright
  Description : Hello World in C, Ansi-style
