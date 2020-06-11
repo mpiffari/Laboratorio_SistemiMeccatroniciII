@@ -1,4 +1,4 @@
-\section{Simulazione}
+\section{Introduzione}
 
 TODO: rivdere questa introduzione (io la rivedrei)
 
@@ -23,7 +23,7 @@ TODO: come spieghiamo la differenza? rifare la simulazione?
 
 
 
-\subsection{Simulazione del sistema non lineare}
+\section{Simulazione del sistema non lineare}
 
 Il primo compito che abbiamo risolto è stato quello di implementare le equazioni differenziali ottenute nel capitolo precedente:
 \begin{itemize}
@@ -49,7 +49,7 @@ Si è dunque proceduto a  simulare il sistema per verificare la bontà di quanto
 \end{figure}
 La simulazione, il cui risultato è riportato in Fig.\ref{fig:open_loop_response_non_linear} è stata svolta per 5 secondi e con un angolo iniziale di 4°; il grafico mostra dunque l'andamento di $\theta$ nel tempo e della posizione che in termini matematici si esprime come $posizione = \phi \cdot{r_{ruota}}$
 \label{sec:simulazione_reale}
-\subsection{Simulazione del sistema lineare}
+\section{Simulazione del sistema lineare}
 Si è inoltre creato un altro modello sfruttando il sistema lineare ottenuto prima  con l'obbiettivo di semplificare il problema e di velocizzare le simulazioni con lo scopo di testare rapidamente nuove tecniche di controllo che se avessero dato esito positivo sul modello lineare sarebbero poi state testate sul simulink che imita il comportamento reale del sistema.
 \begin{figure}[H]
 	\centering   	
@@ -68,7 +68,7 @@ In questo caso, la simulazione in anello aperto mostra che il sistema diverge; q
 
 Come già verificato in precedenza (sezione ~\ref{sec:open_loop_analysis}) ci sono due poli reali, uno negativo e uno positivo; questo dimostra come il sistema sia instabile in anello aperto e necessiti di controllo.
 
-\subsection{Motore}
+\section{Motore}
 Il passo successivo è stato quello di andare a modellizzare il motore presente a bordo dello chassis; questo è necessario in quanto si deve tenere conto, in primo luogo, del ritardo che gli attuatori ( cioè il motore) introducono nel sistema e che per questo potrebbe diventare instabile.
 \begin{figure}[H]
 	\centering   	
@@ -106,7 +106,7 @@ Un esempio in cui la coppia richiesta supera i $2N\cdot{m}$ è il seguente:
 	\label{fig:clamp_motore}
 \end{figure}
 In Fig.\ref{fig:clamp_motore} è anche possibile notare come l'assenza del blocchetto denominato \textit{Torque saturation}, presente in Fig.\ref{fig:motor}, satura l'azione integrale dell'attuatore e inserisce un ritardo non secondario nell'azione di controllo.
-\subsection{Modello complessivo (al momento)}
+\section{Modello complessivo (al momento)}
 L'obbiettivo di questo paragrafo è quello di fare il punto della situazione del sistema sviluppato fino a questo punto e di sviluppare alcune considerazioni sul lavoro fatto.
 
 \begin{figure}[H]
@@ -124,7 +124,7 @@ Come si osserva in Fig.\ref{fig:simulink} il sistema al momento comprende tre bl
 Il sistema al momento è, in linea teorica, a tempo continuo. Nella realtà in un computer e in particolar modo su Simulink la possibilità di far operare i blocchi che simulano il sistema reale a tempo continuo è preclusa.
 Si é scelto dunque,per quanto fatto finora, di lasciare scegliere al software di Simulink il passo della simulazione ed in particolar modo utilizzare un passo variabile. Questo permette, nei punti in cui le variazioni sono spiccate(ad esempio quando il sistema si avvia) di utilizzare un passo di simulazione anche dell'ordine dei nanosecondi che approssima quasi perfettamente l'esecuzione a tempo continuo.
 
-\subsection{Discretizzazione}
+\section{Discretizzazione}
 Come già detto sopra, il controllore è necessario che sia implementato su u calcolatore e quindi verrà eseguito a tempo discreto; per tenere conto di questa caratteristica è necessario discretizzare il controllore e acquisire gli input a tempo discreto:
 \begin{itemize}
 	\item all'ingresso del blocco \textit{controller} è stato posto un \textit{Sample \& Holder}; questo blocco si occupa di acquisire ogni tempo di sampling $T_s$ il valore in input e mantenerlo inalterato fino alla lettura successiva
@@ -146,7 +146,7 @@ $$\dfrac{0.001216 s + 0.9965}{0.00122 s}$$
 e applicando il metodo di Tustin da tempo continuo a discreto con un $T_s = 0.001$ si ottinene che:
 $$\dfrac{1.405 z - 0.5881}{z - 1}$$
 
-\subsection{Sesori}
+\section{Sensori}
 Sempre con l'obbiettivo di rendere la simulazione più raffinata e accurata possibile sono stati inseriti all'interno del file simulink anche dei modelli che simulano la presenza dei sensori. Questo è necessario ed importante poiché nella realtà non esiste un modello matematico che genera i dati che poi sono dati in pasto al controllore ma si devono invece usare dei sensori che danno una stima dello stato del sistema. Un sensore presenta due principali caratteristiche: 
 \begin{itemize}
 	\item Rumore: è stato modellizzato come un \textit{Band-Limited
@@ -182,6 +182,33 @@ Si può notare in Fig.\ref{fig:discrete_motor} che il controllore è quello disc
 Da sottolineare che ognuno dei tre blocchi \textit{Quantizer} ha un valore diverso dovuto al fatto che ognuno dei sensori ha sensibilità diverse:
 \begin{itemize}
 	\item Encoder incrementale: presenta una sensibilità di $2^11 bit = 2048 $ diverse combinazioni e letture
-	\item I.M.U. : sensibilità del giroscopio di $131\dfrac{s}{grado}$TODO sistemare grado
+	\item I.M.U. : sensibilità del giroscopio di $131\dfrac{s}{deg}$
 	\item Sensore di corrente: il valore del sensore di corrente è un voltaggio letto da un Arduino Uno con un ADC con sensibilità di 10 bit
+\end{itemize}
+
+\section{RTOS - XENOMAI}
+Riportiamo di seguito una breve descrizione del lavoro portato avanti durante questa settimana per quanto concerne la parte RTOS.
+
+\begin{itemize}
+	\item Come prima cosa siamo andati a rivedere il file \textit{.cpp} che avevamo prodotto nelle settimane scorse. In particolare abbiamo dovuto ritoccare la parte relativa alla lettura dei dati dal file, andando ad utilizzare le API presenti in ambiente c invece di quelle relative a cpp.
+	Abbiamo quindi provato e testato la lettura da file tramite il tool DevC++, facilitando così il testing e il debug;
+	\item Siamo andati ad installare una macchina virtuale con installato a bordo \textbf{debian 9.8.0} e la patch \textbf{Xenomai 3.0.8} (\href{http://www.cs.ru.nl/lab/xenomai/}{link});
+	\item Essendo debian un OS interamente fruibile da linea di comando, siamo andati a prendere confidenza con l'ambiente, andando a capire l'organizzazione e chiamando gli update/upgrade necessari;
+	\item Prima di andare ad importare il file completo (di cui abbiamo parlato al punto iniziale), siamo andati ad eseguire alcuni esempi iniziali (una sorta di HelloWorld):
+	\begin{itemize}
+		\item Abbiamo per primo cosa studiato questo approccio iniziale (\href{http://www.cs.ru.nl/J.Hooman/DES/XenomaiExercises/Exercise-1.html}{link})
+		\item Siamo andati ad impostare il funzionamento di un task (dummy) periodico, come se si trattasse appunto del main loop di Arduino (\href{http://www.cs.ru.nl/lab/xenomai/}{link})
+	\end{itemize}
+	
+	\item Lo step successivo è stato quello di importare il codice scritto e testato in ambiente DevC++ in xenomai, provandolo e introducendo alcuni dettagli aggiuntivi:
+	\begin{itemize}
+		\item Periodo di funzionamento definito tramite questi comandi 
+		\begin{lstlisting}
+			RTIME period  = 1000000000; % Expressed in [ns]
+			rt_task_set_periodic(NULL,TM_NOW,period);
+		\end{lstlisting}
+		\item Salvataggio dei parametri temporali now ad inizio del ciclo e update del parametro before alla fine del ciclo: questo per facilitare, in qualsiasi punto del codice, l'accesso ai parametri temporali per eventuali necessità di calcolo; inoltre abbiamo utilizzato questi parametri per definitire l'intervallo di tempo su cui andare a calcolare la derivata;
+		\item Abbiamo seguito questo approccio nel ciclo principale eseguito a frequenza fissa: lettura file e sensori $\rightarrow$ algoritmo/elaborazione $\rightarrow$ produzione dei risultati di interesse;
+		\item Il thread relativo al server opc - ua non è ancora stato gestito: esso sarà ovviamente lasciato in secondo piano rispetto al thread principale temporaizzato alla frequenza specifica;
+	\end{itemize}
 \end{itemize}

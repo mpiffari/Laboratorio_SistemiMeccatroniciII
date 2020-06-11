@@ -1,30 +1,30 @@
-\select@language {english}
+\babel@toc {english}{}
 \addvspace {10\p@ }
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {2.1}{\ignorespaces Baricentri dei singoli corpi rigidi\relax }}{4}{figure.caption.3}
-\contentsline {figure}{\numberline {2.2}{\ignorespaces Grandezze di supporto\relax }}{5}{figure.caption.4}
-\contentsline {figure}{\numberline {2.3}{\ignorespaces Ragionamento per il calcolo dei contributi dinamici dello chassis\relax }}{9}{figure.caption.11}
+\contentsline {figure}{\numberline {2.1}{\ignorespaces Baricentri dei singoli corpi rigidi\relax }}{4}{figure.caption.3}%
+\contentsline {figure}{\numberline {2.2}{\ignorespaces Grandezze di supporto\relax }}{5}{figure.caption.4}%
+\contentsline {figure}{\numberline {2.3}{\ignorespaces Ragionamento per il calcolo dei contributi dinamici dello chassis\relax }}{9}{figure.caption.11}%
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {3.1}{\ignorespaces Luogo delle radici del V.A.B. modellizzato in anello aperto\relax }}{16}{figure.caption.14}
-\contentsline {figure}{\numberline {3.2}{\ignorespaces Schema concettuale del controllo (\cite {feedback_state})\relax }}{16}{figure.caption.15}
-\contentsline {figure}{\numberline {3.3}{\ignorespaces Root locus del sistema in anello chiuso\relax }}{18}{figure.caption.16}
-\contentsline {figure}{\numberline {3.4}{\ignorespaces chiusura dell'anello di controllo di $\mathaccentV {dot}05F{\phi }$ con un controllore \textit {I} \cite {feedback_state}\relax }}{19}{figure.caption.17}
-\contentsline {figure}{\numberline {3.5}{\ignorespaces Taratura del controllore\relax }}{19}{figure.caption.18}
-\contentsline {figure}{\numberline {3.6}{\ignorespaces Schema di massima dell'utilizzo di Raspberry Pi 3\relax }}{20}{figure.caption.19}
-\contentsline {figure}{\numberline {3.7}{\ignorespaces Parametri impostabili lato client\relax }}{21}{figure.caption.20}
-\contentsline {figure}{\numberline {3.8}{\ignorespaces Diagramma rappresentante le funzionalit\IeC {\`a} del server\relax }}{22}{figure.caption.21}
+\contentsline {figure}{\numberline {3.1}{\ignorespaces Luogo delle radici del V.A.B. modellizzato in anello aperto\relax }}{16}{figure.caption.14}%
+\contentsline {figure}{\numberline {3.2}{\ignorespaces Schema concettuale del controllo (\cite {feedback_state})\relax }}{16}{figure.caption.15}%
+\contentsline {figure}{\numberline {3.3}{\ignorespaces Root locus del sistema in anello chiuso\relax }}{18}{figure.caption.16}%
+\contentsline {figure}{\numberline {3.4}{\ignorespaces chiusura dell'anello di controllo di $\dot {\phi }$ con un controllore \textit {I} \cite {feedback_state}\relax }}{19}{figure.caption.17}%
+\contentsline {figure}{\numberline {3.5}{\ignorespaces Taratura del controllore\relax }}{19}{figure.caption.18}%
+\contentsline {figure}{\numberline {3.6}{\ignorespaces Schema di massima dell'utilizzo di Raspberry Pi 3\relax }}{20}{figure.caption.19}%
+\contentsline {figure}{\numberline {3.7}{\ignorespaces Parametri impostabili lato client\relax }}{21}{figure.caption.20}%
+\contentsline {figure}{\numberline {3.8}{\ignorespaces Diagramma rappresentante le funzionalità del server\relax }}{22}{figure.caption.21}%
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {4.1}{\ignorespaces Risposta del sistema non lineare in anello chiuso\relax }}{23}{figure.caption.22}
-\contentsline {figure}{\numberline {4.2}{\ignorespaces Risposta del sistema lineare in anello chiuso\relax }}{24}{figure.caption.23}
-\contentsline {figure}{\numberline {4.3}{\ignorespaces Implementazione simulink delle equazioni differenziali\relax }}{24}{figure.caption.24}
-\contentsline {figure}{\numberline {4.4}{\ignorespaces Risposta in anello aperto del sistema reale\relax }}{25}{figure.caption.25}
-\contentsline {figure}{\numberline {4.5}{\ignorespaces Implementazione simulink del sistema linearizzato\relax }}{25}{figure.caption.26}
-\contentsline {figure}{\numberline {4.6}{\ignorespaces Risposta in anello aperto del sistema lineare\relax }}{26}{figure.caption.27}
-\contentsline {figure}{\numberline {4.7}{\ignorespaces Schema a blocchi del motore\relax }}{26}{figure.caption.28}
-\contentsline {figure}{\numberline {4.8}{\ignorespaces Transitorio del motore\relax }}{27}{figure.caption.29}
-\contentsline {figure}{\numberline {4.9}{\ignorespaces Zoom del grafico in figura Fig.\ref {fig:motore}\relax }}{27}{figure.caption.30}
-\contentsline {figure}{\numberline {4.10}{\ignorespaces Clamp della coppia erogata da parte del motore\relax }}{28}{figure.caption.31}
-\contentsline {figure}{\numberline {4.11}{\ignorespaces Simulink\relax }}{28}{figure.caption.32}
-\contentsline {figure}{\numberline {4.12}{\ignorespaces Modello Simulink del controllore\relax }}{29}{figure.caption.33}
-\contentsline {figure}{\numberline {4.13}{\ignorespaces Modello Simulink dei sensori \textit {encoder} e \textit {I.M.U.}\relax }}{31}{figure.caption.34}
-\contentsline {figure}{\numberline {4.14}{\ignorespaces Modello Simulink discreto del motore\relax }}{32}{figure.caption.35}
+\contentsline {figure}{\numberline {4.1}{\ignorespaces Risposta del sistema non lineare in anello chiuso\relax }}{23}{figure.caption.22}%
+\contentsline {figure}{\numberline {4.2}{\ignorespaces Risposta del sistema lineare in anello chiuso\relax }}{24}{figure.caption.23}%
+\contentsline {figure}{\numberline {4.3}{\ignorespaces Implementazione simulink delle equazioni differenziali\relax }}{24}{figure.caption.24}%
+\contentsline {figure}{\numberline {4.4}{\ignorespaces Risposta in anello aperto del sistema reale\relax }}{25}{figure.caption.25}%
+\contentsline {figure}{\numberline {4.5}{\ignorespaces Implementazione simulink del sistema linearizzato\relax }}{25}{figure.caption.26}%
+\contentsline {figure}{\numberline {4.6}{\ignorespaces Risposta in anello aperto del sistema lineare\relax }}{26}{figure.caption.27}%
+\contentsline {figure}{\numberline {4.7}{\ignorespaces Schema a blocchi del motore\relax }}{26}{figure.caption.28}%
+\contentsline {figure}{\numberline {4.8}{\ignorespaces Transitorio del motore\relax }}{27}{figure.caption.29}%
+\contentsline {figure}{\numberline {4.9}{\ignorespaces Zoom del grafico in figura Fig.\ref {fig:motore}\relax }}{27}{figure.caption.30}%
+\contentsline {figure}{\numberline {4.10}{\ignorespaces Clamp della coppia erogata da parte del motore\relax }}{28}{figure.caption.31}%
+\contentsline {figure}{\numberline {4.11}{\ignorespaces Simulink\relax }}{29}{figure.caption.32}%
+\contentsline {figure}{\numberline {4.12}{\ignorespaces Modello Simulink del controllore\relax }}{30}{figure.caption.33}%
+\contentsline {figure}{\numberline {4.13}{\ignorespaces Modello Simulink dei sensori \textit {encoder} e \textit {I.M.U.}\relax }}{31}{figure.caption.34}%
+\contentsline {figure}{\numberline {4.14}{\ignorespaces Modello Simulink discreto del motore\relax }}{32}{figure.caption.35}%
