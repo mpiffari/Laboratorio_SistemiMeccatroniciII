@@ -164,7 +164,7 @@ void wrap() {
 	RTIME before= now-period;
 	while(1){
 		now = rt_timer_read();
-		Ts = now - before;
+		Ts = (now - before)/1000000000;
 		read_sensor_phi(counter);
 		read_sensor_theta(counter);
 		calculate_phi_p(counter);
@@ -174,6 +174,7 @@ void wrap() {
 		controllore_motore(counter);
 		counter = (counter+1)%WINDOW_WIDTH;
 		printf("Actual motor torque: %f\n", actual_cm);
+		printf("Elapsed time: %llu\n",Ts);
 		before= now;
 	}
 
