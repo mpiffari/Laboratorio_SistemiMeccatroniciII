@@ -201,14 +201,32 @@ Riportiamo di seguito una breve descrizione del lavoro portato avanti durante qu
 	\end{itemize}
 	
 	\item Lo step successivo è stato quello di importare il codice scritto e testato in ambiente DevC++ in xenomai, provandolo e introducendo alcuni dettagli aggiuntivi:
+	\begin{figure}[H]
+		\centering   	
+		\includegraphics[width=0.8\textwidth]{Immagini/xenomai_nano_make.png}
+		\caption{Per specificare quale file \textit{.c} compilare}
+		\label{fig:xenomai_nano_make}
+	\end{figure}
 	\begin{itemize}
 		\item Periodo di funzionamento definito tramite questi comandi 
 		\begin{lstlisting}
 			RTIME period  = 1000000000; % Expressed in [ns]
 			rt_task_set_periodic(NULL,TM_NOW,period);
 		\end{lstlisting}
+		\begin{figure}[H]
+			\centering   	
+			\includegraphics[width=0.8\textwidth]{Immagini/xenomai_nano.png}
+			\caption{Definizione e temporizzazione del \textit{WHILE}}
+			\label{fig:xenomai_nano}
+		\end{figure}
 		\item Salvataggio dei parametri temporali now ad inizio del ciclo e update del parametro before alla fine del ciclo: questo per facilitare, in qualsiasi punto del codice, l'accesso ai parametri temporali per eventuali necessità di calcolo; inoltre abbiamo utilizzato questi parametri per definitire l'intervallo di tempo su cui andare a calcolare la derivata;
 		\item Abbiamo seguito questo approccio nel ciclo principale eseguito a frequenza fissa: lettura file e sensori $\rightarrow$ algoritmo/elaborazione $\rightarrow$ produzione dei risultati di interesse;
+		\begin{figure}[H]
+			\centering   	
+			\includegraphics[width=0.8\textwidth]{Immagini/xenomai_execution.png}
+			\caption{Esecuzione a tempo fissato delle funzioni di lettura e calcolo}
+			\label{fig:xenomai_execution}
+		\end{figure}
 		\item Il thread relativo al server opc - ua non è ancora stato gestito: esso sarà ovviamente lasciato in secondo piano rispetto al thread principale temporaizzato alla frequenza specifica;
 	\end{itemize}
 \end{itemize}
