@@ -236,6 +236,7 @@ Quello che ne deriva è quindi la seguente equazione Lagrangiana, in grado di de
  	
 \end{itemize}
 
+\newpage
 \section{Equazioni del moto}
 \subsection{Lagrangiana}
 Una volta definita la dinamica del sistema ed ottenuta quindi l'equazione di Lagrange che ne caratterizza il comportamento, andiamo a ricavare le equazioni del moto, le quali consentono di definire l'andamento delle \textit{coordinate libere} (scelte in fase inziale di progetto) che sappiamo essere
@@ -247,14 +248,14 @@ Una volta definita la dinamica del sistema ed ottenuta quindi l'equazione di Lag
 In particolare possiamo definire le cosidette \textit{equazioni di Eulero-Lagrange}, ovvero un insieme di n equazioni differenziali (con n pari al numero di coordinate libere del sistema), la cui risoluzione fornisce le equazioni del moto del sistema.
 \begin{center}
 	\label{eq:lagrangiana}
-	$\frac{d}{\mathrm{dt}}\left(\frac{\partial }{\partial \dot{q_i} }L\right)-\frac{\partial }{\partial q_i}L=\mathrm{Q_i}\ \rightarrow i = 1,...,n$
+	{\large $\frac{d}{\mathrm{dt}}\left(\frac{\partial }{\partial \dot{q_i} }L\right)-\frac{\partial }{\partial q_i}L=\mathrm{Q_i}\ \rightarrow i = 1,...,n$}
 \end{center}
 
 Sono da effettuare alcune annotazioni sugli addenti presenti nell'equazione precedente  (eq~\ref{eq:lagrangiana}):
 \begin{itemize}
 	\item \textit{q} rappresenta la coordinata libera (nel nostro caso saranno $\theta$ e $\phi$);
 	\item al secondo membro della lagrangiana troviamo le componenti generalizzate, relative alle forze attive esterne. Nel nostro sistema andiamo a modellizzare, come forze attive, quelle che sono le forze motrici immesse dai motori che gestiscono il movimento del V.A.B.: in particolare, nel nostro caso, per il legame matematico tra le componenti generalizzate e il concetto di lavoro virtuale, avremo che l'equazione lagrangiana sarà equiparata al valore di torque immessa dal motore nel sistema;
-	\item molto importante, ai fini della correttezza delle equazioni del moto, è il valore da assegnare al secondo membro \textit{torque}; infatti esso varia a seconda che il sistema agisca sulla coordinata libera \textit{q} a valle o a monte della trasmissione.
+	\item molto importante, ai fini della correttezza delle equazioni del moto, è il valore da assegnare al secondo membro dell'equazione (altro non è che la componente di \textit{torque}, ovvero la forza esterna che agisce); infatti esso varia a seconda che il sistema agisca sulla coordinata libera \textit{q} a valle o a monte della trasmissione.
 	
 	Nello specifico, si osserva che il motore è composto da due parti: lo statore e il rotore. Esse trasmettono una coppia uguale e inversa ai corpi a cui sono solidalmente collegati: lo statore, posizionato nella base del Segway, influenza la coordinata libera $\theta$ ed esercita una coppia sullo chassis pari ad una generica coppia \textit{$-2 C_m$}.
 	Il fattore moltiplicativo 2 è dovuto al fatto che nella base sono presenti due motori.
@@ -277,14 +278,14 @@ Si ottiene dunque il seguente sistema di equazioni, la cui risoluzione permette 
 	$
 \end{center}
 dove $\tau$ è il rapporto di trasmissione il cui calcolo è riportato nella sezione ~\ref{sec:rapp_di_trasmissione}.
-La soluzione di questo sistema di equazioni verrà ad essere utilizzata per rappresentare il comportamento del sistema reale, basandosi su una coppia di equazioni non lineare: questa tematica verrà poi approfondita direttamente nella sezione ~\ref{sec:simulazione_reale}.
+La soluzione di questo sistema di equazioni verrà ad essere utilizzata per rappresentare il comportamento del sistema reale, basandosi su una coppia di equazioni non lineari: questa tematica verrà poi approfondita nella sezione ~\ref{sec:simulazione_reale}.
 
 \subsection{Rapporto di trasmissione}
 \label{sec:rapp_di_trasmissione}
 Come da specifiche del progetto, ognuno dei due motori è collegato alle ruote mediante una doppia sequenza di riduttori:
 \begin{itemize}
 	\item Un primo riduttore epicicloidale con rapporto di trasmissione $\tau_1 = 0.1$;
-	\item Un secondo riduttore, una cinghia dentata che presenta un rapporto di trasmissione facilmente calcolabile come rapporto tra il numero dei denti dei due alberi, essendo il passo uguale in entrambi gli alberi.
+	\item Un secondo riduttore, rappresentato da una cinghia dentata, con un rapporto di trasmissione facilmente calcolabile come rapporto tra il numero dei denti dei due alberi, essendo il passo uguale in entrambi gli alberi.
 	\begin{center}
 		$\tau_2 = \frac{Numero\_denti\_puleggia\_ingresso}{Numero\_denti\_puleggia\_uscita} = \frac{Z_{in}}{Z_{out}} = \frac{22}{26}$
 	\end{center}
@@ -312,10 +313,34 @@ matlabFunction(theta2_diff,'File','theta_secondo');
 matlabFunction(phi2_diff,'File','phi_secondo');
 \end{lstlisting}
 
+{\left[
+	\begin{array}{cc}
+		$l_a m_a rcos{\left(\beta +\theta {\left(t\right)}\right)}-l_b m_b rcos{\left(\theta {\left(t\right)}\right)}+l_c m_c rcos{\left(\alpha +\theta {\left(t\right)}\right)} & 2m_r r^2 +2J_r +m_a r^2 +m_b r^2 +m_c r^2 \\
+		J_a +J_b +J_c +2l_a^2 m_a +2l_b^2 m_b +2l_c^2 m_b  & l_a m_a rcos{\left(\beta +\theta {\left(t\right)}\right)}-l_b m_b rcos{\left(\theta {\left(t\right)}\right)}+l_c m_c rcos\left(\alpha +\theta \left(t\right)\right.$
+	\end{array}
+\right]}{
+\left[
+	\begin{array}{c}
+		$\theta^¨ \\
+		\phi^¨ $
+	\end{array}
+\right]}=-
+{\left[
+	\begin{array}{c}
+		$-l_a m_a rsin{\left(\beta +\theta {\left(t\right)}\right)}{\theta^˙ }^2 +l_b m_b rsin{\left(\theta {\left(t\right)}\right)}{\theta^˙ }^2 -l_c m_c rsin{\left(\alpha +\theta {\left(t\right)}\right)}{\theta^˙ }^2 \\
+		-g{\left(l_c m_c \mathrm{cos}{\left(\alpha +\theta {\left(t\right)}\right)}+l_a m_a \mathrm{sin}{\left(\beta +\theta {\left(t\right)}\right)}-l_b m_b \mathrm{sin}{\left(\theta {\left(t\right)}\right)}\ \right)}\theta^˙ -l_a m_a rsin{\left(\beta +\theta {\left(t\right)}\right)}\theta^˙ \phi^˙ +l_b m_b rsin{\left(\theta {\left(t\right)}\right)}\theta^˙ \phi^˙ -l_c m_c rsin{\left(\alpha +\theta {\left(t\right)}\right)}\theta^˙ \phi^˙ $
+	\end{array}
+\right]}+
+{\left[
+	\begin{array}{c}
+	$C_m \\
+	-C_m$ 
+	\end{array}
+\right]}
+
 Nello specifico queste funzioni avranno come input i valori da cui dipendono le equazioni differenziali e, componendoli algebricamente tra di loro, fornirà come output i valori di $\ddot{\theta}$ e $\ddot{\phi}$.
 
 TODO (mettere le dipendende di theta pp e phi pp)
-
 \subsection{Linearizzazione}
 TODO linearizzazione attorno alla massa 70 kg e rileggere paragrafo
 
