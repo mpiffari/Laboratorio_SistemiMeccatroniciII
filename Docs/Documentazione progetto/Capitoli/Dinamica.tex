@@ -9,7 +9,7 @@ Nello specifico abbiamo considerato il sistema composto da:
 	\item Ruota (che poi sarà considerata con un contributo doppio, essendo il VAB composto da due ruote)
 \end{itemize}
 
-Ognuno di questi corpi rigidi separati è individuato da un punto, che ne rappresenta il centro di massa (o baricentro del corpo stesso): avremo quindi questo insieme di punti caratterizzanti il sistema (figura ~\ref{fig:VAB_baricentri})
+Ognuno di questi corpi rigidi separati è individuato da un punto, che ne rappresenta il centro di massa (o baricentro del corpo stesso): avremo quindi il seguente insieme di punti caratterizzanti il sistema (figura ~\ref{fig:VAB_baricentri})
 
 \begin{itemize}
 	\item \textbf{$P_a$}
@@ -30,12 +30,12 @@ Prima di andare a definire le componenti di energia potenziale e cinetica di ogn
 
 Nello specifico abbiamo introdotto i seguenti parametri, specificati anche in figura ~\ref{fig:VAB_lunghezze}:
 \begin{itemize}
-	\item $\mathbf{l_a}$: rappresenta la congiungente tra il centro del sistema di riferimento \textit{XZ} e il centro dell'asta, utilizzata appunto come manubrio, che abbiamo individuato come
+	\item $\mathbf{l_a}$: rappresenta la congiungente tra il centro del sistema di riferimento \textit{XZ} e il centro dell'asta, utilizzata appunto come manubrio, individuato come
 	\begin{center}
-		{\Large $\sqrt{(\frac{h_a}{2} + \frac{h_b}{2})^2 + (\frac{w_b}{2})^2}$}
+		{$l_a = \sqrt{(\frac{h_a}{2} + \frac{h_b}{2})^2 + (\frac{w_b}{2})^2}$}
 	\end{center}
-	\item $\mathbf{l_c}$: (TODO: check) questa grandezza invece rappresenta per noi l'altezza del baricentro del corpo dell'utente, la quale ovviamente andrà a dipendere dal valore di inclinazione del corpo stesso.
-	Considerando il corpo inzialmente in posizione verticale, avremo che questa grandezza corrisponde alla congiungente dal centro del sistema di riferimento al punto $P_c$, che equivale a dire che
+	\item $\mathbf{l_c}$: questa grandezza rappresenta per noi l'altezza del baricentro del corpo dell'utente, la quale ovviamente andrà a dipendere dal valore di inclinazione del corpo stesso.
+	Considerando il corpo inzialmente in posizione verticale, avremo che questa lunghezza corrisponde alla congiungente dal centro del sistema di riferimento al punto $P_c$, che equivale a dire:
 	\begin{center}
 		$l_c = 0.55 h_c + \frac{h_b}{2}$
 	\end{center}
@@ -95,7 +95,6 @@ Per ognuno dei corpi rigidi definiti in precedenza siamo andati appunto a calcol
 	\\
 	\item \textbf{$L_a = m_a \,{l_a }^2 \,{{\left(\dot{\theta \left(t\right)}\right)}}^2 +\frac{m_a \,r^2 \,{{\left(\dot{\phi \left(t\right)}\right)}}^2 }{2}+\frac{J_a \,{{\left(\dot{\theta \left(t\right)}\right)}}^2 }{2}+m_a \,\mathrm{cos}\left(\beta +\theta \left(t\right)\right)\,l_a \,r\,\dot{\theta \left(t\right)}\,\dot{\phi \left(t\right)}-g\,m_a \,\mathrm{cos}\left(\beta +\theta \left(t\right)\right)\,l_a$}
 \end{itemize}
-\newpage
 \subsubsection{Chassis (base)}
 \begin{itemize}
 	
@@ -179,10 +178,23 @@ Per ognuno dei corpi rigidi definiti in precedenza siamo andati appunto a calcol
 \end{itemize}
 
 \subsubsection{Veicolo completo}
-Una volta trovati le componenti dinamiche dei singoli corpi rigidi, possiamo andare a definire l'energia cinetica e potenziale totale del sistema, per poter poi andare a calcolare l'equazione di Lagrange per l'intero sistema.
+Una volta trovati le componenti dinamiche dei singoli corpi rigidi, possiamo andare a definire l'energia cinetica e potenziale totale del sistema, per poter poi calcolare l'equazione di Lagrange per l'intero sistema.
 In sostanza quindi avremo:
 \begin{center}
 	$L = L_a + L_b + L_c + 2 L_r$
+\end{center}
+Quello che ne deriva è quindi la seguente equazione Lagrangiana, in grado di descrivere la dinamica dell'intero sistema (riportiamo il risultato letterale, ovvero non legato alla sostituzione di alcun valore numerico che descrive il sistema):
+
+
+
+\begin{center}
+	$L = {\left(m_a \,l_a^2 +m_b \,l_b^2 +m_c \,l_c^2 \, +\frac{J_a}{2}+\frac{J_b}{2}+\frac{J_c}{2}\right)}\,({\dot{\theta \left(t\right)}})^2 +
+	{\left(m_r \,r^2 +J_r +\frac{m_a \,r^2}{2}+\frac{m_b \,r^2}{2}+\frac{m_c \,r^2}{2}\right)}\,({\dot{\phi \left(t\right)}})^2 +
+	{\left(m_c \,\sigma_4 \,l_c \,r +m_a \,\sigma_3 \,l_a \,r -m_b \, cos\left(\theta \left(t\right)\right)\,l_b \,r\right)}\dot{\theta \left(t\right)}\,\dot{\phi \left(t\right)}+
+	g\,m_b \,\mathrm{cos}\left(\theta \left(t\right)\right)\,l_b -g\,m_c \,\sigma_4 \,l_c -g\,m_a \,\sigma_3 \,l_a$
+	
+	$\sigma_3 =\mathrm{cos}\left(\beta +\theta \left(t\right)\right)
+	\sigma_4 =\mathrm{cos}\left(\alpha +\theta \left(t\right)\right)$
 \end{center}
 
 \subsubsection{Note sul calcolo delle componenti dinamiche}
@@ -193,22 +205,26 @@ In sostanza quindi avremo:
 		\item Componente di massa lungo z;
 		\item Componente di massa rotazionale: dalla meccanica è noto che un corpo, con una certa massa che si trova in uno stato di rotazione, avrà un contirbuto inerziale che dipende dal braccio rispetto all'asse intorno al quale avviene la rotazione.
 		
-		Nello specifico abbiamo considerato il teorema di \textit{Huygens-Steiner} , per ogni singolo corpo rigido che è stato preso in esame.
+		Nello specifico abbiamo considerato il teorema di \textit{Huygens-Steiner} per ogni singolo corpo rigido che è stato preso in esame.
+		
+		\begin{center}
+			$ I_a = I_{cm} + md^2 $	
+		\end{center}
 		
 		Esso permette di definire l'inerzia di un corpo come la somma di due diverse componenti:
 		\begin{itemize}
-			\item Momento d'inerzia definito rispetto all'asse passante per il centro di massa: questo parametro rappresenta il valore che è fornito dalle specifiche del progetto per gli specific corpi;
+			\item Momento d'inerzia definito rispetto all'asse passante per il centro di massa: questo parametro rappresenta il valore che è fornito dalle specifiche del progetto per gli specifici corpi;
 			\item Prodotto tra la massa \textit{m} del corpo preso in considerazione e la distanza tra l'asse rispetto a cui si riferisce la rotazione e quello passante per il centro di massa;
 		\end{itemize}
 	
-		Questa componente inerziale è visibile nelle matrici di massa in posizione $(3, 1)$: si sottolinea come invece, per la matrice di massa relativa alle ruote (matrice ~\ref{matrix:mr}), non sia presente la componente esplicitata dal teorema di \textit{Huygens-Steiner} per il fatto che il centro di massa della ruota coincide con quello del sistema di riferimento XZ, e quindi di conseguenza non è necessaria alcuna traslazione di asse;
+		Questa componente inerziale è visibile nelle matrici di massa in posizione $(3, 1)$: si sottolinea come invece, per la matrice di massa relativa alle ruote (matrice $M_r$ ~\ref{matrix:mr}), non sia presente la componente esplicitata dal teorema di \textit{Huygens-Steiner} per il fatto che il centro di massa della ruota coincide con quello del sistema di riferimento XZ e quindi di conseguenza non è necessaria alcuna traslazione di asse;
  	\end{itemize}
- 	\item Nel calcolo simbolico in ambiente \textit{Matlab} siamo andati ad utilizzare le funzionalità di \textit{collect} e \textit{simplify}, per permettere di ridurre e semplificare le equazioni. Nello specifico, con il comando simplify, tramite l'opzione \textit{Steps}, siamo andati a settare il numero di step che l'algoritmo di calcolo simbolico andrà ad eseguire per poter ridurre e semplificare il maggior numero di termini ($\uparrow Steps, \uparrow $\textit{Compattezza eq symb});
+ 	\item Nel calcolo simbolico in ambiente \textit{Matlab} siamo andati ad utilizzare le funzionalità di \textit{collect} e \textit{simplify}, per permettere di ridurre e semplificare le equazioni. Nello specifico, con il comando simplify, tramite l'opzione \textit{Steps}, siamo andati a settare il numero di step che l'algoritmo di calcolo simbolico andrà ad eseguire per poter ridurre e semplificare il maggior numero di termini possibili ($\uparrow Steps, \uparrow $\textit{Compattezza eq symb});
  	
  	\item Le ruote, nel calcolo della dinamica completa del VAB, sono state considerate con un contirbuto doppio;
  	
  	\item Nello studio dello chassis (base), abbiamo seguito questo approccio: il baricentro della base stessa sappiamo essere posizionato ad una quota differente rispetto al centro del sistem di coordinate XZ preso come riferimento.
- 	Per questo motivo il suo contributo in termini cinetici e potenziali dipende dal valore dell'inclinazione dello chassis stesso, ovvero dal valore dell'angolo \textit{caratterizzante} il sistema $\theta$: questo concetto è evidenziato in figura ~\ref{fig:chassis}.
+ 	Per questo motivo il suo contributo in termini cinetici e potenziali dipende dal valore dell'inclinazione dello chassis, ovvero dal valore dell'angolo \textit{caratterizzante} il sistema $\theta$: questo concetto è evidenziato in figura ~\ref{fig:chassis}.
  	L'aggiunta di \textit{$\pi$} al valore di $\theta$ è necessaria per poter rendere sensibile i valori di energia cinetica e potenziale al \textit{quadrante} in cui si trova ad essere posizionato il centro di massa della base stessa ($P_b$).
  	
  	\begin{figure}[h]
