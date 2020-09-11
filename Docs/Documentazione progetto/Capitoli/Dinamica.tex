@@ -397,12 +397,14 @@ Per individuare il risultato finale della linearizzazione, abbiamo seguito un ap
 	$
 	\begin{cases}
 		\begin{array}{c}
-			\mathbf{f_1} \to {\dot{x_1} \left(t\right)} =\dot{\phi}= {x_3 \left(t\right)} =0\text{ (poichè all'equilibrio)}\\
-			\mathbf{f_2} \to {\dot{x_3} \left(t\right)} = {\ddot{\phi} \;}\\
-			\mathbf{f_3} \to {\dot{x_2} \left(t\right)} =\dot{\theta} = {x_4 \left(t\right)} =0\text{ (poichè all'equilibrio)}\\
+			\mathbf{f_1} \to {\dot{x_1} \left(t\right)} =\dot{\phi}= {x_2 \left(t\right)} =0\text{ (poichè all'equilibrio)}\\
+			\mathbf{f_2} \to {\dot{x_2} \left(t\right)} = {\ddot{\phi} \;}\\
+			\mathbf{f_3} \to {\dot{x_3} \left(t\right)} =\dot{\theta} = {x_4 \left(t\right)} =0\text{ (poichè all'equilibrio)}\\
 			\mathbf{f_4} \to {\dot{x_4} \left(t\right)=} {\ddot{\theta} \;}\\
 			\mathbf{g_1} \to y_{1\;} \left(t\right)=\phi = x_{1\;}\\
-			\mathbf{g_2} \to y_{2\;} \left(t\right)=\theta =x_{2\;}\\
+			\mathbf{g_2} \to y_{2\;} \left(t\right)=\dot{\phi} =x_{2\;}\\
+			\mathbf{g_3} \to y_{3\;} \left(t\right)=\theta =x_{3\;}\\
+			\mathbf{g_4} \to y_{4\;} \left(t\right)=\dot{\theta} =x_{4\;}\\
 		\end{array}
 	\end{cases}
 	$
@@ -441,12 +443,17 @@ Sfruttando le caratteristiche \textit{matematiche} del sistema non lineare, otte
 	C=\left\lbrack 
 	\begin{array}{cccc}
 		\frac{\partial }{\partial x_1 }g_{1\;}  & \frac{\partial }{\partial x_2 }g_{1\;}  & \frac{\partial }{\partial x_3 }g_{1\;}  & \frac{\partial }{\partial x_4 }g_{1\;} \\\\
-		\frac{\partial }{\partial x_1 }g_{1\;}  & \frac{\partial }{\partial x_2 }g_{1\;}  & \frac{\partial }{\partial x_3 }g_{1\;}  & \frac{\partial }{\partial x_4 }g_2 
+		\frac{\partial }{\partial x_1 }g_{2\;}  & \frac{\partial }{\partial x_2 }g_{2\;}  & \frac{\partial }{\partial x_3 }g_{2\;}  & \frac{\partial }{\partial x_4 }g_{2\;} \\\\
+		\frac{\partial }{\partial x_1 }g_{3\;}  & \frac{\partial }{\partial x_2 }g_{3\;}  & \frac{\partial }{\partial x_3 }g_{3\;}  & \frac{\partial }{\partial x_4 }g_{3\;} \\\\
+		\frac{\partial }{\partial x_1 }g_{4\;}  & \frac{\partial }{\partial x_2 }g_{4\;}  & \frac{\partial }{\partial x_3 }g_{4\;}  & \frac{\partial }{\partial x_4 }g_{4\;} \\\\
 	\end{array}\right\rbrack
 	$
 	$$
-	\;D=\left\lbrack \begin{array}{cc}
-		\frac{\partial }{\partial u}g_{1\;}  & \frac{\partial }{\partial u}g_2 
+	\;D=\left\lbrack \begin{array}{cccc}
+		\frac{\partial }{\partial u}g_1 &
+		\frac{\partial }{\partial u}g_2 &
+		\frac{\partial }{\partial u}g_3 &
+		\frac{\partial }{\partial u}g_4 
 	\end{array}\right\rbrack
 	$$
 \end{center}
@@ -475,13 +482,15 @@ Nel specifico del veicolo autobilanciato, nel caso con utente con peso di \texti
 	C=\left\lbrack 
 	\begin{array}{cccc}
 		1  & 0 & 0 & 0 \\\\
-		0  & 1 & 0  & 0
+		0  & 1 & 0  & 0 \\\\
+		0  & 0 & 1 & 0 \\\\
+		0  & 0 & 0  & 1
 	\end{array}\right\rbrack
 	$
 	$$
 	\;D=\left\lbrack 
-	\begin{array}{cc}
-		0 & 0
+	\begin{array}{cccc}
+		0 & 0 & 0 & 0
 	\end{array}\right\rbrack
 	$$
 \end{center}
@@ -491,7 +500,7 @@ Si nota come, anche dimensionalmente parlando, le matrici siano corrette con qua
 	\item A $\rightarrow$ $[2n \times 2n]$
 	\item B $\rightarrow$ $[2n \times 1]$
 	\item C $\rightarrow$ $[2n \times 2n]$: la dimensione in questo caso può essere variabile, a seconda dei parametri che intendiamo riportare verso l'esterno;
-	\item D $\rightarrow$ $[2n \times 1]$: anche in questo caso la dimensione è collegata alla scelta fatta per la matrice C;
+	\item D $\rightarrow$ $[1 \times 2n]$: anche in questo caso la dimensione è collegata alla scelta fatta per la matrice C;
 \end{itemize}
 
 Ricordando infine che un generico sistema dinamico può essere scritto come
