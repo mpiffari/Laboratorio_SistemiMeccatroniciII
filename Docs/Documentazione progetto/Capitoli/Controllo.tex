@@ -1,5 +1,5 @@
 \section{Introduzione}
-Per rendere maggiormente leggibile il codice Matlab e, allo stesso tempo, ridurre i tempi necessari per l'esecuzione, abbiamo deciso di dividere le varie funzionalità in diversi \textit{livescript}: in particolar modo la parte relativa allo studio ed alla definizione del controllore, siamo andati ad inserirla all'interno del file \textit{GainCalculator.mlx} dove si può vedere che. come prima istruzione, si va a caricare dal workspace, risultante dalla linearizzazione, le matrici A-B-C-D che definiscono il sistema lineare modellizzato.
+Per rendere maggiormente leggibile il codice Matlab e, allo stesso tempo, ridurre i tempi necessari per l'esecuzione, abbiamo deciso di dividere le varie funzionalità in diversi \textit{livescript}: in particolar modo la parte relativa allo studio ed alla definizione del controllore siamo andati ad inserirla all'interno del file \textit{GainCalculator.mlx} dove si può vedere che le prime istruzioni vanno a caricare dal workspace, risultante dalla precedente linearizzazione, le matrici A-B-C-D che definiscono il sistema lineare modellizzato.
 
 \section{Analisi in anello aperto}
 \label{sec:open_loop_analysis}
@@ -12,7 +12,7 @@ Abbiamo quindi calcolato gli autovalori con il comando seguente:
 eig(A_real)
 \end{lstlisting}
 
-La presenza di autovalori con parte reale strettamente negativa è stata confermata anche dalla visualizzazione del luogo delle radici (\textit{rlocus}) del sistema in anello aperto: come si vede in figura ~\ref{fig:r_locus_openloop}, il polo che si trova nel semi-piano reale positivo non potrà, in alcun modo, essere stabilizzato, ovvero portato nel semi-piano sinistro.
+La presenza di autovalori con parte reale strettamente positiva è stata confermata anche dalla visualizzazione del luogo delle radici (\textit{rlocus}) del sistema in anello aperto: come si vede in figura ~\ref{fig:r_locus_openloop}, il polo che si trova nel semi-piano reale positivo non potrà, in alcun modo, essere stabilizzato, ovvero portato nel semi-piano sinistro.
 
 Questa breve analisi ci ha permesso di avere una conferma numerica del fatto ovvio che, senza un controllo, il V.A.B. in esame non riesce a mantenere da solo la posizione verticale.
 
@@ -21,6 +21,13 @@ Questa breve analisi ci ha permesso di avere una conferma numerica del fatto ovv
 	\includegraphics[width=0.5\textwidth]{Immagini/root_locus_open_loop.png}
 	\caption{Luogo delle radici del V.A.B. modellizzato in anello aperto}
 	\label{fig:r_locus_openloop}
+\end{figure}
+
+\begin{figure}[H]
+	\centering   	
+	\includegraphics[width=0.5\textwidth]{Immagini/open_loop_response_non_linear.png}
+	\caption{Risposta del sistema non lineare in anello aperto}
+	\label{fig:openloop_nonlin_response}
 \end{figure}
 
 \section{Controllore}
@@ -52,11 +59,10 @@ Ciò che è riportato graficamente in figura \ref{fig:feedback_state}, può esse
 	$$
 \end{center}
 
-\newpage
 Dunque, sostituendo la legge di controllo nell'equazione di stato del sistema, possiamo ottenere le seguenti equazioni che ci permettono di definire il legame del sistema in anello chiuso con la matrice K:
 \begin{center}
 	$
-	x{\left(t\right)}=Ax{\left(t\right)}+Bu{\left(t\right)}=Ax{\left(t\right)}+B{\left(-Kx{\left(t\right)}+w{\left(t\right)}\right)}
+	\dot{x}{\left(t\right)}=Ax{\left(t\right)}+Bu{\left(t\right)}=Ax{\left(t\right)}+B{\left(-Kx{\left(t\right)}+w{\left(t\right)}\right)}
 	$
 	$$
 	=Ax{\left(t\right)}-BKx{\left(t\right)}+Bw\left(t\right)={\left(A-BK\right)}x{\left(t\right)}+Bw{\left(t\right)}
@@ -95,13 +101,12 @@ Dovendo posizionare due coppie di poli complessi coniugati si sono scelte due fr
 	$$
 \end{center}
 
-TODO
 Nello specifico, una prima osservazione, è il fatto che il polo più veloce (ovvero quello con frequenza pari a 0.2 Hz) è stato assegnato alla parte relativa al controllo dell'angolo $\theta$, essendo che è auspicabile un controllo maggiormente reattivo per quanto riguarda la stabilizzazione della base, piuttosto che il rapido raggiungimento del set point di posizione spaziale (e quindi angolare $\phi$ delle ruote).
 
-Una seconda osservazione è che, motivi esterni, il motore risulta avere una coppia massima molto limitata (per via delle limitazioni di corrente): è stato dunque necessario posizionare i poli ad una frequenza tale che permettesso di non saturare per molto tempo la coppia fornita dal motore.
+Una seconda osservazione è che, per motivi esterni, il motore risulta avere una coppia massima molto limitata (per via delle limitazioni di corrente): è stato dunque necessario posizionare i poli ad una frequenza tale che permettesso di non saturare per molto tempo la coppia fornita dal motore.
 Questa scelta ha inevitabilmente rallentato la risposta del sistema.
 
-Definita quindi la frequenza a cui posizionare i poli, siamo andati a risolvere l'equazione al denominatore della forma generica della f.d.t (G(s)) con due poli complessi: la risoluzione di questa equazione, come è noto dalla teoria, permette di ottenere i valori della variabile di Laplace \textit{s} che azzerano il denominatore stesso, che corrisponde a risolvere questa equazione (in forma generica):
+Definita quindi la frequenza a cui posizionare i poli, siamo andati a risolvere l'equazione al denominatore della forma generica della f.d.t (G(s)) con due poli complessi: la risoluzione di questa equazione, come è noto dalla teoria, permette di ottenere i valori della variabile di Laplace \textit{s} che azzerano il denominatore stesso, che corrisponde a:
 
 \begin{center}
 	$s^2 +2\,\mathrm{\xi}\,s\,{{w_n}} +{{{w_n}}}^2 =0$
@@ -147,12 +152,6 @@ Come si vede in figura ~\ref{fig:closed_loop_root}, grazie al posizionamento deg
 	\label{fig:closed_loop_root}
 \end{figure}
 
-\subsection{Posizionamento dei poli discreti}
-TODO
-
-Nello sviluppo del sistema, come presenteremo poi nella sezione di simulazioni (sezione TODO), siamo andati anche ad inserire il passaggio a tempo discreto, a seconda di quelle che sono le specifiche temporali di campionamento del controllore.
-
-Nel definire quindi un controllo a tempo discreto è stato necessario anche andare a riportare il posizionamento dei poli in ambito discreto.
 \subsection{Setpoint di velocità}
 Oltre al controllo del moto libero del sistema è stata implementata anche la possibilità di inserire un setpoint sulla velocità a fine transitorio del Segway. In questo modo si apre la possibilità per l'utente finale di impostare la velocità desiderata e di mantenerla nel tempo nonostante i vari disturbi che in un sistema reale influiranno sulla macchina(vento, salita, discesa..) 
 \begin{figure}[H]

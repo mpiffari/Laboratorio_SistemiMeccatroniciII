@@ -23,12 +23,11 @@
 \contentsline {section}{\numberline {3.2}Analisi in anello aperto}{15}{section.3.2}%
 \contentsline {section}{\numberline {3.3}Controllore}{16}{section.3.3}%
 \contentsline {subsection}{\numberline {3.3.1}Posizionamento dei poli continui}{17}{subsection.3.3.1}%
-\contentsline {subsection}{\numberline {3.3.2}Posizionamento dei poli discreti}{18}{subsection.3.3.2}%
-\contentsline {subsection}{\numberline {3.3.3}Setpoint di velocità}{18}{subsection.3.3.3}%
-\contentsline {section}{\numberline {3.4}OPC - UA}{19}{section.3.4}%
+\contentsline {subsection}{\numberline {3.3.2}Setpoint di velocità}{19}{subsection.3.3.2}%
+\contentsline {section}{\numberline {3.4}OPC - UA}{20}{section.3.4}%
 \contentsline {subsection}{\numberline {3.4.1}Idea base OPC-UA}{20}{subsection.3.4.1}%
 \contentsline {section}{\numberline {3.5}OPC-UA e V.A.B.}{20}{section.3.5}%
-\contentsline {section}{\numberline {3.6}Rumore}{21}{section.3.6}%
+\contentsline {section}{\numberline {3.6}Rumore}{22}{section.3.6}%
 \contentsline {chapter}{\numberline {4}Simulink}{23}{chapter.4}%
 \contentsline {section}{\numberline {4.1}Introduzione}{23}{section.4.1}%
 \contentsline {section}{\numberline {4.2}Simulazione del sistema non lineare}{24}{section.4.2}%
