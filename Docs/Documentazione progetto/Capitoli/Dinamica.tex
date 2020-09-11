@@ -233,7 +233,6 @@ Quello che ne deriva è quindi la seguente equazione Lagrangiana, in grado di de
  		\caption{Ragionamento per il calcolo dei contributi dinamici dello chassis}
  		\label{fig:chassis}
  	\end{figure}
- 	
 \end{itemize}
 
 \newpage
@@ -271,13 +270,23 @@ Si ottiene dunque il seguente sistema di equazioni, la cui risoluzione permette 
 	\begin{cases}
 		\label{eq:lagrangiana_theta_phi}
 		\begin{array}{c}
-			\frac{d}{\mathrm{dt}}\left(\frac{\partial }{\partial \dot{\theta} }L\right)-\frac{\partial }{\partial \theta}L=\mathrm{-2 C_m} \\
-			\frac{d}{\mathrm{dt}}\left(\frac{\partial }{\partial \dot{\phi} }L\right)-\frac{\partial }{\partial \phi}L=\mathrm{\frac{C_m}{\tau}}
+			\frac{d}{\mathrm{dt}}\left(\frac{\partial }{\partial \dot{\phi} }L\right)-\frac{\partial }{\partial \phi}L=\mathrm{\frac{C_m}{\tau}}\\
+			\frac{d}{\mathrm{dt}}\left(\frac{\partial }{\partial \dot{\theta} }L\right)-\frac{\partial }{\partial \theta}L=\mathrm{-2 C_m}
 		\end{array}
 	\end{cases}
 	$
 \end{center}
 dove $\tau$ è il rapporto di trasmissione il cui calcolo è riportato nella sezione ~\ref{sec:rapp_di_trasmissione}.
+
+Lo stesso sistema di equazioni, che per semplicità non è qui riportato, può essere rapppresentato anche in forma matriciale, come mostrato in figura ~\ref{fig:matrix_sys_non_lin}:
+
+\begin{figure}[h]
+	\centering   	
+	\includegraphics[width=\textwidth]{Immagini/SistemaMatrciale_NonLin.png}
+	\caption{Equazioni non lineari in forma matriciale}
+	\label{fig:matrix_sys_non_lin}
+\end{figure}
+
 La soluzione di questo sistema di equazioni verrà ad essere utilizzata per rappresentare il comportamento del sistema reale, basandosi su una coppia di equazioni non lineari: questa tematica verrà poi approfondita nella sezione ~\ref{sec:simulazione_reale}.
 
 \subsection{Rapporto di trasmissione}
@@ -297,7 +306,7 @@ Il rapporto di trasmissione completo $\tau$ è quindi definito come:
 \end{center}
 
 \subsection{Sistema non lineare}
-La risoluzione del sistema di equazioni sopra riportato permette di ottenere due equazioni differenziali del secondo ordine: queste soluzioni sono state ottenute sfruttando la potnezialità del calcolo simbolico messo a disposizione da Matlab, come si vede nel listato seguente.
+La risoluzione del sistema di equazioni sopra riportato permette di ottenere due equazioni differenziali del secondo ordine: queste soluzioni sono state ottenute sfruttando la potenzialità del calcolo simbolico messo a disposizione da Matlab, come si vede nel listato seguente.
 
 \begin{lstlisting} [caption={Risoluzione del sistema di equazioni},captionpos=b]
 theta2_diff = subs(theta2,{phi,vel,theta,vel_ang,C_m},{q_1 q_1_p q_2 q_2_p u})
@@ -306,52 +315,27 @@ phi2_diff = subs(phi2,{phi,vel,theta,vel_ang,C_m},{q_1 q_1_p q_2 q_2_p u })
 
 Le soluzioni così ottenute rappresentano e governano la dinamica del sistema: esse verranno quindi utilizzate per andare ad analizzare il comportamento del sistema considerato reale, utlizzando il controllore che è stato progettato sul sistema linearizzato.
 
-Un passaggio importante per la simulazione del sistema non lineare, è quello rappresentato dal salvataggio di queste due equazioni in esame: infatti esse sono, per forza di cose, richiamate all'interno della simulazione \textit{Simulink}: per fare ciò abbiamo utilizzato il comando \textit{matlabFunction()}, il quale va a scrivere in una funzione di matlab le due equazioni in esame.
+Un passaggio importante per la simulazione del sistema non lineare, è quello rappresentato dal salvataggio di queste due equazioni in esame.
+
+Esse sono, per forza di cose, richiamate all'interno della simulazione \textit{Simulink}: per fare ciò abbiamo utilizzato il comando \textit{matlabFunction()}, il quale permette di scrivere in una funzione di matlab le due equazioni in esame.
 
 \begin{lstlisting} [caption={Salvataggio in funzioni Matlab},captionpos=b]
 matlabFunction(theta2_diff,'File','theta_secondo');
 matlabFunction(phi2_diff,'File','phi_secondo');
 \end{lstlisting}
 
-{\left[
-	\begin{array}{cc}
-		$l_a m_a rcos{\left(\beta +\theta {\left(t\right)}\right)}-l_b m_b rcos{\left(\theta {\left(t\right)}\right)}+l_c m_c rcos{\left(\alpha +\theta {\left(t\right)}\right)} & 2m_r r^2 +2J_r +m_a r^2 +m_b r^2 +m_c r^2 \\
-		J_a +J_b +J_c +2l_a^2 m_a +2l_b^2 m_b +2l_c^2 m_b  & l_a m_a rcos{\left(\beta +\theta {\left(t\right)}\right)}-l_b m_b rcos{\left(\theta {\left(t\right)}\right)}+l_c m_c rcos\left(\alpha +\theta \left(t\right)\right.$
-	\end{array}
-\right]}{
-\left[
-	\begin{array}{c}
-		$\theta^¨ \\
-		\phi^¨ $
-	\end{array}
-\right]}=-
-{\left[
-	\begin{array}{c}
-		$-l_a m_a rsin{\left(\beta +\theta {\left(t\right)}\right)}{\theta^˙ }^2 +l_b m_b rsin{\left(\theta {\left(t\right)}\right)}{\theta^˙ }^2 -l_c m_c rsin{\left(\alpha +\theta {\left(t\right)}\right)}{\theta^˙ }^2 \\
-		-g{\left(l_c m_c \mathrm{cos}{\left(\alpha +\theta {\left(t\right)}\right)}+l_a m_a \mathrm{sin}{\left(\beta +\theta {\left(t\right)}\right)}-l_b m_b \mathrm{sin}{\left(\theta {\left(t\right)}\right)}\ \right)}\theta^˙ -l_a m_a rsin{\left(\beta +\theta {\left(t\right)}\right)}\theta^˙ \phi^˙ +l_b m_b rsin{\left(\theta {\left(t\right)}\right)}\theta^˙ \phi^˙ -l_c m_c rsin{\left(\alpha +\theta {\left(t\right)}\right)}\theta^˙ \phi^˙ $
-	\end{array}
-\right]}+
-{\left[
-	\begin{array}{c}
-	$C_m \\
-	-C_m$ 
-	\end{array}
-\right]}
 
 Nello specifico queste funzioni avranno come input i valori da cui dipendono le equazioni differenziali e, componendoli algebricamente tra di loro, fornirà come output i valori di $\ddot{\theta}$ e $\ddot{\phi}$.
 
-TODO (mettere le dipendende di theta pp e phi pp)
 \subsection{Linearizzazione}
-TODO linearizzazione attorno alla massa 70 kg e rileggere paragrafo
-
 Nell'approccio alla modellistica dei sistemi dinamici, uno step molto importante è quello che concerne la linearizzazione del sistema, ovvero il passaggio da un insieme di equazioni non lineari ad un set di equazioni lineari definite nell'intorno di un punto specifico dello stato del sistema: questo nuovo sistema di equazioni andrà a definire un sistema lineare in grado di approssimare il comportamento dinamico del sistema non lineare vicino all'equilibrio.
 
-Il punto in questione è quello in cui la variazione dello stato del sistema è nullo: deto quindi $\mathbf{x}(t)$ il vettore di stato, l'equilibrio sarà dato da $\dot{\mathbf{x}(t)}$.
+Il punto d'equilibrio in questione è quello in cui la variazione dello stato del sistema è nullo: detto quindi $\mathbf{x}(t)$ il vettore di stato, l'equilibrio sarà dato da $\dot{\mathbf{x}(t)}$.
 
-Perciò, il passo successivo alla risoluzione del sistema di equazioni di Lagrange in $\theta$ e $\phi$ che è stato svolto riguarda la linearizzazione: nel contesto del controllo, linearizzare è importante poiché permette di progettare il controllore stesso sul sistema tangente a quello reale (ovvero il sistema lineare), potendo poi testarlo direttamente sul sistema reale (ovvero quello descritto da equazioni non lineari).
+Perciò, il passo successivo alla risoluzione del sistema di equazioni di Lagrange in $\theta$ e $\phi$ che è stato svolto riguarda la linearizzazione: nel contesto del controllo, linearizzare è importante poiché permette di progettare il controllore stesso sul sistema tangente a quello reale (ovvero il sistema lineare), potendo poi testarlo direttamente sul sistema reale (ovvero quello descritto dalle equazioni non lineari).
 
 \subsubsection{Calcolo della posizione di equilibrio}
-Per poter quindi procedere con la linearizzazione, è necessario innanzitutto calcolare l'equilibrio del sistema, cioè il punto in cui $\mathbf{\ddot{\theta} = 0}$: questa condizione corrisponde  ad una situazione in cui lo stato del sistema risulta essere in una condizione di equilibrio dinamico, ovvero quando la sua variazione nel tempo è nulla (nessuna accelerazione $\rightarrow$ velocità costante $\rightarrow$ posizione lineare):
+Per poter quindi procedere con la linearizzazione è necessario innanzitutto calcolare l'equilibrio del sistema, cioè il punto in cui $\mathbf{\ddot{\theta} = 0}$: essa corrisponde  ad una situazione in cui lo stato del sistema risulta essere in una condizione di equilibrio dinamico, ovvero quando la sua variazione nel tempo è nulla (nessuna accelerazione $\rightarrow$ velocità costante $\rightarrow$ posizione lineare); tale equilibrio è data dalle due posizioni seguenti:
 \begin{center}
 	$\left(\begin{array}{c}
 		-0.01174364-\text{7.105427e-15}\,\mathrm{i}\\
@@ -359,14 +343,14 @@ Per poter quindi procedere con la linearizzazione, è necessario innanzitutto ca
 	\end{array}\right)$
 \end{center}
 
-Queste posizioni di equilibrio le abbiamo ottenute per mezzo della istruzione Matlab ~\ref{code:matalab_eq}, nella quale si vede come, partendo dall'equazione differenziale del sistema non lineare espressa in termini di $\ddot{\theta}$ si ricava la posizione di equilibrio del sistema.
+Queste posizioni di equilibrio le abbiamo ottenute per mezzo della istruzione Matlab presentata di seguito, nella quale si vede come, partendo dall'equazione differenziale del sistema non lineare espressa in termini di $\ddot{\theta}$, si ricava la posizione di equilibrio del sistema.
 \begin{lstlisting} [caption={Calcolo posizione di equilbrio},captionpos=b]
 equilibri = solve(subs(theta2_differenziabile,{q_1 q_1_p q_2_p u},{0,0,0,0})==0,q_2)
 \end{lstlisting}
 
 Come si vede, siamo interessati solamente al valore di equilibrio relativo di $\theta$: per questo motivo che poniamo a 0 (valore arbitrario) i valori di $\phi$ e $\dot{\phi}$, poichè non risultano essere di interesse per il calcolo dell'equilibrio.
 
-I risultati ottenuti sono, con buona approssimazione, considerabili numeri naturali e rispondono a quanto ci aspettavamo: essendo presente un offset ($w_b$) tra quello che è il baricentro del sistema di riferimento e quello relativo al manubrio, non ci aspettavamo di ottenere due equilibri perfettamente di 0° (posizione verticale a "testa in sù") e di 180° (posizione verticale a "testa in giù").
+I risultati ottenuti sono, con buona approssimazione, considerabili numeri naturali e rispondono a quanto ci aspettavamo: essendo presente un offset ($w_b$) tra quello che è il baricentro del sistema di riferimento e quello relativo al manubrio, non ci aspettavamo di ottenere due equilibri perfettamente di 0° (posizione verticale a "testa in sù") e di 180° (posizione verticale a "testa in giù"), ma bensì due posizioni leggermente spostate rispetto alla verticale.
 
 Per completezza e per avere comunque un feedback più concreto, abbiamo provato ad azzerare il valore di $w_b$, andando a ricalcolare la posizione di equilibrio, ottenendo effettivamente i valori di
 \begin{center}
@@ -407,15 +391,15 @@ I vettori che definiscono le \textbf{variabili di stato del sistema} e le \textb
 	$
 \end{center}
 
-Per individuare il risultato finale della linearizzazione, abbiamo seguito un approccio matriciale: nello specifico abbiamo utilizzato la notazione matriciale nel caso di sistemi SIMO (\textit{Single Input Multiple Output}), la cui stesura ha utilizzato le seguenti funzioni di supporto:
+Per individuare il risultato finale della linearizzazione, abbiamo seguito un approccio a matrici: nello specifico abbiamo utilizzato la notazione matriciale nel caso di sistemi SIMO (\textit{Single Input Multiple Output}), la cui stesura ha utilizzato le seguenti funzioni di supporto:
 
 \begin{center}
 	$
 	\begin{cases}
 		\begin{array}{c}
-			\mathbf{f_1} \to {\dot{x_1} \left(t\right)} =\overline{x_2 } =0\text{ (poichè all'equilibrio)}\\
-			\mathbf{f_2} \to {\dot{x_2} \left(t\right)} = {\ddot{\phi} \;}\\
-			\mathbf{f_3} \to {\dot{x_3} \left(t\right)} =\overline{x_4 } =0\text{ (poichè all'equilibrio)}\\
+			\mathbf{f_1} \to {\dot{x_1} \left(t\right)} =\dot{\phi}= {x_3 \left(t\right)} =0\text{ (poichè all'equilibrio)}\\
+			\mathbf{f_2} \to {\dot{x_3} \left(t\right)} = {\ddot{\phi} \;}\\
+			\mathbf{f_3} \to {\dot{x_2} \left(t\right)} =\dot{\theta} = {x_4 \left(t\right)} =0\text{ (poichè all'equilibrio)}\\
 			\mathbf{f_4} \to {\dot{x_4} \left(t\right)=} {\ddot{\theta} \;}\\
 			\mathbf{g_1} \to y_{1\;} \left(t\right)=\phi = x_{1\;}\\
 			\mathbf{g_2} \to y_{2\;} \left(t\right)=\theta =x_{2\;}\\
@@ -424,7 +408,7 @@ Per individuare il risultato finale della linearizzazione, abbiamo seguito un ap
 	$
 \end{center}
 
-Sfruttando le caratteristiche \textit{matematiche} del sistema non lineare, ottenibili tramite lo sviluppo in serie di Taylor nell'intorno dell'equilibrio, possiamo definire i termini matriciali che permettono di definire il sistema, secondo le seguenti equazioni:
+Sfruttando le caratteristiche \textit{matematiche} del sistema non lineare, ottenibili tramite lo sviluppo in serie di Taylor nell'intorno dell'equilibrio, possiamo definire i termini matriciali che permettono di caratterizzare il sistema, secondo le seguenti equazioni:
 
 \begin{center}
 	$$
@@ -502,15 +486,22 @@ Nel specifico del veicolo autobilanciato, nel caso con utente con peso di \texti
 	$$
 \end{center}
 
+Si nota come, anche dimensionalmente parlando, le matrici siano corrette con quanto ricavato dalla teoria; definendo $n$ come il numero di gdl e le rispettive derivate (nel nostro caso $n = 4$) abbiamo che:
+\begin{itemize}
+	\item A $\rightarrow$ $[2n \times 2n]$
+	\item B $\rightarrow$ $[2n \times 1]$
+	\item C $\rightarrow$ $[2n \times 2n]$: la dimensione in questo caso può essere variabile, a seconda dei parametri che intendiamo riportare verso l'esterno;
+	\item D $\rightarrow$ $[2n \times 1]$: anche in questo caso la dimensione è collegata alla scelta fatta per la matrice C;
+\end{itemize}
 
-Ricordando infine che un generico sistema dinamico può essere scritto come:
+Ricordando infine che un generico sistema dinamico può essere scritto come
 
 \begin{center}
 	$
 	G\left(s\right)=C {\left(\mathrm{sI}-A\right)}^{-1} B+D
 	$
 \end{center}
-sostituendo i valori numerici matriciali ottenuti al passo precedente, possiamo ottenere il sistema di equazioni, le quali rappresentano l'insieme delle funzioni di trasferimento caratterizzanti il sistema:
+e sostituendo i valori numerici matriciali ottenuti al passo precedente, possiamo ottenere il sistema di equazioni, le quali rappresentano l'insieme delle funzioni di trasferimento caratterizzanti il sistema:
 
 \begin{center}
 		$$
@@ -522,6 +513,8 @@ sostituendo i valori numerici matriciali ottenuti al passo precedente, possiamo 
 		\end{array}\right)
 		$$
 \end{center}
-Si può notare come la prima e la seconda riga della matrice differiscano solo per un fattore derivativo, così come la terza e quarta riga; questo è ovvio ed atteso in quanto $x_2$ è a derivata di $x_1$ e $x_4$ la derivata di $x_3$.
+Si può notare come la prima e la seconda riga della matrice differiscano solo per un fattore derivativo, così come la terza e la quarta riga; questo è ovvio ed atteso in quanto $f_2$ è la derivata di $f_1$ e $f_4$ la derivata di $f_3$.
 
-Nello specifico, queste funzionalità di linearizzazione, sono state racchiuse all'interno del \textit{live script} Matlab nominato \textit{VAB\_simulazioni\_discrete.mlx}: in questo modo siamo stati in grado di rendere più efficace ed efficiente la prosecuzione della simulazione, non dovendo eseguire ogni volta anche questa parte di calcolo matematico relativo alla linearizzazione. Siamo andati infatti a sfruttare le funzionalità di salvataggio offerte da Matlab, per salvare in un file \textit{.mat} l'intera \textit{workspace} (file che abbiamo nominato \textit{WS\_VAB\_wb\_0\_5.mat}), in maniera tale da permettere, agli script che ne avessero bisogno, di aprire il workspace e leggere tutte le variabili di interesse.
+Nello specifico, queste funzionalità di linearizzazione sono state racchiuse all'interno del \textit{live script} Matlab nominato \textit{VAB\_dinamica\_numerica.mlx}: in questo modo siamo stati in grado di rendere più efficace ed efficiente la prosecuzione della simulazione, non dovendo eseguire ogni volta anche questa parte di calcolo matematico relativo alla modelizzazione e linearizzazione del sistema.
+
+Siamo andati infatti a sfruttare le funzionalità di salvataggio offerte da Matlab per salvare in un file \textit{.mat} l'intero \textit{workspace} (file che abbiamo nominato \textit{WS\_VAB\_wb\_0\_5.mat}), in maniera tale da permettere, agli script che ne avessero bisogno, di aprire il workspace e leggere tutte le variabili di interesse.

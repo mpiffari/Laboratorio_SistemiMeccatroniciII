@@ -16,8 +16,8 @@
 \contentsline {subsection}{\numberline {2.2.2}Rapporto di trasmissione}{10}{subsection.2.2.2}%
 \contentsline {subsection}{\numberline {2.2.3}Sistema non lineare}{10}{subsection.2.2.3}%
 \contentsline {subsection}{\numberline {2.2.4}Linearizzazione}{11}{subsection.2.2.4}%
-\contentsline {subsubsection}{Calcolo della posizione di equilibrio}{11}{section*.12}%
-\contentsline {subsubsection}{Calcolo del sistema lineare}{12}{section*.13}%
+\contentsline {subsubsection}{Calcolo della posizione di equilibrio}{11}{section*.13}%
+\contentsline {subsubsection}{Calcolo del sistema lineare}{12}{section*.14}%
 \contentsline {chapter}{\numberline {3}Controllo}{15}{chapter.3}%
 \contentsline {section}{\numberline {3.1}Introduzione}{15}{section.3.1}%
 \contentsline {section}{\numberline {3.2}Analisi in anello aperto}{15}{section.3.2}%
