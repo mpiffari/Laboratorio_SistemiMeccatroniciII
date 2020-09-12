@@ -68,18 +68,6 @@ In questo caso, la simulazione in anello aperto mostra che il sistema diverge; q
 
 Come già verificato in precedenza (sezione ~\ref{sec:open_loop_analysis}) ci sono due poli reali, uno negativo e uno positivo; questo dimostra come il sistema sia instabile in anello aperto e necessiti di controllo.
 
-\section{Motore}
-Il passo successivo è stato quello di andare a modellizzare il motore presente a bordo dello chassis; questo è necessario in quanto si deve tenere conto, in primo luogo, del ritardo che gli attuatori ( cioè il motore) introducono nel sistema e che per questo potrebbe diventare instabile.
-\begin{figure}[H]
-	\centering   	
-	\includegraphics[width=1\textwidth]{Immagini/motor.png}
-	\caption{Schema a blocchi del motore}
-	\label{fig:motor}
-\end{figure}
-
-I valori delle componenti in Fig.\ref{fig:motor} sono presi dal datasheet del motore.
-Il controllo del motore DC in questione e stato ottenuto tramite una retroazione in corrente che permette quindi di definire un setpoint alla corrente presente nel motore. Questo si è reso necessario poiché il controllore, attraverso il vettore K e lo stato del sistema, definisce la coppia che il motore dovrebbe erogare. In un motore DC la correlazione tra coppia erogata e corrente esiste ed è ben definita e si tratta di $k_t$.
-Il controllore è stato realizzato seguendo metodi già noti in letteratura TODO: scrivere la formula o trovare un posto che la spieghi 
 \begin{figure}[H]
 	\centering   	
 	\includegraphics[width=0.7\textwidth]{Immagini/motore.png}
@@ -93,10 +81,7 @@ Il controllore è stato realizzato seguendo metodi già noti in letteratura TODO
 	\label{fig:motore_zoom}
 \end{figure}
 
-Come si può notare il picco di coppia massimo è minore di 2; questo è dovuto al fatto che, per ragioni esterne, nel motore può scorrere ua corrente di massimo 20A e quindi:
-\begin{center}
-	$C_{m,max} = I_{max}\cdot{K_{motore}} = 20 A\cdot{10 \dfrac{N\cdot{m}}{A}}=2N\cdot{m}$
-\end{center}
+Come si può notare il picco di coppia massimo è minore di 2 Nm, come da limitazioni imposte dal modello del motore.
 
 Un esempio in cui la coppia richiesta supera i $2N\cdot{m}$ è il seguente:
 \begin{figure}[H]

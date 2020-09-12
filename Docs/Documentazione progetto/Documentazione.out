@@ -9,22 +9,22 @@
 \BOOKMARK [2][-]{subsection.2.2.2}{Rapporto di trasmissione}{section.2.2}% 9
 \BOOKMARK [2][-]{subsection.2.2.3}{Sistema non lineare}{section.2.2}% 10
 \BOOKMARK [2][-]{subsection.2.2.4}{Linearizzazione}{section.2.2}% 11
-\BOOKMARK [0][-]{chapter.3}{Controllo}{}% 12
-\BOOKMARK [1][-]{section.3.1}{Introduzione}{chapter.3}% 13
-\BOOKMARK [1][-]{section.3.2}{Analisi in anello aperto}{chapter.3}% 14
-\BOOKMARK [1][-]{section.3.3}{Controllore}{chapter.3}% 15
-\BOOKMARK [2][-]{subsection.3.3.1}{Posizionamento dei poli continui}{section.3.3}% 16
-\BOOKMARK [2][-]{subsection.3.3.2}{Setpoint di velocit\340}{section.3.3}% 17
-\BOOKMARK [1][-]{section.3.4}{OPC - UA}{chapter.3}% 18
-\BOOKMARK [2][-]{subsection.3.4.1}{Idea base OPC-UA}{section.3.4}% 19
-\BOOKMARK [1][-]{section.3.5}{OPC-UA e V.A.B.}{chapter.3}% 20
-\BOOKMARK [1][-]{section.3.6}{RTOS - XENOMAI}{chapter.3}% 21
-\BOOKMARK [0][-]{chapter.4}{Simulink}{}% 22
-\BOOKMARK [1][-]{section.4.1}{Introduzione}{chapter.4}% 23
-\BOOKMARK [1][-]{section.4.2}{Simulazione del sistema non lineare}{chapter.4}% 24
-\BOOKMARK [1][-]{section.4.3}{Simulazione del sistema lineare}{chapter.4}% 25
-\BOOKMARK [1][-]{section.4.4}{Motore}{chapter.4}% 26
-\BOOKMARK [1][-]{section.4.5}{Modello complessivo \(al momento\)}{chapter.4}% 27
-\BOOKMARK [1][-]{section.4.6}{Discretizzazione}{chapter.4}% 28
-\BOOKMARK [1][-]{section.4.7}{Sensori}{chapter.4}% 29
+\BOOKMARK [1][-]{section.2.3}{Motore}{chapter.2}% 12
+\BOOKMARK [0][-]{chapter.3}{Controllo}{}% 13
+\BOOKMARK [1][-]{section.3.1}{Introduzione}{chapter.3}% 14
+\BOOKMARK [1][-]{section.3.2}{Analisi in anello aperto}{chapter.3}% 15
+\BOOKMARK [1][-]{section.3.3}{Controllore}{chapter.3}% 16
+\BOOKMARK [2][-]{subsection.3.3.1}{Posizionamento dei poli continui}{section.3.3}% 17
+\BOOKMARK [2][-]{subsection.3.3.2}{Setpoint di velocit\340}{section.3.3}% 18
+\BOOKMARK [1][-]{section.3.4}{OPC - UA}{chapter.3}% 19
+\BOOKMARK [2][-]{subsection.3.4.1}{Idea base OPC-UA}{section.3.4}% 20
+\BOOKMARK [1][-]{section.3.5}{OPC-UA e V.A.B.}{chapter.3}% 21
+\BOOKMARK [1][-]{section.3.6}{RTOS - XENOMAI}{chapter.3}% 22
+\BOOKMARK [0][-]{chapter.4}{Simulink}{}% 23
+\BOOKMARK [1][-]{section.4.1}{Introduzione}{chapter.4}% 24
+\BOOKMARK [1][-]{section.4.2}{Simulazione del sistema non lineare}{chapter.4}% 25
+\BOOKMARK [1][-]{section.4.3}{Simulazione del sistema lineare}{chapter.4}% 26
+\BOOKMARK [1][-]{section.4.4}{Modello complessivo \(al momento\)}{chapter.4}% 27
+\BOOKMARK [1][-]{section.4.5}{Discretizzazione}{chapter.4}% 28
+\BOOKMARK [1][-]{section.4.6}{Sensori}{chapter.4}% 29
 \BOOKMARK [0][-]{appendix.A}{}{}% 30

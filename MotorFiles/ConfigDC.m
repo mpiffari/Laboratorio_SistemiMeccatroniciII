@@ -20,6 +20,9 @@ switch (id)
         m.La = 0.10e-03;
         % Costante di coppia [Nm / A]
         m.K = 0.10;
+        m.K_T = 0.10;
+        % Costante di tensione [V / (rad/s)]
+        m.K_E = (10/1000) * pi/30;
         % Costante di tempo elettrica [s]
         m.tee = 1.22e-03;
         % Momento d'inerzia rotore [kg m^2]

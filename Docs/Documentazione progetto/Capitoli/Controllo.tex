@@ -184,10 +184,10 @@ TODO: perchè arriva a 0.5? per la retroazione interna?
 \section{OPC - UA}
 Per quanto riguarda la parte di controllo, il sistema presenta un controllore centralizzato, rappresentato da un Raspberry: nello specifico ad esso sono affidate delle mansioni ben specifiche, tutte ovviamente volte al controllo e alla stabilizzazione del \textit{veicolo auto bilanciato}.
 
-In questa fase dello sviluppo del progetto, siamo andati ad implementare parte del codice che verrà installato, in un secondo momento, a bordo del raspberry: esso infatti svolge, all'interno del sistema (come si vede in figura ~\ref{fig:OPCUA_schema}) una comunicazione a due direzioni, che ne determinano due comportamenti differenti:
+In questa fase dello sviluppo del progetto, siamo andati ad implementare parte del codice che verrà installato, in un secondo momento, a bordo del Raspberry: esso infatti svolge, all'interno del sistema (come si vede in figura ~\ref{fig:OPCUA_schema}) una comunicazione a due direzioni, che ne determinano due comportamenti differenti:
 \begin{itemize}
-	\item Come \textbf{server} per la parte di comunicazione \textit{OPC-UA} (per il settaggio dei guadagni);
-	\item Come \textbf{master} nella comunicazione seriale verso Arduino (per quanto riguarda invece la gestione dell'algoritmo di controllo);
+	\item Come \textbf{server} per la parte di comunicazione \textit{OPC-UA} (per il settaggio dei guadagni) nei confronti di un client (ovvero dell'utente che intende settare i parametri del controllore);
+	\item Come \textbf{master} nei confronti della sezione di sensoristica a bordo del V.A.B. (per quanto riguarda invece la gestione dell'algoritmo di controllo);
 \end{itemize}
 
  \begin{figure}[H]
