@@ -280,7 +280,7 @@ Di seguito una breve descrizione degli step principali seguiti per quanto concer
 		\item Come primo step risulta essere necessario fornire al framework Xenomai il nome di quale file con estensione .c andare a compilare e successivamente, incapsulare in un framework real-time
 			\begin{figure}[H]
 				\centering   	
-				\includegraphics[width=0.8\textwidth]{Immagini/xenomai_nano_make.png}
+				\includegraphics[width=0.6\textwidth]{Immagini/xenomai_nano_make.png}
 				\caption{Per specificare quale file \textit{.c} compilare}
 				\label{fig:xenomai_nano_make}
 			\end{figure}
@@ -308,6 +308,9 @@ Di seguito una breve descrizione degli step principali seguiti per quanto concer
 			\item Elaborazione dei dati rilevati e algoritmo di controllo;
 			\item Produzione dei risultati di interesse
 		\end{itemize}
+		\item In figura ~\ref{fig:xenomai_execution} si può vedere come, ogni ciclo di lettura del file con i parametri, che corrisponde ad un ciclo macchina, presenti un tempo fisso.
+		
+		Infatti, con il termine \textit{"Elapsed time"} siamo andati a stampare il \textit{delta} temporale, il quale rappresenta il tempo occupato da un singolo ciclo macchina;
 		\begin{figure}[H]
 			\centering   	
 			\includegraphics[width=0.8\textwidth]{Immagini/xenomai_execution.png}

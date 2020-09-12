@@ -15,7 +15,7 @@
 \contentsline {figure}{\numberline {3.7}{\ignorespaces Schema di massima dell'utilizzo di Raspberry Pi 3\relax }}{20}{figure.caption.21}%
 \contentsline {figure}{\numberline {3.8}{\ignorespaces Parametri impostabili lato client\relax }}{22}{figure.caption.22}%
 \contentsline {figure}{\numberline {3.9}{\ignorespaces Per specificare quale file \textit {.c} compilare\relax }}{23}{figure.caption.23}%
-\contentsline {figure}{\numberline {3.10}{\ignorespaces Definizione e temporizzazione del ciclo \textit {WHILE}\relax }}{24}{figure.caption.24}%
+\contentsline {figure}{\numberline {3.10}{\ignorespaces Definizione e temporizzazione del ciclo \textit {WHILE}\relax }}{23}{figure.caption.24}%
 \contentsline {figure}{\numberline {3.11}{\ignorespaces Esecuzione a tempo fissato (1 ms) delle funzioni di lettura e calcolo\relax }}{24}{figure.caption.25}%
 \addvspace {10\p@ }
 \contentsline {figure}{\numberline {4.1}{\ignorespaces Risposta del sistema non lineare in anello chiuso\relax }}{25}{figure.caption.26}%
