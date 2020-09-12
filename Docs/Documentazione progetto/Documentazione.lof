@@ -13,24 +13,24 @@
 \contentsline {figure}{\numberline {3.5}{\ignorespaces chiusura dell'anello di controllo di $\dot {\phi }$ con un controllore \textit {I} \cite {feedback_state}\relax }}{19}{figure.caption.19}%
 \contentsline {figure}{\numberline {3.6}{\ignorespaces Taratura del controllore\relax }}{19}{figure.caption.20}%
 \contentsline {figure}{\numberline {3.7}{\ignorespaces Schema di massima dell'utilizzo di Raspberry Pi 3\relax }}{20}{figure.caption.21}%
-\contentsline {figure}{\numberline {3.8}{\ignorespaces Parametri impostabili lato client\relax }}{21}{figure.caption.22}%
-\contentsline {figure}{\numberline {3.9}{\ignorespaces Diagramma rappresentante le funzionalità del server\relax }}{22}{figure.caption.23}%
+\contentsline {figure}{\numberline {3.8}{\ignorespaces Parametri impostabili lato client\relax }}{22}{figure.caption.22}%
+\contentsline {figure}{\numberline {3.9}{\ignorespaces Per specificare quale file \textit {.c} compilare\relax }}{23}{figure.caption.23}%
+\contentsline {figure}{\numberline {3.10}{\ignorespaces Definizione e temporizzazione del ciclo \textit {WHILE}\relax }}{24}{figure.caption.24}%
+\contentsline {figure}{\numberline {3.11}{\ignorespaces Esecuzione a tempo fissato (1 ms) delle funzioni di lettura e calcolo\relax }}{24}{figure.caption.25}%
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {4.1}{\ignorespaces Risposta del sistema non lineare in anello chiuso\relax }}{23}{figure.caption.24}%
-\contentsline {figure}{\numberline {4.2}{\ignorespaces Risposta del sistema lineare in anello chiuso\relax }}{24}{figure.caption.25}%
-\contentsline {figure}{\numberline {4.3}{\ignorespaces Implementazione simulink delle equazioni differenziali\relax }}{24}{figure.caption.26}%
-\contentsline {figure}{\numberline {4.4}{\ignorespaces Risposta in anello aperto del sistema reale\relax }}{25}{figure.caption.27}%
-\contentsline {figure}{\numberline {4.5}{\ignorespaces Implementazione simulink del sistema linearizzato\relax }}{25}{figure.caption.28}%
-\contentsline {figure}{\numberline {4.6}{\ignorespaces Risposta in anello aperto del sistema lineare\relax }}{26}{figure.caption.29}%
-\contentsline {figure}{\numberline {4.7}{\ignorespaces Schema a blocchi del motore\relax }}{26}{figure.caption.30}%
-\contentsline {figure}{\numberline {4.8}{\ignorespaces Transitorio del motore\relax }}{27}{figure.caption.31}%
-\contentsline {figure}{\numberline {4.9}{\ignorespaces Zoom del grafico in figura Fig.\ref {fig:motore}\relax }}{27}{figure.caption.32}%
-\contentsline {figure}{\numberline {4.10}{\ignorespaces Clamp della coppia erogata da parte del motore\relax }}{28}{figure.caption.33}%
-\contentsline {figure}{\numberline {4.11}{\ignorespaces Simulink\relax }}{29}{figure.caption.34}%
-\contentsline {figure}{\numberline {4.12}{\ignorespaces Modello Simulink del controllore\relax }}{30}{figure.caption.35}%
-\contentsline {figure}{\numberline {4.13}{\ignorespaces Modello Simulink dei sensori \textit {encoder} e \textit {I.M.U.}\relax }}{31}{figure.caption.36}%
-\contentsline {figure}{\numberline {4.14}{\ignorespaces Modello Simulink discreto del motore\relax }}{32}{figure.caption.37}%
-\contentsline {figure}{\numberline {4.15}{\ignorespaces Per specificare quale file \textit {.c} compilare\relax }}{33}{figure.caption.38}%
-\contentsline {figure}{\numberline {4.16}{\ignorespaces Definizione e temporizzazione del \textit {WHILE}\relax }}{34}{figure.caption.39}%
-\contentsline {figure}{\numberline {4.17}{\ignorespaces Esecuzione a tempo fissato delle funzioni di lettura e calcolo\relax }}{34}{figure.caption.40}%
+\contentsline {figure}{\numberline {4.1}{\ignorespaces Risposta del sistema non lineare in anello chiuso\relax }}{25}{figure.caption.26}%
+\contentsline {figure}{\numberline {4.2}{\ignorespaces Risposta del sistema lineare in anello chiuso\relax }}{26}{figure.caption.27}%
+\contentsline {figure}{\numberline {4.3}{\ignorespaces Implementazione simulink delle equazioni differenziali\relax }}{26}{figure.caption.28}%
+\contentsline {figure}{\numberline {4.4}{\ignorespaces Risposta in anello aperto del sistema reale\relax }}{27}{figure.caption.29}%
+\contentsline {figure}{\numberline {4.5}{\ignorespaces Implementazione simulink del sistema linearizzato\relax }}{27}{figure.caption.30}%
+\contentsline {figure}{\numberline {4.6}{\ignorespaces Risposta in anello aperto del sistema lineare\relax }}{28}{figure.caption.31}%
+\contentsline {figure}{\numberline {4.7}{\ignorespaces Schema a blocchi del motore\relax }}{28}{figure.caption.32}%
+\contentsline {figure}{\numberline {4.8}{\ignorespaces Transitorio del motore\relax }}{29}{figure.caption.33}%
+\contentsline {figure}{\numberline {4.9}{\ignorespaces Zoom del grafico in figura Fig.\ref {fig:motore}\relax }}{29}{figure.caption.34}%
+\contentsline {figure}{\numberline {4.10}{\ignorespaces Clamp della coppia erogata da parte del motore\relax }}{30}{figure.caption.35}%
+\contentsline {figure}{\numberline {4.11}{\ignorespaces Simulink\relax }}{31}{figure.caption.36}%
+\contentsline {figure}{\numberline {4.12}{\ignorespaces Modello Simulink del controllore\relax }}{32}{figure.caption.37}%
+\contentsline {figure}{\numberline {4.13}{\ignorespaces Modello Simulink dei sensori \textit {encoder} e \textit {I.M.U.}\relax }}{33}{figure.caption.38}%
+\contentsline {figure}{\numberline {4.14}{\ignorespaces Modello Simulink discreto del motore\relax }}{34}{figure.caption.39}%
 \addvspace {10\p@ }
+\contentsline {figure}{\numberline {A.1}{\ignorespaces Diagramma di flusso rappresentante le funzionalità del server\relax }}{35}{figure.caption.40}%

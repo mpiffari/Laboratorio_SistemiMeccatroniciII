@@ -144,6 +144,7 @@ Ricordando a questo punto quanto detto nella prima parte di questo capitolo in m
 \end{center}
 
 utilizzando il valore di K appena trovato: una volta trovata la nuova matrice A, siamo andati a ri-effettuare le stesse analisi portate avanti anche per il sistema in anello aperto.
+
 Come si vede in figura ~\ref{fig:closed_loop_root}, grazie al posizionamento degli autovalori, siamo stati in grado di spostare i nuovi poli nel semi-piano sinistro: questo significa quindi che siamo riusciti a stabilizzare il nostro sistema dinamico.
 \begin{figure}[H]
 	\centering   	
@@ -153,26 +154,35 @@ Come si vede in figura ~\ref{fig:closed_loop_root}, grazie al posizionamento deg
 \end{figure}
 
 \subsection{Setpoint di velocità}
-Oltre al controllo del moto libero del sistema è stata implementata anche la possibilità di inserire un setpoint sulla velocità a fine transitorio del Segway. In questo modo si apre la possibilità per l'utente finale di impostare la velocità desiderata e di mantenerla nel tempo nonostante i vari disturbi che in un sistema reale influiranno sulla macchina(vento, salita, discesa..) 
+Oltre al controllo del moto libero del sistema è stata implementata anche la possibilità di inserire un setpoint sulla velocità a fine transitorio del Segway. In questo modo si apre la possibilità per l'utente finale di impostare la velocità desiderata e di mantenerla nel tempo nonostante i vari disturbi che in un sistema reale agiranno sulla macchina(vento, salita, discesa..) 
 \begin{figure}[H]
 	\centering   	
-	\includegraphics[width=0.75\textwidth]{Immagini/y_setpoint.png}
-	\caption{chiusura dell'anello di controllo di $\dot{\phi}$ con un controllore \textit{I} \cite{feedback_state}}
+	\includegraphics[width=0.8\textwidth]{Immagini/y_setpoint.png}
+	\caption{chiusura dell'anello di controllo di $\dot{\phi}$ con un controllore \textit{I} 
+	\cite{feedback_state}}
 	\label{fig:y_setpoint}
 \end{figure}
-In Fig.\ref{fig:y_setpoint} si nota come l'anello di $\dot{\phi}$ sia esterno rispetto all'anello di retroazione dello stato; solitamente si procede dunque nel progettare il controllore avendo cura di lasciare una decade di spazio tra la frequenza del polo dell' integratore e la coppia di poli più lenta del controllore della retroazione dello stato.
-In questo caso, per ragioni puramente pratiche, non è stato possibile : il sistema presenta una risposta particolarmente lenta agli input viste le limitazioni di coppia di cui si approfondirà successivamente; sarebbe quindi stato necessario quindi troppo tempo per raggiungere il setpoint di velocità se si fosse proceduto a lasciare una decade di distanza. Si è invece proceduto a posizionare il polo dell'integratore tramite la funzione di Tuning offerta da Matlab Simulink stesso:
+In figura \ref{fig:y_setpoint} si nota come l'anello di $\dot{\phi}$ sia esterno rispetto all'anello di retroazione dello stato; solitamente si procede dunque nel progettare il controllore avendo cura di lasciare una decade di spazio tra la frequenza del polo dell' integratore e la coppia di poli più lenta del controllore della retroazione dello stato.
+
+In questo caso, per ragioni puramente pratiche, non è stato possibile : il sistema presenta una risposta particolarmente lenta agli input viste le limitazioni di coppia (imposte dai limiti di corrente definiti in fase di specifica del progetto) di cui si approfondirà successivamente.
+
+Sarebbe quindi stato necessario quindi troppo tempo per raggiungere il setpoint di velocità se si fosse proceduto a lasciare una decade di distanza. Si è invece proceduto a posizionare il polo dell'integratore tramite la funzione di Tuning offerta da Matlab Simulink stesso:
 \begin{figure}[H]
 	\centering   	
 	\includegraphics[width=0.75\textwidth]{Immagini/pid_tuning.png}
 	\caption{Taratura del controllore}
 	\label{fig:pid_tuning}
 \end{figure}
-Il tuning è stato effettuato sul sistema lineare in quanto Matlab richiede un sistema lineare per questo tipo di tecniche. Da notare inoltre, in Fig.\ref{fig:pid_tuning} che la frequenza $f_3 = \dfrac{0.041 \textit{rad/s}}{2\pi} = 0.0065 Hz$ che è circa $\dfrac{1}{3} 	f_{\mathrm{propria\phi}}$.
-Sempre in Fig.\ref{fig:pid_tuning} si osserva come comunque, non avendo rispettato la decade di distanza, il sistema sia comunque molto lento e arrivi a regime in circa 70 \textit{s}.
+Il tuning è stato effettuato sul sistema lineare in quanto Matlab richiede un sistema lineare per questo tipo di tecniche.
+
+Da notare inoltre, in figura \ref{fig:pid_tuning} che la frequenza $f_3 = \dfrac{0.041 \textit{rad/s}}{2\pi} = 0.0065 Hz$ che è circa $\dfrac{1}{3} 	f_{\mathrm{propria\phi}}$.
+
+Sempre in figura \ref{fig:pid_tuning} si osserva che, nonostante non sia stata rispettato la decade di distanza, il sistema sia comunque molto lento e arrivi a regime in circa 70 \textit{s}.
+
 TODO: perchè arriva a 0.5? per la retroazione interna?
+
 \section{OPC - UA}
-Per quanto riguarda la parte di controllo, il sistema presenta un articolato insieme di controllori inter-operanti tra di loro: nello specifico ad ogni singolo controllore sono affidate delle mansioni ben specifiche, tutte ovviamente volte al controllo e alla stabilizzazione del \textit{veicolo auto bilanciato}.
+Per quanto riguarda la parte di controllo, il sistema presenta un controllore centralizzato, rappresentato da un Raspberry: nello specifico ad esso sono affidate delle mansioni ben specifiche, tutte ovviamente volte al controllo e alla stabilizzazione del \textit{veicolo auto bilanciato}.
 
 In questa fase dello sviluppo del progetto, siamo andati ad implementare parte del codice che verrà installato, in un secondo momento, a bordo del raspberry: esso infatti svolge, all'interno del sistema (come si vede in figura ~\ref{fig:OPCUA_schema}) una comunicazione a due direzioni, che ne determinano due comportamenti differenti:
 \begin{itemize}
@@ -187,17 +197,18 @@ In questa fase dello sviluppo del progetto, siamo andati ad implementare parte d
 	\label{fig:OPCUA_schema}
 \end{figure}
 
-In questa fase abbiamo quindi sviluppato la parte relativa all'utilizzo di \textit{Raspberry Pi 3} come \textit{server OPCUA}.
+In questa fase abbiamo quindi sviluppato la parte relativa all'utilizzo di \textit{Raspberry Pi 3} come \textit{server OPCUA}: in seguito, nella sezione ~\ref{sec:xenomai}, ci occuperemo di andare a rendere Raspberry un controllore Real-Time, tramite il framework \textit{Xenomai}.
 
 \subsection{Idea base OPC-UA}
-L'\textit{Open Platform Communications Unified Architecture} (OPC UA) è un protocollo di comunicazione automatico per l'automazione industriale. 
+L'\textit{Open Platform Communications Unified Architecture} (OPC UA) è un protocollo di comunicazione automatico per l'automazione industriale: OPC UA sostituisce il protocollo \textit{OPC Classic}, conservando tutte le funzionalità del predecessore.
 
-OPC UA sostituisce il protocollo \textit{OPC Classic}, conservando tutte le funzionalità del predecessore. Poiché OPC Classic era stato costruito su una tecnologia Microsoft detta modello a oggetti per componenti distribuiti, era vincolato a Microsoft, ma questa caratteristica è diventata sempre più limitante.
+Poiché \textit{OPC Classic} è stato costruito su una tecnologia Microsoft detta modello a oggetti per componenti distribuiti, risulta essere vincolato a Microsoft (caratteristica è diventata sempre più limitante).
 
-OPC UA risulta completamente interoperabile tra i diversi sistemi operativi usati, aggiungendosi a Windows e alle tecnologie industriali come i PLC, inoltre comprende Linux, iOS e anche sistemi operativi per dispositivi mobili come Android. Consentire al maggior numero di dispositivi possibile di comunicare contribuisce al progresso dell'IoT.
+OPC UA invece risulta completamente interoperabile tra i diversi sistemi operativi usati, diventando compatibile, oltre che con Windows, anche con tecnologie industriali come i PLC, Linux, iOS e anche sistemi operativi per dispositivi mobili come Android.
 
 Queste caratteristiche di \textbf{interoperabilità} sono state sfruttate al massimo in questo contesto, potendo così creare, in maniera semplice e veloce, una comunicazione tra differenti tipologie e famiglie di dispositivi.
 
+\newpage
 \section{OPC-UA e V.A.B.}
 Nel contesto del progetto del \textit{veicolo auto bilanciato}, siamo andati ad utilizzare il protocollo di comunicazione \textit{OPC-UA} come supporto per il tuning dei parametri relativi al \textbf{gain} del controllore, ovvero ai parametri del vettore \textit{K}, che abbiamo chiamato (all'interno dello script di Python):
 \begin{itemize}
@@ -207,43 +218,102 @@ Nel contesto del progetto del \textit{veicolo auto bilanciato}, siamo andati ad 
 	\item \textbf{K\_theta\_p}
 \end{itemize}
 
-Nello specifico, lo scambio di parametri tra server e controllore avviene tramite unfile \textit{.txt}, che permette, in maniera semplice e immediata, di implementare uno scambio di informazioni tra il server \textit{OPC-UA} strutturato in Python e l'ambiente \textit{real-time} introdotto a bordo del controllore \textit{Raspbery Pi 3}.
+Nello specifico, lo scambio di parametri tra server e controllore avviene tramite un file di testo \textit{.txt} che permette, in maniera semplice e immediata, di implementare uno scambio di informazioni tra il server \textit{OPC-UA} strutturato in Python e l'ambiente \textit{Real-time} introdotto a bordo del controllore \textit{Raspbery Pi 3}.
 
 
 In particolare abbiamo due files:
 \begin{itemize}
 	\item \textbf{Un file temporaneo} \textit{("GainParametersToController.txt")} utilizzato come pipeline per il passaggio dei parametri tra server e controllore. Questo risulta essere un file temporaneo che viene ad essere cancellato e ricreato ogni qualvolta che il server viene spento e successivamente riaccesso.
-	Nello specifico, ad ogni riaccensione, i valori iniziali di questo file, vengono settati con gli stessi valori presenti nel file \textit{definitivo}  (qualora quest'ultimo esista già: in caso contrario si procede con un inizializzazione dei parametri a 0);
+	Nello specifico, ad ogni riaccensione, i valori iniziali di questo file, vengono settati con gli stessi valori presenti nel file \textit{definitivo}  (qualora quest'ultimo non esistesse, si procede con un inizializzazione dei parametri a 0);
 	
 	\item \textbf{Un file definitivo} \textit{("GainParametersConfirmed.txt")} il quale invece viene creato una e una sola volta e sul quale poi vengono salvati i parametri che saranno poi letti all'accensione successiva del server ed utilizzati come parametri iniziali per il controllore.
 \end{itemize}
 
-Questi file possono essere settati con i parametri presenti nel server che sono visibili in figura ~\ref{fig:OPCUA_params}, nello specifico:
+Questi file possono essere settati con i parametri accettati nel server che sono visibili in figura ~\ref{fig:OPCUA_params}; nello specifico:
 \begin{itemize}
 	\item \textbf{Submit change to controller} permette di scrivere i valori dei gains sul file \textit{"GainParametersToController.txt"};
 	
 	\item \textbf{Store definitively in file} permette di scrivere i valori dei gains sul file \textit{"GainParametersConfirmed.txt"};
 	
-	\item \textbf{SHUT DOWN SERVER} permette invece di spegnere il server e di cancellare successivamente il file temporaneo.
+	\item \textbf{SHUT DOWN SERVER} permette invece di spegnere il server e di cancellare il file temporaneo.
 \end{itemize}
 
-\begin{figure}[h]
+\begin{figure}[h!]
 	\centering   	
-	\includegraphics[width=0.4\textwidth]{Immagini/OPC_UA_params.jpg}
+	\includegraphics[width=0.3\textwidth]{Immagini/OPC_UA_params.jpg}
 	\caption{Parametri impostabili lato client}
 	\label{fig:OPCUA_params}
 \end{figure}
 
 
-Abbiamo racchiuso in figura ~\ref{fig:OPCUA_diagram} il funzionamento di massima del codice lato server: codice che siamo andati a testare utilizzando un'apposita app per smartphone Android (\href{https://play.google.com/store/apps/details?id=com.prosysopc.ua.android2&hl=it}{OPC-UA Android client}); per quanto riguarda invece l'effettiva implementazione, abbiamo riportato nell'Appendice ~\ref{cod:Appendice_opcua} l'intero codice prodotto, per la gestione della comunicazione OPC-UA.
+All'interno dell'Appendice ~\ref{cod:Appendice_opcua}, abbiamo racchiuso in figura ~\ref{fig:OPCUA_diagram}, tramite diagramma di flusso, il funzionamento di massima del codice lato server: codice che siamo andati a testare utilizzando un'apposita app per smartphone Android (\href{https://play.google.com/store/apps/details?id=com.prosysopc.ua.android2&hl=it}{OPC-UA Android client}).
 
-\begin{figure}[h]
-	\centering   	
-	\includegraphics[width=0.7\textwidth]{Immagini/OPCUA_diagram.jpeg}
-	\caption{Diagramma rappresentante le funzionalità del server}
-	\label{fig:OPCUA_diagram}
-\end{figure}
+Per quanto riguarda invece l'effettiva implementazione, sempre in Appendice ~\ref{cod:Appendice_opcua}, abbiamo riportato l'intero codice prodotto per la gestione della comunicazione OPC-UA.
 
-\section{Rumore}
-Piattaforma inerziale --> PSD
-Questione anti windup --> coppia già limitata quindi nessun vincolo di saturazione
+\newpage
+\section{RTOS - XENOMAI}
+\label{sec:xenomai}
+
+Nella parte di controllo di sistemi in generale, risulta essere sempre necessario andare a lavorare in \textit{Real-Time}, ovvero il sistema richiede che il calcolatore sia in grado di produrre computazioni corrette andando allo stesso tempo a rispettare delle \textit{dealine} temporali, ovvero dei vincoli che validano o meno il risultato prodotto.
+
+Come ben noto nall'ambiente informatico, \textit{Linux}, che rappresenta l'\textit{OS} installato a bordo di Raspberry, risulta essere un sistema operativo \textbf{non} \textit{RTOS} (Real Time Operative System): è stato quindi necessario andare ad improntare un aproccio che permesso di renderlo tale.
+
+In questo contesto è risultato essere di fondamentale importanza il software \textit{Xenomai}, un progetto open source creato per fornire un framework real-time per le piattaforme Linux, con l'obbiettivo di aiutare la migrazione di progetti in ambito industriale da sistemi real-time proprietari a sistemi diffusi come Linux.
+
+Il cuore delle funzionalità offerte da Xenomai, sta nella praticità e facilità con cui mette a disposizioni delle API di tipo real-time, occupandosi anche di garantire quelli che sono i limiti e vincoli temporali. 
+
+Di seguito una breve descrizione degli step principali seguiti per quanto concerne la parte di adattamento del controllore Raspberry a RTOS.
+
+\begin{itemize}
+	\item Come prima cosa siamo andati a rivedere i files \textit{.cpp} contente la logica di controllo, ritoccando la parte relativa alla lettura dei dati dal file, andando ad utilizzare le API presenti in ambiente c invece di quelle relative a cpp.
+	Abbiamo quindi provato e testato la lettura da file tramite il tool DevC++, facilitando così il testing e il debug;
+	\item Siamo andati ad installare una macchina virtuale con a bordo \textbf{debian 9.8.0} e la patch \textbf{Xenomai 3.0.8} (\cite{xenomai});
+	\item Essendo debian un OS interamente fruibile da linea di comando, siamo andati a prendere confidenza con l'ambiente, cercando di capire l'organizzazione e chiamando gli update/upgrade necessari;
+	\item Prima di andare ad importare il file completo (di cui abbiamo parlato al punto iniziale), siamo andati ad eseguire alcuni esempi iniziali (una sorta di HelloWorld):
+	\begin{itemize}
+		\item Abbiamo per primo cosa studiato questo approccio iniziale (\href{http://www.cs.ru.nl/J.Hooman/DES/XenomaiExercises/Exercise-1.html}{link})
+		\item Siamo andati ad impostare il funzionamento di un task (dummy) periodico, come se si trattasse appunto del main loop di un sistema Real-Time;
+	\end{itemize}
+	
+	\item Lo step successivo è stato quello di importare il codice scritto e testato in ambiente DevC++ in Xenomai, provandolo e introducendo alcuni dettagli aggiuntivi, come presentato nei punti seguenti:
+	\begin{itemize}
+		\item Come primo step risulta essere necessario fornire al framework Xenomai il nome di quale file con estensione .c andare a compilare e successivamente, incapsulare in un framework real-time
+			\begin{figure}[H]
+				\centering   	
+				\includegraphics[width=0.8\textwidth]{Immagini/xenomai_nano_make.png}
+				\caption{Per specificare quale file \textit{.c} compilare}
+				\label{fig:xenomai_nano_make}
+			\end{figure}
+		\item Abbiamo specificato quello che è il periodo di funzionamento  tramite i seguenti comandi:
+		\begin{lstlisting}
+		RTIME period  = 1000000000; % Expressed in [ns]
+		rt_task_set_periodic(NULL,TM_NOW,period);
+		\end{lstlisting}
+		
+		\item All'interno del ciclo while, abbiamo definito un continuo update dei parametri temporali di nostro interesse.
+		
+		Nello specifico ad inizio ciclo andiamo a sovrascrivere constantemente il parametro \textit{now} mentre, nella parte finale del ciclo stesso, abbiamo impostato un update del parametro \textit{before}.
+		
+		Il salvataggio di queste variabili permette di facilitare, in qualsiasi punto del codice, l'accesso ai parametri temporali per eventuali necessità di calcolo, come nella definizione dell'intervallo di tempo su cui andare a realizzare i vari calcoli derivativi necessari per il corretto controllo;
+		\begin{figure}[H]
+			\centering   	
+			\includegraphics[width=0.8\textwidth]{Immagini/xenomai_nano.png}
+			\caption{Definizione e temporizzazione del ciclo \textit{WHILE}}
+			\label{fig:xenomai_nano}
+		\end{figure}
+		\item Come si vede anche in figura ~\ref{fig:xenomai_nano}, nel ciclo principale abbiamo messo in successione questi blocchi (eseguiti a frequenza fissa): 
+		\begin{itemize}
+			\item Lettura dei parametri da files;
+			\item Lettura dei valori misurati della parte sensoristica;
+			\item Elaborazione dei dati rilevati e algoritmo di controllo;
+			\item Produzione dei risultati di interesse
+		\end{itemize}
+		\begin{figure}[H]
+			\centering   	
+			\includegraphics[width=0.8\textwidth]{Immagini/xenomai_execution.png}
+			\caption{Esecuzione a tempo fissato  (1 ms) delle funzioni di lettura e calcolo}
+			\label{fig:xenomai_execution}
+		\end{figure}
+		\item La gestione del thread relativo al server \textit{OPC-UA} non è ancora stato gestito: esso sarà ovviamente lasciato in secondo piano rispetto al thread di lavoro principale principale temporizzato alla frequenza specifica;
+	\end{itemize}
+\end{itemize}
