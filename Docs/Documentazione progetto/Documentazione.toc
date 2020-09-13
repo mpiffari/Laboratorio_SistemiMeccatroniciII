@@ -19,21 +19,21 @@
 \contentsline {subsubsection}{Calcolo della posizione di equilibrio}{11}{section*.13}%
 \contentsline {subsubsection}{Calcolo del sistema lineare}{12}{section*.14}%
 \contentsline {section}{\numberline {2.3}Motore}{14}{section.2.3}%
-\contentsline {chapter}{\numberline {3}Controllo}{17}{chapter.3}%
-\contentsline {section}{\numberline {3.1}Introduzione}{17}{section.3.1}%
-\contentsline {section}{\numberline {3.2}Analisi in anello aperto}{17}{section.3.2}%
-\contentsline {section}{\numberline {3.3}Controllore}{18}{section.3.3}%
-\contentsline {subsection}{\numberline {3.3.1}Posizionamento dei poli continui}{19}{subsection.3.3.1}%
-\contentsline {subsection}{\numberline {3.3.2}Setpoint di velocità}{21}{subsection.3.3.2}%
-\contentsline {section}{\numberline {3.4}OPC - UA}{22}{section.3.4}%
-\contentsline {subsection}{\numberline {3.4.1}Idea base OPC-UA}{22}{subsection.3.4.1}%
-\contentsline {section}{\numberline {3.5}OPC-UA e V.A.B.}{23}{section.3.5}%
-\contentsline {section}{\numberline {3.6}RTOS - XENOMAI}{24}{section.3.6}%
-\contentsline {chapter}{\numberline {4}Simulink}{27}{chapter.4}%
-\contentsline {section}{\numberline {4.1}Introduzione}{27}{section.4.1}%
-\contentsline {section}{\numberline {4.2}Simulazione del sistema non lineare}{28}{section.4.2}%
-\contentsline {section}{\numberline {4.3}Simulazione del sistema lineare}{29}{section.4.3}%
-\contentsline {section}{\numberline {4.4}Modello complessivo (al momento)}{32}{section.4.4}%
-\contentsline {section}{\numberline {4.5}Discretizzazione}{32}{section.4.5}%
-\contentsline {section}{\numberline {4.6}Sensori}{33}{section.4.6}%
-\contentsline {chapter}{\numberline {A}}{37}{appendix.A}%
+\contentsline {chapter}{\numberline {3}Controllo}{19}{chapter.3}%
+\contentsline {section}{\numberline {3.1}Introduzione}{19}{section.3.1}%
+\contentsline {section}{\numberline {3.2}Analisi in anello aperto}{19}{section.3.2}%
+\contentsline {section}{\numberline {3.3}Controllore}{20}{section.3.3}%
+\contentsline {subsection}{\numberline {3.3.1}Posizionamento dei poli continui}{21}{subsection.3.3.1}%
+\contentsline {subsection}{\numberline {3.3.2}Setpoint di velocità}{23}{subsection.3.3.2}%
+\contentsline {section}{\numberline {3.4}OPC - UA}{24}{section.3.4}%
+\contentsline {subsection}{\numberline {3.4.1}Idea base OPC-UA}{24}{subsection.3.4.1}%
+\contentsline {section}{\numberline {3.5}OPC-UA e V.A.B.}{25}{section.3.5}%
+\contentsline {section}{\numberline {3.6}RTOS - XENOMAI}{26}{section.3.6}%
+\contentsline {chapter}{\numberline {4}Simulink}{29}{chapter.4}%
+\contentsline {section}{\numberline {4.1}Introduzione}{29}{section.4.1}%
+\contentsline {section}{\numberline {4.2}Simulazione del sistema non lineare}{30}{section.4.2}%
+\contentsline {section}{\numberline {4.3}Simulazione del sistema lineare}{31}{section.4.3}%
+\contentsline {section}{\numberline {4.4}Modello complessivo (al momento)}{34}{section.4.4}%
+\contentsline {section}{\numberline {4.5}Discretizzazione}{34}{section.4.5}%
+\contentsline {section}{\numberline {4.6}Sensori}{35}{section.4.6}%
+\contentsline {chapter}{\numberline {A}}{39}{appendix.A}%

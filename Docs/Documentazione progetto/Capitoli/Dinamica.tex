@@ -555,16 +555,31 @@ In particola abbiamo portato avanti alcune osservazioni, partendo da quella che 
 	\item Nella definizione dei parametri caratteristici del motore, è necessario dare spazio anche ad alcune considerazioni su quelli che sono le costanti di tempo che si ricavano dalla modellizzazione della funzione di trasferimento del motore, partendo dal modello elettrico (figura ~\ref{fig:electric_motor_model})
 	\begin{itemize}
 		\item $\tau_e$ = $\frac{L_a}{R_a}$ = costante di tempo elettrica
-		\item $\tau_m$ = $\frac{J_m + J_r}{K_e K_t}$ = $\frac{J_m + J_r}{K}$ = costante di tempo meccanica
+		\item $\tau_m$ = $\frac{J_m + J_r\tau^2}{K_e K_t}$ = $\frac{J_m + J_r}{K^2}$ = costante di tempo meccanica
 	\end{itemize}
 
 	Infatti, nella funzione di trasferimento che considera in ingresso la tensione di armatura $V_a$ e in uscita la velocità $\Omega$, espressa utilizzando le costanti di tempo sopra riportate, presenta una coppia di poli che possono essere o reali o complessi e coniugati a seconda dei valori assunti da $\tau_e$ e $\tau_m$.
-	Nello specifico, come visto nella parte teorica, i poli saranno reali se $\xi = \frac{1}{2}\sqrt{\frac{\tau_m}{\tau_e}}>1$, ovvero se $\tau_m >> 4\tau_e$: questa è quindi una condizione che abbiamo verificato, in maniera tale da permettere una semplificazione del modello del sistema.
+	Nello specifico, come visto nella parte teorica, i poli saranno reali se $\xi = \frac{1}{2}\sqrt{\frac{\tau_m}{\tau_e}}>1$, ovvero se $\tau_m >> 4\tau_e$: questa è quindi una condizione che abbiamo verificato, in maniera tale da permettere una semplificazione del modello del sistema nelle parte di definizione dei poli.
+	Abbiamo infatti che:
+	\begin{itemize}
+		\item $\tau_e = 1.22 ms$
+		\item $\tau_m = 18.3 ms$
+	\end{itemize}
+	da cui si può evincere che la costante di tempo meccanica risulti essere molto maggiore di quella elettrica, il chè significa che la dinamica meccanica e quella elettrica sono disaccoppiati in frequenza, potendo così considerarle in maniera separata.
 	\item Nel calcolo della costante di tempo meccanica $\tau_m$ abbiamo sviluppato due considerazioni:
 	\begin{itemize}
 		\item è necessario considerare anche l'inerzia del carico $J_r$, ovvero delle ruote ridotte all'albero motore, nel calcolo della costante di tempo meccanica;
 		\item Le costanti di coppia $K_T$ e elettrica $K_E$ rappresentano gli stessi valori, espressi in unità di misura differenti, che quindi chiamiamo, per semplicità $K$;
 	\end{itemize}
+	\item Abbiamo anche verificato l'aderenza del modello creato a quanto visto in teoria: sappiamo infatti che, andando a semplificare l'influenza della parte meccanica (quindi come se fosse a rotore bloccato), considerando solamente quella elettrica, avremo un effettivo comportamento come filtro passa basso. Nel modello completo invece, che considera anche la parte meccanica, abbiamo che in bassa frequenza si raggiunge un equilibrio tra la forza contro elettro motrice e la velocità di rotazione del rotore.
+	
+	Quanto detto è confermato anche dei diagrammi in figura ~\ref{fig:motor_bode}.
+	\begin{figure}[H]
+		\centering   	
+		\includegraphics[width=1\textwidth]{Immagini/motor_bode.png}
+		\caption{Diagrammi di Bode modello del motore in anello aperto}
+		\label{fig:motor_bode}
+	\end{figure}
 \end{itemize}
 
 \begin{figure}[H]
@@ -584,6 +599,26 @@ In figura ~\ref{fig:motor} è rappresentato il modello finale completo del motor
 	\item \textit{Regolatore}: il controllo del motore DC in questione e stato ottenuto tramite una retroazione in corrente che permette quindi di definire un setpoint alla corrente fornita al motore.
 	
 	Questo si è reso necessario poiché il controllore, attraverso il vettore K e lo stato del sistema, definisce la coppia che il motore dovrebbe erogare: in un motore DC la correlazione tra coppia erogata e corrente esiste ed è ben definita dalla costante $K_t$.
-	Il controllore è stato realizzato seguendo metodi già noti in letteratura TODO: scrivere la formula o trovare un posto che la spieghi 
-	\item \textit{Sensore di corrente}:
+	Il controllore è stato realizzato seguendo metodi già noti in letteratura, che cerchiamo di riassumere brevemente di seguito.
+	La funzione di trasferimento che lega $V_a$ ad $I_a$ abbiamo visto essere
+	\begin{center}
+			${\mathrm{tf}}_{\mathrm{VI},\mathrm{complete}} =G\left(s\right)=\frac{\frac{\tau {\;}_m \;}{R_a }s}{\tau_m \tau {\;}_e s^2 +\tau {\;}_m s+1}$
+	\end{center}
+	Volendo andare ad applicare un regolatore di tipo \textbf{PI (Proporzionale - Integrale)}, andremo ad inserire il seguente blocco regolatore
+	\begin{center}
+		$\begin{array}{l}
+		R_{\mathrm{PI}} \left(s\right)=K_P +\frac{K_I }{s}=K_{P\;} \left(1+\frac{K_I }{K_P s}\right)\to \tau {\;}_I =\frac{K_P }{K_I }\\
+		\to \;=K_P \left(1+\frac{1}{\tau {\;}_i s}\right)=K_P \left(\frac{1+\tau {\;}_i s}{\tau {\;}_i s}\right)=K_P  \frac{K_I }{K_P }\left(\frac{1+\tau_{i\;} s}{s}\right)=k_{g{\;}_i } \left(\frac{1+s\tau {\;}_i }{s\tau {\;}_i }\right)
+		\end{array}$	
+	\end{center}
+	dove $k_{g_i} = 2\pi f_c \tau_e R$.
+	Con il comando Matlab \textit{feedback}, siamo quindi stati in grado di ottenere le \textit{f.d.t.} sia semplificate che non, implementando quindi quanto riportato nella figura di dettaglio ~\ref{fig:motor_detail}.
+	\begin{figure}[H]
+		\centering   	
+		\includegraphics[width=1\textwidth]{Immagini/motor_PI_detail.png}
+		\caption{Dettaglio del modello del motore}
+		\label{fig:motor_detail}
+	\end{figure}
+	\item \textit{Sensore di corrente}: le retroazione in corrente è ovviamente necessaria, essendo il controllo basato sulla corrente assorbita dallo stesso.
+	In particolare, a differenza del modello continuo in cui ci siamo limitati solamente a riportare il segnale di corrente in ingresso, nella modellizzazione discreta siamo andati ad inserire alcuni blocchi \textit{Simulink} per modellizzare l'andamento discreto della grandezza fornita dal sensore, unitamente alla componente di rumore. 
 \end{itemize}
