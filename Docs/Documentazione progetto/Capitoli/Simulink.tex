@@ -110,41 +110,70 @@ Il sistema al momento è, in linea teorica, a tempo continuo. Nella realtà in u
 Si é scelto dunque,per quanto fatto finora, di lasciare scegliere al software di Simulink il passo della simulazione ed in particolar modo utilizzare un passo variabile. Questo permette, nei punti in cui le variazioni sono spiccate(ad esempio quando il sistema si avvia) di utilizzare un passo di simulazione anche dell'ordine dei nanosecondi che approssima quasi perfettamente l'esecuzione a tempo continuo.
 
 \section{Discretizzazione}
-Come già detto sopra, il controllore è necessario che sia implementato su u calcolatore e quindi verrà eseguito a tempo discreto; per tenere conto di questa caratteristica è necessario discretizzare il controllore e acquisire gli input a tempo discreto:
+Perchè discretizzare?
+Come già detto sopra, il controllore è necessario che sia implementato su di un calcolatore, venendo pertanto eseguito a tempo discreto.
+
+
+
+Per tenere conto di questa caratteristica è necessario che essa venga modellizzata in quale modo, rendendo il controllore in grado di acquisire gli input provenienti dal sistema a tempo discreto:
 \begin{itemize}
-	\item all'ingresso del blocco \textit{controller} è stato posto un \textit{Sample \& Holder}; questo blocco si occupa di acquisire ogni tempo di sampling $T_s$ il valore in input e mantenerlo inalterato fino alla lettura successiva
-	\item all'uscita del \textit{controller} si è posizionato un altro \textit{Sample \& Holder} per le stesse ragioni
+	\item all'ingresso del blocco \textit{controller} è stato posto un \textit{Sample and Holder}; questo componente si occupa di acquisire ad ogni tempo di sampling $T_s$, il valore in input, campionandolo e mantenendolo inalterato fino alla lettura successiva;
+	\item all'uscita del \textit{controller} si è posizionato un altro \textit{Sample and Holder} per le stesse ragioni;
 	\item il \textit{controller} è stato trasformato a tempo discreto; TODO inseriamo la cosa dei poli discreti o diciamo che sono uguali essendo un proporzionale?
-	A differenza del controllore della retroazione dello stato, il controllore che chiude la retroazione in velocità va ricalcolato tenendo conto del $T_s$; fortunatamente Simulink fa da solo questa conversione se si setta il blocco simulink \textit{Controllore PID} come integratore a tempo discreto fornendo il $T_s$ e la costante moltiplicativa.
+	A differenza del controllore della retroazione dello stato, il controllore che chiude la retroazione in velocità va ricalcolato tenendo conto del $T_s$; fortunatamente Simulink fa da solo questa conversione se si setta il blocco simulink \textit{Controllore PID} come integratore a tempo discreto fornendo il $T_s$ e la costante moltiplicativa;
+	\item Tutte le \textit{grandezze fisiche} misurate sono state campionate e rese rumorose con appositi blocchi Simulink;
 \end{itemize}
 Il controllore a tempo discreto ha dunque questo aspetto nel modello simulink implementato:
 \begin{figure}[H]
 	\centering   	
 	\includegraphics[width=0.8\textwidth]{Immagini/controller_discrete.png}
-	\caption{Modello Simulink del controllore}
+	\caption{Modello Simulink del controllore discreto (vista ad alto livello e vista interna)}
 	\label{fig:controller_discrete}
 \end{figure}
 
-Per le stesse ragioni pratiche anche il modello del motore ha subito una conversione: il controllore dell'anello di retroazione in corrente sarà un software eseguito ciclicamente su di un calcolatore e va dunque implementato a tempo discreto.
-Ricordando che la funzione che la F.d.T. del controllore \textit{PI} a tempo continuo era:
+Per le stesse ragioni pratiche anche il modello del motore discreto (figura ~\ref{fig:discrete_motor}) ha subito una conversione: il controllore dell'anello di retroazione in corrente sarà un software eseguito ciclicamente su di un calcolatore e va dunque implementato a tempo discreto.
+Ricordando che la funzione che la \textit{f.d.t.} del controllore \textit{PI} a tempo continuo era:
 $$\dfrac{0.001216 s + 0.9965}{0.00122 s}$$
 e applicando il metodo di Tustin da tempo continuo a discreto con un $T_s = 0.001$ si ottinene che:
-$$\dfrac{1.405 z - 0.5881}{z - 1}$$
+$$\dfrac{1.037 z - 0.9557}{z - 1}$$
+
+Quanto ottenuto a livello numerico qui sopra, è facilmente ottenibili tramite comandi per la modellizzazione dei sistemi dinamici che Matlab mette a disposizione: nello specifico, come si vede nel listato seguente, si tratta dei comandi \textit{tf} e \textit{c2d} (\textit{continous to discrete}):
+\begin{lstlisting}
+	PI_I = K_gi * tf([m.te,1],[m.te, 0])
+	PI_I_d = c2d(PI_I,Ts,'tustin')
+\end{lstlisting}
+
+\begin{figure}[H]
+	\centering   	
+	\includegraphics[width=0.8\textwidth]{Immagini/discrete_motor.png}
+	\caption{Modello Simulink del motore discreto}
+	\label{fig:discrete_motor}
+\end{figure}
 
 \section{Sensori}
-Sempre con l'obbiettivo di rendere la simulazione più raffinata e accurata possibile sono stati inseriti all'interno del file simulink anche dei modelli che simulano la presenza dei sensori. Questo è necessario ed importante poiché nella realtà non esiste un modello matematico che genera i dati che poi sono dati in pasto al controllore ma si devono invece usare dei sensori che danno una stima dello stato del sistema. Un sensore presenta due principali caratteristiche: 
+A bordo del sistema sono presenti diversi sensori che permettono di definire e caratterizzare lo stato e il comportamento del veicolo auto bilanciato. In particolare abbiamo:
 \begin{itemize}
-	\item Rumore: è stato modellizzato come un \textit{Band-Limited
-		White Noise} con \textit{Noise power} = [0.00000001] e \textit{Sample time} = 0.001.
-	\item Quantizzazione: la lettura dei dati da un sensore, oltre ad avvenire ad un intervallo di tempo minimo e regolare, mostra anche un errore dovuto alla limitata sensibilità del sensore stesso o dell' \textit{ADC} che effettua la lettura. Il blocco simulink \textit{Quantizer} ha l'esatto scopo di simulare questo comportamento presente nei sensori reali.
+	\item \textbf{Encoder incrementale}: si occupa di misurare la rotazione della singola ruota;
+	\item \textbf{I.M.U.}: Inertial Measaurement Unit, stima l'inclinazione dello chassis;
+	\item \textbf{Sensore di corrente}: permette di rilevare la corrente che fluisce all'interno del motore, per così poter realizzare un controllo in corrente dello stesso;
 \end{itemize}
-TODO come spiego che mi arriva in ingresso theta e phi e non le derivate?
-Sul sistema sono presenti diversi sensori:
+
+Questa parte di sensoristica è stata presa in considerazione con l'obbiettivo di rendere la simulazione più raffinata e accurata possibile: sono stati quindi inseriti all'interno dei file Simulink anche dei modelli che simulano la presenza dei sensori stessi.
+
+Questo è necessario ed importante poiché nella realtà non esiste un modello matematico che genera i dati che poi sono dati in pasto al controllore ma si devono invece usare dei sensori che danno una stima dello stato del sistema. Un sensore presenta due principali caratteristiche: 
 \begin{itemize}
-	\item Encoder incrementale: si occupa di misurare la rotazione della singola ruota
-	\item I.M.U. : stima l'inclinazione dello chassis
-	\item Sensore di corrente: misura la corrente presente nel motore
+	\item \textbf{Rumore}: è stato modellizzato come un \textit{Band-Limited
+	White Noise} con \textit{Noise power} = [0.00000001] e \textit{Sample time} = 0.001 tramite lo specifico blocco Simulink;
+	\begin{figure}[H]
+		\centering   	
+		\includegraphics[width=0.5\textwidth]{Immagini/band_limited_white_noise.png}
+		\caption{Blocco Simulink responsabile della generazione del rumore}
+		\label{fig:band_limited_wn}
+	\end{figure}
+	\item \textbf{Quantizzazione}: la lettura dei dati da un sensore, oltre ad avvenire ad un intervallo di tempo minimo e regolare, mostra anche un errore dovuto alla limitata sensibilità del sensore stesso o dell' \textit{ADC} che effettua la lettura. Il blocco simulink \textit{Quantizer} ha l'esatto scopo di simulare questo comportamento presente nei sensori reali.
 \end{itemize}
+
+
 Per come si presenta il sistema, sia l'\textit{encoder} incrementale sia la \textit{I.M.U.} restituiscono rispettivamente una stima di $\phi$ e $\theta$
 Per modellizzare quanto detto finora riguardante i sensori ed in particolare per l'\textit{encoder} e l'\textit{I.M.U.} è stato approntato il seguente blocco simulink:
 \begin{figure}[H]
@@ -153,20 +182,23 @@ Per modellizzare quanto detto finora riguardante i sensori ed in particolare per
 	\caption{Modello Simulink dei sensori \textit{encoder} e \textit{I.M.U.}}
 	\label{fig:sensor_block1}
 \end{figure}
-Si può notare come in Fig.\ref{fig:sensor_block1} siano presenti due blocchi \textit{Moving average} per ciascun sensore; questo si è reso necessario per due ragioni.
-La prima è che, presentando il sistema del rumore, era necessario rimuoverlo attraverso un filtro digitale; la seconda ragione è che, vista la presenza della quantizzazione, la derivazione a tempo discreto del segnale presenta molti picchi e molti valori nulli; è quindi necessario filtrare questi valori prima di passarli al controllore per evitare picchi di coppie troppo alti oppure nulli in brevi intervalli di tempo.
+Si può notare come in Fig.\ref{fig:sensor_block1} siano presenti due blocchi \textit{Moving average} per ciascun sensore.
+
+Questo si è reso necessario per due ragioni:
+\begin{itemize}
+	\item  presentando il sistema del rumore, era necessario rimuoverlo attraverso un filtro digitale;
+	\item la derivazione a tempo discreto del segnale presenta molti picchi e molti valori nulli;
+	E' quindi necessario filtrare questi valori prima di passarli al controllore per evitare picchi di coppie troppo alti oppure nulli in brevi intervalli di tempo, rendendo necessario filtrare questi valori prima di passarli al controllore per evitare picchi di coppie troppo alti oppure nulli in brevi intervalli di tempo;
+\end{itemize}
+
 Si presenta ora la necessità di modellizzare la presenza del sensore di corrente nel motore; per fare ciò si è modificato solamente l'anello di retroazione esterno che permette il controllo del motore in corrente:
 
-\begin{figure}[H]
-	\centering   	
-	\includegraphics[width=0.8\textwidth]{Immagini/discrete_motor.png}
-	\caption{Modello Simulink discreto del motore}
-	\label{fig:discrete_motor}
-\end{figure}
-Si può notare in Fig.\ref{fig:discrete_motor} che il controllore è quello discreto presentato prima, mentre è stato inserito anche in questo caso un rumore sulla misura, una quantizzazione e un filtro sul segnale da passare al controllore.
-Da sottolineare che ognuno dei tre blocchi \textit{Quantizer} ha un valore diverso dovuto al fatto che ognuno dei sensori ha sensibilità diverse:
+Si può notare in figura \ref{fig:discrete_motor} che il controllore è quello discreto presentato prima, mentre è stato inserito anche in questo caso un rumore sulla misura, una quantizzazione e un filtro sul segnale da passare al controllore.
+
+
+Da sottolineare il fatto che, ognuno dei tre blocchi \textit{Quantizer}, utilizzato per modellizzare altrattanti sensori, ha un valore diverso del parametro caratterizzante di \textit{Quantization Interval}, dovuto al fatto che ognuno dei sensori ha sensibilità diverse:
 \begin{itemize}
-	\item Encoder incrementale: presenta una sensibilità di $2^11 bit = 2048 $ diverse combinazioni e letture
-	\item I.M.U. : sensibilità del giroscopio di $131\dfrac{s}{deg}$
-	\item Sensore di corrente: il valore del sensore di corrente è un voltaggio letto da un Arduino Uno con un ADC con sensibilità di 10 bit
+	\item \textbf{Encoder incrementale}: presenta una sensibilità di $2^{11} bit = 2048$ diverse combinazioni e letture
+	\item \textbf{I.M.U.}: sensibilità del giroscopio di $131\dfrac{s}{deg}$
+	\item \textbf{Sensore di corrente}: il valore del sensore di corrente è un voltaggio letto da un Raspberry tramite ADC con sensibilità di 10 bit;
 \end{itemize}

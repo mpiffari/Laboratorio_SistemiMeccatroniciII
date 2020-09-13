@@ -35,5 +35,6 @@
 \contentsline {section}{\numberline {4.3}Simulazione del sistema lineare}{31}{section.4.3}%
 \contentsline {section}{\numberline {4.4}Modello complessivo (al momento)}{34}{section.4.4}%
 \contentsline {section}{\numberline {4.5}Discretizzazione}{34}{section.4.5}%
-\contentsline {section}{\numberline {4.6}Sensori}{35}{section.4.6}%
+\contentsline {section}{\numberline {4.6}Sensori}{36}{section.4.6}%
 \contentsline {chapter}{\numberline {A}}{39}{appendix.A}%
+\contentsline {chapter}{\numberline {B}}{43}{appendix.B}%
