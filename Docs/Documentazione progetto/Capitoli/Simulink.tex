@@ -1,10 +1,9 @@
 \section{Introduzione}
+Data la straordinarietà degli eventi che erano in corso dal punto di vista sanitario nel nostro paese si è reso necessario svolgere gran parte del lavoro in modalità a distanza e quindi senza la possibilità di testare il modello matematico appena ottenuto e i successivi risultati dovuti all'azione di controllo sul V.A.B.
 
-TODO: rivdere questa introduzione (io la rivedrei)
+Il lavoro quindi è stato svolto per la maggior parte sfruttando il tool \textit{Simulink} di Matlab il quale rappresenta, in poche parole, un risolutore di equazioni differenziali, le quali rappresentano la descrizione risultante del sistema che siamo andati a modellizzare.
 
-Data la straordinarietà degli eventi che erano in corso dal punto di vista sanitario nel nostro paese si è reso necessario svolgere gran parte del lavoro in modalità a distanza e quindi senza la possibilità di testare il modello matematico appena ottenuto e i successivi risultati dovuti all'azione di controllo sul V.A.B., il lavoro quindi è stato svolto per la maggior parte sfruttando il tool \textit{Simulink} di Matlab che è, in poche parole, un risolutore di equazioni differenziali.
-
-Abbiamo così adottato una metodologia di lavoro basata su prototipi sempre più simili a quello che dovrebbe essere il sistema reale.
+Abbiamo così adottato una metodologia di lavoro basata su prototipi sempre più simili a quello che dovrebbe essere il sistema reale, lavorando step by step, partendo da modelli più semplici e aggiungendo, via via, features più complesse e ricercate, in maniera da rendere il più aderente possibile tale modello al funzionamento reale.
 
 Si va ora ad analizzare la risposta del sistema al controllo ottenuto nei punti precedenti, per assicurarci, che quanto scritto sopra valga oltre che nella teoria anche nella pratica:
 \begin{figure}[H]
@@ -178,8 +177,8 @@ Per come si presenta il sistema, sia l'\textit{encoder} incrementale sia la \tex
 Per modellizzare quanto detto finora riguardante i sensori ed in particolare per l'\textit{encoder} e l'\textit{I.M.U.} è stato approntato il seguente blocco simulink:
 \begin{figure}[H]
 	\centering   	
-	\includegraphics[width=0.8\textwidth]{Immagini/sensor_block1.png}
-	\caption{Modello Simulink dei sensori \textit{encoder} e \textit{I.M.U.}}
+	\includegraphics[width=0.6\textwidth]{Immagini/sensor_block1.png}
+	\caption{Modello Simulink dei sensori \textit{encoder} e \textit{I.M.U.} con Moving Average}
 	\label{fig:sensor_block1}
 \end{figure}
 Si può notare come in Fig.\ref{fig:sensor_block1} siano presenti due blocchi \textit{Moving average} per ciascun sensore.
@@ -191,6 +190,23 @@ Questo si è reso necessario per due ragioni:
 	E' quindi necessario filtrare questi valori prima di passarli al controllore per evitare picchi di coppie troppo alti oppure nulli in brevi intervalli di tempo, rendendo necessario filtrare questi valori prima di passarli al controllore per evitare picchi di coppie troppo alti oppure nulli in brevi intervalli di tempo;
 \end{itemize}
 
+L'approccio con \textit{Moving average} è stato quello inizialmente seguito: abbiamo poi però cercato anche di portare avanti un altro approccio in cui, la stima dello stato, venisse effettuata tramite filtro di Kalman.
+Il contesto infatti è quello in cui si ha un controllore che fornisce in uscita un comando in coppia che cambia in base allo stato del sistema $(\phi, \dot{\phi}, \theta, \dot{theta})$: i \textbf{problemi} che emergono sono però che:
+\begin{itemize}
+	\item $\phi$ e $\theta$ vengono misurati ma i valori forniti dai sensori sono quantizzati (quindi sarà necessario attuare un filtraggio digitalmente);
+	\item $\dot{\phi}$ e $\dot{\theta}$ non sono direttamente misurabili;
+\end{itemize}
+
+Una soluzione che si è soliti seguire in contesti del genere, è quella di andare appunto ad applicare un filtro di Kalman, come già specificato, per produrre così una stima dello stato.
+
+\begin{figure}[H]
+	\centering   	
+	\includegraphics[width=0.6\textwidth]{Immagini/sensor_block_kalman.png}
+	\caption{Modello Simulink dei sensori \textit{encoder} e \textit{I.M.U.} con Filtro di Kalman}
+	\label{fig:sensor_block_kalman}
+\end{figure}
+
+
 Si presenta ora la necessità di modellizzare la presenza del sensore di corrente nel motore; per fare ciò si è modificato solamente l'anello di retroazione esterno che permette il controllo del motore in corrente:
 
 Si può notare in figura \ref{fig:discrete_motor} che il controllore è quello discreto presentato prima, mentre è stato inserito anche in questo caso un rumore sulla misura, una quantizzazione e un filtro sul segnale da passare al controllore.
@@ -198,7 +214,7 @@ Si può notare in figura \ref{fig:discrete_motor} che il controllore è quello d
 
 Da sottolineare il fatto che, ognuno dei tre blocchi \textit{Quantizer}, utilizzato per modellizzare altrattanti sensori, ha un valore diverso del parametro caratterizzante di \textit{Quantization Interval}, dovuto al fatto che ognuno dei sensori ha sensibilità diverse:
 \begin{itemize}
-	\item \textbf{Encoder incrementale}: presenta una sensibilità di $2^{11} bit = 2048$ diverse combinazioni e letture
+	\item \textbf{Encoder incrementale}: presenta una sensibilità di $2^{11} bit = 2048$ diverse combinazioni e letture possibili;
 	\item \textbf{I.M.U.}: sensibilità del giroscopio di $131\dfrac{s}{deg}$
-	\item \textbf{Sensore di corrente}: il valore del sensore di corrente è un voltaggio letto da un Raspberry tramite ADC con sensibilità di 10 bit;
+	\item \textbf{Sensore di corrente}: il valore del sensore di corrente è un voltaggio letto da un Raspberry tramite ADC interno, il quale presenta sensibilità di 10 bit;
 \end{itemize}
