@@ -22,21 +22,21 @@
 \contentsline {figure}{\numberline {3.10}{\ignorespaces Definizione e temporizzazione del ciclo \textit {WHILE}\relax }}{27}{figure.caption.28}%
 \contentsline {figure}{\numberline {3.11}{\ignorespaces Esecuzione a tempo fissato (1 ms) delle funzioni di lettura e calcolo\relax }}{28}{figure.caption.29}%
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {4.1}{\ignorespaces Risposta del sistema non lineare in anello chiuso\relax }}{29}{figure.caption.30}%
-\contentsline {figure}{\numberline {4.2}{\ignorespaces Risposta del sistema lineare in anello chiuso\relax }}{30}{figure.caption.31}%
-\contentsline {figure}{\numberline {4.3}{\ignorespaces Implementazione simulink delle equazioni differenziali\relax }}{30}{figure.caption.32}%
-\contentsline {figure}{\numberline {4.4}{\ignorespaces Risposta in anello aperto del sistema reale\relax }}{31}{figure.caption.33}%
-\contentsline {figure}{\numberline {4.5}{\ignorespaces Implementazione simulink del sistema linearizzato\relax }}{31}{figure.caption.34}%
-\contentsline {figure}{\numberline {4.6}{\ignorespaces Risposta in anello aperto del sistema lineare\relax }}{32}{figure.caption.35}%
-\contentsline {figure}{\numberline {4.7}{\ignorespaces Transitorio del motore\relax }}{32}{figure.caption.36}%
-\contentsline {figure}{\numberline {4.8}{\ignorespaces Zoom del grafico in figura Fig.\ref {fig:motore}\relax }}{33}{figure.caption.37}%
-\contentsline {figure}{\numberline {4.9}{\ignorespaces Clamp della coppia erogata da parte del motore\relax }}{33}{figure.caption.38}%
-\contentsline {figure}{\numberline {4.10}{\ignorespaces Simulink\relax }}{34}{figure.caption.39}%
-\contentsline {figure}{\numberline {4.11}{\ignorespaces Modello Simulink del controllore discreto (vista ad alto livello e vista interna)\relax }}{35}{figure.caption.40}%
-\contentsline {figure}{\numberline {4.12}{\ignorespaces Modello Simulink del motore discreto\relax }}{36}{figure.caption.41}%
-\contentsline {figure}{\numberline {4.13}{\ignorespaces Blocco Simulink responsabile della generazione del rumore\relax }}{36}{figure.caption.42}%
-\contentsline {figure}{\numberline {4.14}{\ignorespaces Modello Simulink dei sensori \textit {encoder} e \textit {I.M.U.} con Moving Average\relax }}{37}{figure.caption.43}%
-\contentsline {figure}{\numberline {4.15}{\ignorespaces Modello Simulink dei sensori \textit {encoder} e \textit {I.M.U.} con Filtro di Kalman\relax }}{38}{figure.caption.44}%
+\contentsline {figure}{\numberline {4.1}{\ignorespaces Risposta in anello aperto del sistema reale\relax }}{30}{figure.caption.30}%
+\contentsline {figure}{\numberline {4.2}{\ignorespaces Andamento angolo caratteristico $\theta $ per diversi angoli iniziali\relax }}{30}{figure.caption.31}%
+\contentsline {figure}{\numberline {4.3}{\ignorespaces Implementazione simulink del sistema linearizzato\relax }}{31}{figure.caption.32}%
+\contentsline {figure}{\numberline {4.4}{\ignorespaces Risposta in anello aperto del sistema lineare\relax }}{31}{figure.caption.33}%
+\contentsline {figure}{\numberline {4.5}{\ignorespaces Implementazione Simulink delle equazioni differenziali\relax }}{32}{figure.caption.34}%
+\contentsline {figure}{\numberline {4.6}{\ignorespaces Risposta del sistema non lineare in anello chiuso\relax }}{33}{figure.caption.35}%
+\contentsline {figure}{\numberline {4.7}{\ignorespaces Transitorio del motore\relax }}{34}{figure.caption.36}%
+\contentsline {figure}{\numberline {4.8}{\ignorespaces Zoom del grafico in figura Fig.\ref {fig:motore}\relax }}{34}{figure.caption.37}%
+\contentsline {figure}{\numberline {4.9}{\ignorespaces Clamp della coppia erogata da parte del motore\relax }}{35}{figure.caption.38}%
+\contentsline {figure}{\numberline {4.10}{\ignorespaces Simulink\relax }}{36}{figure.caption.39}%
+\contentsline {figure}{\numberline {4.11}{\ignorespaces Modello Simulink del controllore discreto (vista ad alto livello e vista interna)\relax }}{37}{figure.caption.40}%
+\contentsline {figure}{\numberline {4.12}{\ignorespaces Modello Simulink del motore discreto\relax }}{38}{figure.caption.41}%
+\contentsline {figure}{\numberline {4.13}{\ignorespaces Blocco Simulink responsabile della generazione del rumore\relax }}{38}{figure.caption.42}%
+\contentsline {figure}{\numberline {4.14}{\ignorespaces Modello Simulink dei sensori \textit {encoder} e \textit {I.M.U.} con Moving Average\relax }}{39}{figure.caption.43}%
+\contentsline {figure}{\numberline {4.15}{\ignorespaces Modello Simulink dei sensori \textit {encoder} e \textit {I.M.U.} con Filtro di Kalman\relax }}{40}{figure.caption.44}%
 \addvspace {10\p@ }
 \contentsline {figure}{\numberline {A.1}{\ignorespaces Diagramma di flusso rappresentante le funzionalità del server\relax }}{41}{figure.caption.45}%
 \addvspace {10\p@ }

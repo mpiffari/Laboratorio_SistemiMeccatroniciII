@@ -3,42 +3,16 @@ Data la straordinarietà degli eventi che erano in corso dal punto di vista sani
 
 Il lavoro quindi è stato svolto per la maggior parte sfruttando il tool \textit{Simulink} di Matlab il quale rappresenta, in poche parole, un risolutore di equazioni differenziali, le quali rappresentano la descrizione risultante del sistema che siamo andati a modellizzare.
 
-Abbiamo così adottato una metodologia di lavoro basata su prototipi sempre più simili a quello che dovrebbe essere il sistema reale, lavorando step by step, partendo da modelli più semplici e aggiungendo, via via, features più complesse e ricercate, in maniera da rendere il più aderente possibile tale modello al funzionamento reale.
+Abbiamo così adottato una metodologia di lavoro basata su prototipi sempre più simili a quello che dovrebbe essere il sistema reale, lavorando step by step, partendo da modelli più semplici e aggiungendo via via features più complesse, in maniera da rendere il più aderente possibile il modello al sistema reale.
 
-Si va ora ad analizzare la risposta del sistema al controllo ottenuto nei punti precedenti, per assicurarci, che quanto scritto sopra valga oltre che nella teoria anche nella pratica:
-\begin{figure}[H]
-	\centering   	
-	\includegraphics[width=0.7\textwidth]{Immagini/closed_loop_non_linear.png}
-	\caption{Risposta del sistema non lineare in anello chiuso}
-	\label{fig:closed_loop_non_linear_response}
-\end{figure}
-\begin{figure}[H]
-	\centering   	
-	\includegraphics[width=0.7\textwidth]{Immagini/closed_loop_linear.png}
-	\caption{Risposta del sistema lineare in anello chiuso}
-	\label{fig:closed_loop_linear_response}
-\end{figure}
-TODO: come spieghiamo la differenza? rifare la simulazione?
+Si va ora ad analizzare la risposta del sistema al controllo ottenuto nei punti precedenti, per assicurarci, che quanto scritto sopra valga il più possibile, oltre che nella teoria, anche nella pratica.
 
 
+\section{Simulazione in anello aperto}
 
-\section{Simulazione del sistema non lineare}
+Si è dunque proceduto, come primo approccio, a  simulare il sistema in anello aperto: senza controllo, come visto nella sezione ~\ref{sec:open_loop_analysis}, e come deduzione logica, non dovrebbe essere in grado di mantenere la posizione verticale (essendo essa un punto di equilibrio instabile).
 
-Il primo compito che abbiamo risolto è stato quello di implementare le equazioni differenziali ottenute nel capitolo precedente:
-\begin{itemize}
-	\item $\ddot{\phi} = f_{\ddot{\phi}} (M_c,\theta,\dot{\theta},C_m)$
-	\item $\ddot{\theta} = f_{\ddot{\theta}} (M_c,\theta,\dot{\theta},C_m)$
-\end{itemize}
-
-Dove $M_c$ sarebbe la massa del passeggero, $\theta e \dot{\theta}$ lo stato del sistema e $C_m$  la coppia erogata dal motore. Si può notare come entrambe le equazioni differenziali siano indipendenti dalla coordinata libera $\phi$.
-\begin{figure}[H]
-	\centering   	
-	\includegraphics[width=1\textwidth]{Immagini/non_linear_system.png}
-	\caption{Implementazione simulink delle equazioni differenziali}
-	\label{fig:non_linear_system}
-\end{figure}
-In Fig.\ref{fig:non_linear_system} le \textit{interpreted function} altro non sono che  $f_{\ddot{\phi}}$ e $f_{\ddot{\theta}}$. A valle di esse sono presenti degli integratori che permettono di ottenere lo stato $x$ completo del sistema. Si può facilmente notare come $\dot{\theta} e \theta$ siano collegate direttamente all'input delle \textit{interpreted function}.
-Si è dunque proceduto a  simulare il sistema per verificare la bontà di quanto ottenuto; in particolare, il sistema in anello aperto, dovrebbe oscillare all'infinito vista la mancanza di attriti nel modello.
+La simulazione è stata portata avanti sul sistema non lineare, per il fatto che, nel sistema linearizzato risulta essere chiaro che, non appena ci si sposta dalla posizione di equilibrio intorno alla quale è stata realizzata la linearizzazione, il sistema non mostra il tipico andamento oscillante, ma va semplicemente a divergere, senza quindi fornire utili informazioni sul comportamento del sistema stesso.
 
 \begin{figure}[H]
 	\centering   	
@@ -46,10 +20,28 @@ Si è dunque proceduto a  simulare il sistema per verificare la bontà di quanto
 	\caption{Risposta in anello aperto del sistema reale}
 	\label{fig:open_loop_response_non_linear}
 \end{figure}
-La simulazione, il cui risultato è riportato in Fig.\ref{fig:open_loop_response_non_linear} è stata svolta per 5 secondi e con un angolo iniziale di 4°; il grafico mostra dunque l'andamento di $\theta$ nel tempo e della posizione che in termini matematici si esprime come $posizione = \phi \cdot{r_{ruota}}$
-\label{sec:simulazione_reale}
+
+Inoltre, essendo che nel sistema non sono stati modellizzati direttamente gli attriti, abbiamo che, partendo da una posizione verticale il veicolo autobilanciato continuerà a girare intorno all'asse delle ruote: questo è confermato dalle simulazioni in anello aperte fatte a differenti angoli di partenza (0 deg, 4 deg, 45 deg).
+
+Come si vede nelle figure ~\ref{fig:angle_theta}, partendo da una posizione di 45 deg, il V.A.B. non è in grado di compiere una rotazione completa, poichè l'energia non è sufficiente per permettergli di passare dalla posizione verticale.
+
+\begin{figure}[H]
+	\centering
+	\subfloat[][\emph{$\theta = 0deg$}]
+	{\includegraphics[width=.45\textwidth]{Immagini/open_loop_response_angle_clamped.png}} \quad
+	\subfloat[][\emph{$\theta = 4deg$}]
+	{\includegraphics[width=.45\textwidth]{Immagini/open_loop_response_angle_clamped_start4deg.png}} \\
+	\subfloat[][\emph{$\theta = 45deg$}]
+	{\includegraphics[width=.45\textwidth]{Immagini/open_loop_response_angle_clamped_start45deg.png}}
+	\caption{Andamento angolo caratteristico $\theta$ per diversi angoli iniziali}
+	\label{fig:angle_theta}
+\end{figure}
+
+La simulazione, i cui risultati sono riportati in figura \ref{fig:open_loop_response_non_linear} e \ref{fig:angle_theta}, è stata svolta per 5 e 20 secondi e con un angolo iniziale di 4°; il grafico mostra dunque l'andamento di $\theta$ nel tempo e della posizione  spaziale che, in termini matematici, si esprime come $posizione = \phi \cdot{r_{ruota}}$.
+
 \section{Simulazione del sistema lineare}
-Si è inoltre creato un altro modello sfruttando il sistema lineare ottenuto prima  con l'obbiettivo di semplificare il problema e di velocizzare le simulazioni con lo scopo di testare rapidamente nuove tecniche di controllo che se avessero dato esito positivo sul modello lineare sarebbero poi state testate sul simulink che imita il comportamento reale del sistema.
+\label{sec:simulazione_reale}
+Abbiamo comunque creato, come primo step, un modello sfruttando il sistema lineare ottenuto in precedenza  con l'obbiettivo di semplificare il problema e di velocizzare le simulazioni e con lo scopo di testare rapidamente nuove tecniche di controllo che, se avessero dato esito positivo sul modello lineare, sarebbero poi state testate sul modello non lineare, che imita il comportamento reale del sistema.
 \begin{figure}[H]
 	\centering   	
 	\includegraphics[width=1\textwidth]{Immagini/linear_system.png}
@@ -63,7 +55,46 @@ Si è inoltre creato un altro modello sfruttando il sistema lineare ottenuto pri
 	\caption{Risposta in anello aperto del sistema lineare}
 	\label{fig:open_loop_response}
 \end{figure}
-In questo caso, la simulazione in anello aperto mostra che il sistema diverge; questo perché la linearizzazione ha senso attorno al punto di equilibrio da cui è stata ottenuta, distante da quel punto il sistema lineare non approssima più il sistema reale ed anche un eventuale controllo ottenuto da esso non garantisce buone performance distante da quel punto. Si nota, in Fig.\ref{fig:open_loop_response} che il punto di partenza è 4° e il sistema, lineare, diverga quasi immediatamente; la differenza con la risposta del sistema non lineare in Fig.\ref{fig:open_loop_response_non_linear}
+Per completezza abbiamo comunque portato avanti la simulazione in anello aperto: il risultato ottenuto mostra che il sistema diverge.
+
+Questo perché, come accennato in precedenza, la linearizzazione ha senso attorno al punto di equilibrio da cui è stata ottenuta, distante da quel punto il sistema lineare non approssima più il sistema reale ed anche un eventuale controllo ottenuto da esso non garantisce buone performance distante da quel punto. 
+
+Si nota, in figura \ref{fig:open_loop_response} che il punto di partenza è di 4 deg e il sistema, lineare, diverga quasi immediatamente: la differenza con la risposta del sistema non lineare in figura \ref{fig:open_loop_response_non_linear} è lampante.
+
+
+\section{Simulazione del sistema non lineare}
+
+Il primo compito che abbiamo risolto è stato quello di implementare le equazioni differenziali ottenute nel capitolo precedente:
+\begin{itemize}
+	\item $\ddot{\phi} = f_{\ddot{\phi}} (M_c, C_m, \theta,\dot{\theta})$
+	\item $\ddot{\theta} = f_{\ddot{\theta}} (M_c, C_m, \theta,\dot{\theta})$
+\end{itemize}
+
+Dove 
+\begin{itemize}
+	\item $M_c$ rappresenta la massa del passeggero;
+	\item $\theta$ e $\dot{\theta}$ lo stato del sistema;
+	\item $C_m$  la coppia erogata dal motore;
+\end{itemize}
+
+Si può notare come entrambe le equazioni differenziali non siano indipendenti dalla coordinata libera $\phi$.
+\begin{figure}[H]
+	\centering   	
+	\includegraphics[width=1\textwidth]{Immagini/non_linear_system.png}
+	\caption{Implementazione Simulink delle equazioni differenziali}
+	\label{fig:non_linear_system}
+\end{figure}
+
+\begin{figure}[H]
+	\centering   	
+	\includegraphics[width=0.7\textwidth]{Immagini/closed_loop_non_linear.png}
+	\caption{Risposta del sistema non lineare in anello chiuso}
+	\label{fig:closed_loop_non_linear_response}
+\end{figure}
+
+Nella figura \ref{fig:non_linear_system}, è riportata la definizione del sistema non lineare: nello specifico il core del modello è rappresentato dai blocchi \textit{interpreted function}, i quali rappresentano le funzioni  $f_{\ddot{\phi}}$ e $f_{\ddot{\theta}}$ a cui si ha fatto riferimento in precedenza.
+
+A valle di esse sono presenti degli integratori che permettono di ottenere lo stato completo del sistema: si può facilmente notare come $\theta$ e $\dot{\theta}$ siano collegate direttamente all'input delle \textit{interpreted function} per il fatto che, come espresso dalle equazioni differenziali, si ha una dipendenza diretta da questi parametri.
 
 Come già verificato in precedenza (sezione ~\ref{sec:open_loop_analysis}) ci sono due poli reali, uno negativo e uno positivo; questo dimostra come il sistema sia instabile in anello aperto e necessiti di controllo.
 
@@ -89,7 +120,7 @@ Un esempio in cui la coppia richiesta supera i $2N\cdot{m}$ è il seguente:
 	\caption{Clamp della coppia erogata da parte del motore}
 	\label{fig:clamp_motore}
 \end{figure}
-In Fig.\ref{fig:clamp_motore} è anche possibile notare come l'assenza del blocchetto denominato \textit{Torque saturation}, presente in Fig.\ref{fig:motor}, satura l'azione integrale dell'attuatore e inserisce un ritardo non secondario nell'azione di controllo.
+In figura \ref{fig:clamp_motore} è anche possibile notare come l'assenza del blocchetto denominato \textit{Torque saturation}, presente in figura \ref{fig:motor}, satura l'azione integrale dell'attuatore e inserisce un ritardo non secondario nell'azione di controllo.
 \section{Modello complessivo (al momento)}
 L'obbiettivo di questo paragrafo è quello di fare il punto della situazione del sistema sviluppato fino a questo punto e di sviluppare alcune considerazioni sul lavoro fatto.
 
