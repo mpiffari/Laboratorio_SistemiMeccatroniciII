@@ -34,8 +34,8 @@
 \contentsline {section}{\numberline {4.2}Simulazione in anello aperto}{29}{section.4.2}%
 \contentsline {section}{\numberline {4.3}Simulazione del sistema lineare}{31}{section.4.3}%
 \contentsline {section}{\numberline {4.4}Simulazione del sistema non lineare}{32}{section.4.4}%
-\contentsline {section}{\numberline {4.5}Modello complessivo (al momento)}{35}{section.4.5}%
+\contentsline {section}{\numberline {4.5}Modello complessivo}{35}{section.4.5}%
 \contentsline {section}{\numberline {4.6}Discretizzazione}{36}{section.4.6}%
-\contentsline {section}{\numberline {4.7}Sensori}{38}{section.4.7}%
+\contentsline {section}{\numberline {4.7}Sensori}{37}{section.4.7}%
 \contentsline {chapter}{\numberline {A}}{41}{appendix.A}%
 \contentsline {chapter}{\numberline {B}}{45}{appendix.B}%

@@ -63,13 +63,11 @@ Si nota, in figura \ref{fig:open_loop_response} che il punto di partenza è di 4
 
 
 \section{Simulazione del sistema non lineare}
-
 Il primo compito che abbiamo risolto è stato quello di implementare le equazioni differenziali ottenute nel capitolo precedente:
 \begin{itemize}
 	\item $\ddot{\phi} = f_{\ddot{\phi}} (M_c, C_m, \theta,\dot{\theta})$
 	\item $\ddot{\theta} = f_{\ddot{\theta}} (M_c, C_m, \theta,\dot{\theta})$
 \end{itemize}
-
 Dove 
 \begin{itemize}
 	\item $M_c$ rappresenta la massa del passeggero;
@@ -93,9 +91,7 @@ Si può notare come entrambe le equazioni differenziali non siano indipendenti d
 \end{figure}
 
 Nella figura \ref{fig:non_linear_system}, è riportata la definizione del sistema non lineare: nello specifico il core del modello è rappresentato dai blocchi \textit{interpreted function}, i quali rappresentano le funzioni  $f_{\ddot{\phi}}$ e $f_{\ddot{\theta}}$ a cui si ha fatto riferimento in precedenza.
-
 A valle di esse sono presenti degli integratori che permettono di ottenere lo stato completo del sistema: si può facilmente notare come $\theta$ e $\dot{\theta}$ siano collegate direttamente all'input delle \textit{interpreted function} per il fatto che, come espresso dalle equazioni differenziali, si ha una dipendenza diretta da questi parametri.
-
 Come già verificato in precedenza (sezione ~\ref{sec:open_loop_analysis}) ci sono due poli reali, uno negativo e uno positivo; questo dimostra come il sistema sia instabile in anello aperto e necessiti di controllo.
 
 \begin{figure}[H]
@@ -116,25 +112,29 @@ Come si può notare il picco di coppia massimo è minore di 2 Nm, come da limita
 Un esempio in cui la coppia richiesta supera i $2N\cdot{m}$ è il seguente:
 \begin{figure}[H]
 	\centering   	
-	\includegraphics[width=0.8\textwidth]{Immagini/saturazione.png}
+	\includegraphics[width=0.7\textwidth]{Immagini/saturazione.png}
 	\caption{Clamp della coppia erogata da parte del motore}
 	\label{fig:clamp_motore}
 \end{figure}
 In figura \ref{fig:clamp_motore} è anche possibile notare come l'assenza del blocchetto denominato \textit{Torque saturation}, presente in figura \ref{fig:motor}, satura l'azione integrale dell'attuatore e inserisce un ritardo non secondario nell'azione di controllo.
-\section{Modello complessivo (al momento)}
-L'obbiettivo di questo paragrafo è quello di fare il punto della situazione del sistema sviluppato fino a questo punto e di sviluppare alcune considerazioni sul lavoro fatto.
+
+\section{Modello complessivo}
+L'obbiettivo di questo paragrafo è quello di fare il punto della situazione del sistema sviluppato e analizzato in tutte le sue parti, riportando alcune considerazioni sul lavoro fatto.
 
 \begin{figure}[H]
 	\centering   	
 	\includegraphics[width=0.8\textwidth]{Immagini/simulink_model_continuos.png}
-	\caption{Simulink}
+	\caption{Modello completo}
 	\label{fig:simulink}
 \end{figure}
-Come si osserva in Fig.\ref{fig:simulink} il sistema al momento comprende tre blocchi:
+Come si osserva in figura \ref{fig:simulink} il sistema comprende quattro blocchi principali:
 \begin{itemize}
-	\item Il blocco \textit{non linear}: rappresenta quello che nella realtà sarebbe il sistema reale; si occupa durante la simulazione, dati gli input, di restituire output simili a quelli che si avrebbero in laboratorio utilizzando la macchina vera e propria.
-	\item Il blocco \textit{MotorModelContinuos}: si occupa di simulare la presenza e i transitori dovuti ai motori che nella realtà sono posti a bordo dello chassis.
-	\item Il blocco \textit{controller}: è, dei tre, l'unico blocco che effettivamente dovrebbe essere implementato su un calcolatore. Con i valori simulati dai due blocchi di cui sopra calcola il valore di coppia per il controllo e lo fornisce indietro ai suddetti blocchi per completare la retroazione.
+	\item blocco \textit{NON LINEAR}: esso rappresenta quello che nella realtà sarebbe il sistema reale; si occupa durante la simulazione, dati gli input, di restituire output simili a quelli che si avrebbero in laboratorio utilizzando la macchina vera e propria.
+	Esso è il frutto di tutto il percorso di modellizzazione mostrato nel capito ~\ref{sec:modellizzazione};
+	\item blocco \textit{Sensor}: all'interno di questo blocco, siamo andati a comporre le parti necessarie per andare a filtrare e stimare lo stato del sistema, seguendo inizialmente un approccio basato su Moving Average (con un determinato valore di sliding window), passando poi ad un approccio più stabile, basato su filtraggio di Kalman;
+	\item blocco \textit{controller} è, dei tre, l'unico blocco che effettivamente dovrebbe essere implementato su un calcolatore. Con i valori simulati dai due blocchi di cui sopra, esso va a calcolare il valore di coppia per il controllo e lo fornendo poi al blocco motore, completando la retroazione.
+	\item blocco \textit{MotorModelDiscrete}: si occupa di simulare la presenza e i transitori dovuti ai motori posti a bordo dello chassis.
+	Anche il loro funzionamento è stato discretizzato, per renderli quindi "compatibili" con quello che è il funzionamento del controllore e le letture che lo stesso processore farà delle grandezze relative agli attuatori;
 \end{itemize}
 Il sistema al momento è, in linea teorica, a tempo continuo. Nella realtà in un computer e in particolar modo su Simulink la possibilità di far operare i blocchi che simulano il sistema reale a tempo continuo è preclusa.
 Si é scelto dunque,per quanto fatto finora, di lasciare scegliere al software di Simulink il passo della simulazione ed in particolar modo utilizzare un passo variabile. Questo permette, nei punti in cui le variazioni sono spiccate(ad esempio quando il sistema si avvia) di utilizzare un passo di simulazione anche dell'ordine dei nanosecondi che approssima quasi perfettamente l'esecuzione a tempo continuo.
